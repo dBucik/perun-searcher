@@ -2,6 +2,7 @@ package cz.metacentrum.perunsearch.persistence.models;
 
 import cz.metacentrum.perunsearch.persistence.enums.PerunAttributeType;
 import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -124,6 +125,36 @@ public class PerunAttribute {
 		}
 
 		return valuesMap;
+	}
+
+	/**
+	 * Convert attribute to JSON representation.
+	 * @return attribute in JSON format.
+	 */
+	public JSONObject toJson() {
+		JSONObject json = new JSONObject();
+		json.put("id", this.id);
+		json.put("friendlyName", this.friendlyName);
+		json.put("namespace", this.namespace);
+		json.put("type", this.type.toString());
+		json.put("value", getTrueValue());
+
+		return json;
+	}
+
+	private Object getTrueValue() {
+		switch (this.type) {
+			case STRING:
+			case LARGE_STRING:
+				return valueAsString();
+			case INTEGER: return valueAsInt();
+			case BOOLEAN: return valueAsBoolean();
+			case ARRAY:
+			case LARGE_ARRAY_LIST:
+				return valueAsList();
+			case MAP: return valueAsMap();
+			default: return null;
+		}
 	}
 
 }

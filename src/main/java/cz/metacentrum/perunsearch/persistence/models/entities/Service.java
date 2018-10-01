@@ -1,25 +1,26 @@
 package cz.metacentrum.perunsearch.persistence.models.entities;
 
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
-import cz.metacentrum.perunsearch.persistence.models.PerunEntity;
+import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Map;
 
 public class Service extends PerunEntity {
 
 	private String name;
 	private String description;
 	private Integer delay;
-	private Integer reccurrence;
+	private Integer recurrence;
 	private boolean enabled;
 	private String script;
 
-	public Service(Long id, List<PerunAttribute> attributes, String name, String description, Integer delay, Integer reccurrence, boolean enabled, String script) {
+	public Service(Long id, String name, String description, Integer delay, Integer recurrence, boolean enabled, String script, Map<String, PerunAttribute> attributes) {
 		super(id, attributes);
 		this.name = name;
 		this.description = description;
 		this.delay = delay;
-		this.reccurrence = reccurrence;
+		this.recurrence = recurrence;
 		this.enabled = enabled;
 		this.script = script;
 	}
@@ -48,12 +49,12 @@ public class Service extends PerunEntity {
 		this.delay = delay;
 	}
 
-	public Integer getReccurrence() {
-		return reccurrence;
+	public Integer getRecurrence() {
+		return recurrence;
 	}
 
-	public void setReccurrence(Integer reccurrence) {
-		this.reccurrence = reccurrence;
+	public void setRecurrence(Integer recurrence) {
+		this.recurrence = recurrence;
 	}
 
 	public boolean isEnabled() {
@@ -70,5 +71,10 @@ public class Service extends PerunEntity {
 
 	public void setScript(String script) {
 		this.script = script;
+	}
+
+	@Override
+	public JSONObject toJson() {
+		return null;
 	}
 }

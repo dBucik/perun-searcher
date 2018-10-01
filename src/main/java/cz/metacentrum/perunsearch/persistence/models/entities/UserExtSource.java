@@ -1,9 +1,10 @@
 package cz.metacentrum.perunsearch.persistence.models.entities;
 
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
-import cz.metacentrum.perunsearch.persistence.models.PerunEntity;
+import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Map;
 
 public class UserExtSource extends PerunEntity {
 
@@ -13,8 +14,8 @@ public class UserExtSource extends PerunEntity {
 	private int loa;
 	private long lastAccess;
 
-	public UserExtSource(Long id, List<PerunAttribute> attributes, Long userId, String loginExt, Long extSourceId,
-						 int loa, long lastAccess) {
+	public UserExtSource(Long id, Long userId, String loginExt, Long extSourceId,
+						 int loa, long lastAccess, Map<String, PerunAttribute> attributes) {
 		super(id, attributes);
 		this.userId = userId;
 		this.loginExt = loginExt;
@@ -61,5 +62,10 @@ public class UserExtSource extends PerunEntity {
 
 	public void setLastAccess(long lastAccess) {
 		this.lastAccess = lastAccess;
+	}
+
+	@Override
+	public JSONObject toJson() {
+		return null;
 	}
 }

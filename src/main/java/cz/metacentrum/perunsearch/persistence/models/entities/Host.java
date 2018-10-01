@@ -1,9 +1,9 @@
 package cz.metacentrum.perunsearch.persistence.models.entities;
 
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
-import cz.metacentrum.perunsearch.persistence.models.PerunEntity;
+import org.json.JSONObject;
 
-import java.util.List;
+import java.util.Map;
 
 public class Host extends PerunEntity  {
 
@@ -11,7 +11,7 @@ public class Host extends PerunEntity  {
 	private Long facilityId;
 	private String description;
 
-	public Host(Long id, List<PerunAttribute> attributes, String hostname, Long facilityId, String description) {
+	public Host(Long id, String hostname, Long facilityId, String description, Map<String, PerunAttribute> attributes) {
 		super(id, attributes);
 		this.hostname = hostname;
 		this.facilityId = facilityId;
@@ -40,5 +40,10 @@ public class Host extends PerunEntity  {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public JSONObject toJson() {
+		return null;
 	}
 }

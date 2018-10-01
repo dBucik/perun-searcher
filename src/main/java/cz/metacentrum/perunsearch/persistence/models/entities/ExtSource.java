@@ -1,16 +1,16 @@
 package cz.metacentrum.perunsearch.persistence.models.entities;
 
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
-import cz.metacentrum.perunsearch.persistence.models.PerunEntity;
+import org.json.JSONObject;
 
-import java.util.List;
+import java.util.Map;
 
 public class ExtSource extends PerunEntity {
 
 	private String name;
 	private String type;
 
-	public ExtSource(Long id, String name, String type, List<PerunAttribute> attributes) {
+	public ExtSource(Long id, String name, String type, Map<String, PerunAttribute> attributes) {
 		super(id, attributes);
 		this.name = name;
 		this.type = type;
@@ -30,5 +30,10 @@ public class ExtSource extends PerunEntity {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	@Override
+	public JSONObject toJson() {
+		return null;
 	}
 }

@@ -1,9 +1,10 @@
 package cz.metacentrum.perunsearch.persistence.models.entities;
 
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
-import cz.metacentrum.perunsearch.persistence.models.PerunEntity;
+import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Map;
 
 public class User extends PerunEntity {
 
@@ -15,7 +16,8 @@ public class User extends PerunEntity {
 	private boolean serviceAcc;
 	private boolean sponsoredAcc;
 
-	public User(Long id, List<PerunAttribute> attributes, String firstName, String lastName, String middleName, String titleBefore, String titleAfter, boolean serviceAcc, boolean sponsoredAcc) {
+	public User(Long id, String firstName, String middleName, String lastName, String titleBefore, String titleAfter,
+				boolean serviceAcc, boolean sponsoredAcc, Map<String, PerunAttribute> attributes) {
 		super(id, attributes);
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -80,5 +82,10 @@ public class User extends PerunEntity {
 
 	public void setSponsoredAcc(boolean sponsoredAcc) {
 		this.sponsoredAcc = sponsoredAcc;
+	}
+
+	@Override
+	public JSONObject toJson() {
+		return null;
 	}
 }
