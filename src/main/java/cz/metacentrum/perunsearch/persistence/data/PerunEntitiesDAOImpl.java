@@ -101,7 +101,7 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 
 		return entities.stream()
 				.filter(entity -> hasAllAttributes(entity.getAttributes(), query.getInputAttributes()))
-				.map(PerunEntity::getId)
+				.map(PerunEntity::getForeignId)
 				.collect(Collectors.toList());
 	}
 

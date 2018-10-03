@@ -3,7 +3,6 @@ package cz.metacentrum.perunsearch.persistence.models.entities;
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import org.json.JSONObject;
 
-import java.util.List;
 import java.util.Map;
 
 public class User extends PerunEntity {
@@ -13,12 +12,12 @@ public class User extends PerunEntity {
 	private String middleName;
 	private String titleBefore;
 	private String titleAfter;
-	private boolean serviceAcc;
-	private boolean sponsoredAcc;
+	private Boolean serviceAcc;
+	private Boolean sponsoredAcc;
 
 	public User(Long id, String firstName, String middleName, String lastName, String titleBefore, String titleAfter,
-				boolean serviceAcc, boolean sponsoredAcc, Map<String, PerunAttribute> attributes) {
-		super(id, attributes);
+				Boolean serviceAcc, Boolean sponsoredAcc, Map<String, PerunAttribute> attributes, Long foreignId) {
+		super(id, attributes, foreignId);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.middleName = middleName;
@@ -68,24 +67,35 @@ public class User extends PerunEntity {
 		this.titleAfter = titleAfter;
 	}
 
-	public boolean isServiceAcc() {
+	public Boolean isServiceAcc() {
 		return serviceAcc;
 	}
 
-	public void setServiceAcc(boolean serviceAcc) {
+	public void setServiceAcc(Boolean serviceAcc) {
 		this.serviceAcc = serviceAcc;
 	}
 
-	public boolean isSponsoredAcc() {
+	public Boolean isSponsoredAcc() {
 		return sponsoredAcc;
 	}
 
-	public void setSponsoredAcc(boolean sponsoredAcc) {
+	public void setSponsoredAcc(Boolean sponsoredAcc) {
 		this.sponsoredAcc = sponsoredAcc;
 	}
 
 	@Override
 	public JSONObject toJson() {
-		return null;
+		JSONObject json = new JSONObject();
+		json.put("id", this.getId());
+		json.put("first_name", this.firstName);
+		json.put("middle_name", this.middleName);
+		json.put("last_name", this.lastName);
+		json.put("title_before", this.titleBefore);
+		json.put("title_after", this.titleAfter);
+		json.put("service", this.serviceAcc);
+		json.put("sponsored", this.sponsoredAcc);
+		json.put("attributes", this.attributesToJson());
+
+		return json;
 	}
 }

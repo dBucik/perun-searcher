@@ -5,10 +5,12 @@ import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import cz.metacentrum.perunsearch.persistence.models.entities.ExtSource;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.postgresql.util.PSQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 import static cz.metacentrum.perunsearch.persistence.mappers.MappersUtils.mapAttributes;
@@ -20,18 +22,29 @@ public class ExtSourceMapper implements RowMapper<ExtSource> {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
 		Long id = entityJson.getLong("id");
-		String name = entityJson.getString("name");
-		String type = entityJson.getString("type");
+		String name = MappersUtils.getString(entityJson,"name");
+		String type = MappersUtils.getString(entityJson,"type");
 
-		JSONArray attributesJson = new JSONArray(resultSet.getString("attributes"));
-		Map<String, PerunAttribute> attributes;
+		Map<String, PerunAttribute> attributes = new HashMap<>();
 		try {
+			JSONArray attributesJson = new JSONArray(resultSet.getString("attributes"));
 			attributes = mapAttributes(attributesJson);
+		} catch (PSQLException e) {
+			//this is fine, no attributes were fetched;
 		} catch (AttributeTypeException e) {
 			throw new RuntimeException("Error while parsing attributes", e);
 			//TODO
 		}
 
-		return new ExtSource(id, name, type, attributes);
+		Long foreignId = null;
+		try {
+			foreignId = resultSet.getLong("foreign_id");
+		} catch (PSQLException e) {
+			//this is fine, no foreign id fetched
+			//TODO
+		}
+
+
+		return new ExtSource(id, name, type, attributes, foreignId);
 	}
 }

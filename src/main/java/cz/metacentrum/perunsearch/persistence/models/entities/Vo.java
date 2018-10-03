@@ -3,7 +3,6 @@ package cz.metacentrum.perunsearch.persistence.models.entities;
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import org.json.JSONObject;
 
-import java.util.List;
 import java.util.Map;
 
 public class Vo extends PerunEntity {
@@ -11,8 +10,8 @@ public class Vo extends PerunEntity {
 	private String name;
 	private String shortName;
 
-	public Vo(Long id, String name, String shortName, Map<String, PerunAttribute> attributes) {
-		super(id, attributes);
+	public Vo(Long id, String name, String shortName, Map<String, PerunAttribute> attributes, Long foreignId) {
+		super(id, attributes, foreignId);
 		this.name = name;
 		this.shortName = shortName;
 	}
@@ -35,6 +34,12 @@ public class Vo extends PerunEntity {
 
 	@Override
 	public JSONObject toJson() {
-		return null;
+		JSONObject json = new JSONObject();
+		json.put("id", this.getId());
+		json.put("name", this.name);
+		json.put("short_name", this.shortName);
+		json.put("attributes", this.attributesToJson());
+
+		return json;
 	}
 }

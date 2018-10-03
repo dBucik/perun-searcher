@@ -3,7 +3,6 @@ package cz.metacentrum.perunsearch.persistence.models.entities;
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import org.json.JSONObject;
 
-import java.util.List;
 import java.util.Map;
 
 public class Service extends PerunEntity {
@@ -15,8 +14,9 @@ public class Service extends PerunEntity {
 	private boolean enabled;
 	private String script;
 
-	public Service(Long id, String name, String description, Integer delay, Integer recurrence, boolean enabled, String script, Map<String, PerunAttribute> attributes) {
-		super(id, attributes);
+	public Service(Long id, String name, String description, Integer delay, Integer recurrence, Boolean enabled,
+				   String script, Map<String, PerunAttribute> attributes, Long foreignId) {
+		super(id, attributes, foreignId);
 		this.name = name;
 		this.description = description;
 		this.delay = delay;
@@ -57,11 +57,11 @@ public class Service extends PerunEntity {
 		this.recurrence = recurrence;
 	}
 
-	public boolean isEnabled() {
+	public Boolean isEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
 
@@ -75,6 +75,16 @@ public class Service extends PerunEntity {
 
 	@Override
 	public JSONObject toJson() {
-		return null;
+		JSONObject json = new JSONObject();
+		json.put("id", this.getId());
+		json.put("name", this.name);
+		json.put("description", this.description);
+		json.put("delay", this.delay);
+		json.put("recurrence", this.recurrence);
+		json.put("enabled", this.enabled);
+		json.put("script", this.script);
+		json.put("attributes", this.attributesToJson());
+
+		return json;
 	}
 }

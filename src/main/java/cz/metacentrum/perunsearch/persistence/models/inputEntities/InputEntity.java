@@ -82,7 +82,7 @@ public abstract class InputEntity {
 		this.entityType = entityType;
 	}
 
-	public Query toQuery() throws IncorrectCoreAttributeTypeException {
+	public Query toQuery(PerunEntityType sourceType) throws IncorrectCoreAttributeTypeException {
 		boolean isSimple = this.isSimpleQuery();
 		String entityId = getEntityId();
 		String attrValuesTable = getEntityAttrsTable();
@@ -92,11 +92,9 @@ public abstract class InputEntity {
 		query.setEntityType(entityType);
 		StringBuilder queryString = new StringBuilder();
 
-		queryString.append("SELECT to_json(ent) AS entity");
-		if (! isSimple) {
-			queryString.append(", attributes.data AS attrs");
-		}
-		queryString.append(" FROM ").append(getEntityTable()).append(" ent");
+		String selectFrom = this.getSelectFrom(sourceType, isSimple);
+
+		queryString.append(selectFrom);
 		if (! isSimple) {
 			List<String> names = mergeNames(attrNames, attributes);
 			String attributesQuery = buildAttributesQuery(query, names, entityId, attrValuesTable, attrsTable);
@@ -112,13 +110,19 @@ public abstract class InputEntity {
 		query.setQueryString(queryString.toString());
 		Map<PerunEntityType, Query> innerQueries = new HashMap<>();
 		for (Map.Entry<PerunEntityType, InputEntity> input : innerInputs.entrySet()) {
-			innerQueries.put(input.getKey(), input.getValue().toQuery());
+			innerQueries.put(input.getKey(), input.getValue().toQuery(this.entityType));
 		}
 		query.setInnerQueries(innerQueries);
 		query.setInputAttributes(attributes);
 
 		return query;
 	}
+
+	public boolean isSimpleQuery() {
+		return this.attributes.isEmpty() && this.attrNames.isEmpty();
+	}
+
+	public abstract String getSelectFrom(PerunEntityType sourceType, boolean isSimple);
 
 	private List<String> mergeNames(List<String> attrNames, List<InputAttribute> attributes) {
 		Set<String> names = new HashSet<>(attrNames);
@@ -127,10 +131,6 @@ public abstract class InputEntity {
 		}
 
 		return new ArrayList<>(names);
-	}
-
-	private boolean isSimpleQuery() {
-		return this.attributes.isEmpty() && this.attrNames.isEmpty();
 	}
 
 	private String outerWhere(Query query, List<InputAttribute> core) throws IncorrectCoreAttributeTypeException {

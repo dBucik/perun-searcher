@@ -54,4 +54,35 @@ public class UserExtSourceInput extends InputEntity {
 	public String getAttrsTable() {
 		return ATTR_NAMES_TABLE;
 	}
+
+	@Override
+	public String getSelectFrom(PerunEntityType sourceType, boolean isSimple) {
+		if (sourceType == null) {
+			return getDefaultQuery(isSimple);
+		}
+
+		switch (sourceType) {
+			case USER:
+				return getQueryForUser(isSimple);
+			case EXT_SOURCE:
+				return getQueryForExtSource(isSimple);
+			default: return null; //TODO: throw exception
+		}
+	}
+
+	private String getDefaultQuery(boolean isSimple) {
+		return InputUtils.getQuery(isSimple, null, null, ENTITY_TABLE);
+	}
+
+	private String getQueryForUser(boolean isSimple) {
+		String select = "ent.user_id AS foreign_id";
+
+		return InputUtils.getQuery(isSimple, select, null, ENTITY_TABLE);
+	}
+
+	private String getQueryForExtSource(boolean isSimple) {
+		String select = "ent.ext_source_id AS foreign_id";
+
+		return InputUtils.getQuery(isSimple, select, null, ENTITY_TABLE);
+	}
 }

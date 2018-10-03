@@ -22,13 +22,10 @@ public class GroupMapper implements RowMapper<Group> {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
 		Long id = entityJson.getLong("id");
-		String name = entityJson.getString("name");
-		String dsc = entityJson.getString("dsc");
-		Long voId = entityJson.getLong("vo_id");
-		Long parentGroupId = entityJson.optLong("parent_group_id", -1);
-		if (parentGroupId == -1) {
-			parentGroupId = null;
-		}
+		String name = MappersUtils.getString(entityJson,"name");
+		String dsc = MappersUtils.getString(entityJson,"dsc");
+		Long voId = MappersUtils.getLong(entityJson, "vo_id");
+		Long parentGroupId = MappersUtils.getLong(entityJson, "parent_group_id");
 
 		Map<String, PerunAttribute> attributes = new HashMap<>();
 		try {
@@ -41,6 +38,14 @@ public class GroupMapper implements RowMapper<Group> {
 			//TODO
 		}
 
-		return new Group(id, name, dsc, voId, parentGroupId, attributes);
+		Long foreignId = null;
+		try {
+			foreignId = resultSet.getLong("foreign_id");
+		} catch (PSQLException e) {
+			//this is fine, no foreign id fetched
+			//TODO
+		}
+
+		return new Group(id, name, dsc, voId, parentGroupId, attributes, foreignId);
 	}
 }

@@ -53,4 +53,28 @@ public class ServiceInput extends InputEntity {
 	public String getAttrsTable() {
 		return ATTR_NAMES_TABLE;
 	}
+
+	@Override
+	public String getSelectFrom(PerunEntityType sourceType, boolean isSimple) {
+		if (sourceType == null) {
+			return getDefaultQuery(isSimple);
+		}
+
+		switch (sourceType) {
+			case RESOURCE:
+				return getQueryForResource(isSimple);
+			default: return null; //TODO: throw exception
+		}
+	}
+
+	private String getDefaultQuery(boolean isSimple) {
+		return InputUtils.getQuery(isSimple, null, null, ENTITY_TABLE);
+	}
+
+	private String getQueryForResource(boolean isSimple) {
+		String select = "rs.resource_id AS foreign_id";
+		String join = "JOIN resource_services rs ON rs.service_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+
+		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
+	}
 }

@@ -5,11 +5,12 @@ import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import cz.metacentrum.perunsearch.persistence.models.entities.Service;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.postgresql.util.PSQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import static cz.metacentrum.perunsearch.persistence.mappers.MappersUtils.mapAttributes;
@@ -21,22 +22,33 @@ public class ServiceMapper implements RowMapper<Service> {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
 		Long id = entityJson.getLong("id");
-		String name = entityJson.getString("name");
-		String description = entityJson.getString("description");
-		int delay = entityJson.getInt("delay");
-		int recurrence = entityJson.getInt("recurrence");
-		boolean enabled = "t".equals(entityJson.getString("enabled"));
-		String script = entityJson.getString("script");
+		String name = MappersUtils.getString(entityJson,"name");
+		String description = MappersUtils.getString(entityJson,"description");
+		Integer delay = MappersUtils.getInt(entityJson, "delay");
+		Integer recurrence = MappersUtils.getInt(entityJson, "recurrence");
+		String enabledStr = MappersUtils.getString(entityJson,"enabled");
+		Boolean enabled = (enabledStr != null) ? "t".equals(enabledStr) : null;
+		String script = MappersUtils.getString(entityJson,"script");
 
-		JSONArray attributesJson = new JSONArray(resultSet.getString("attributes"));
-		Map<String, PerunAttribute> attributes;
+		Map<String, PerunAttribute> attributes = new HashMap<>();
 		try {
+			JSONArray attributesJson = new JSONArray(resultSet.getString("attributes"));
 			attributes = mapAttributes(attributesJson);
+		} catch (PSQLException e) {
+			//this is fine, no attributes were fetched;
 		} catch (AttributeTypeException e) {
 			throw new RuntimeException("Error while parsing attributes", e);
 			//TODO
 		}
 
-		return new Service(id, name, description, delay, recurrence, enabled, script, attributes);
+		Long foreignId = null;
+		try {
+			foreignId = resultSet.getLong("foreign_id");
+		} catch (PSQLException e) {
+			//this is fine, no foreign id fetched
+			//TODO
+		}
+
+		return new Service(id, name, description, delay, recurrence, enabled, script, attributes, foreignId);
 	}
 }

@@ -12,8 +12,8 @@ public class Resource extends PerunEntity {
 	private String description;
 	private Long voId;
 
-	public Resource(Long id, Long facilityId, String name, String description, Long voId, Map<String, PerunAttribute> attributes) {
-		super(id, attributes);
+	public Resource(Long id, Long facilityId, String name, String description, Long voId, Map<String, PerunAttribute> attributes, Long foreignId) {
+		super(id, attributes, foreignId);
 		this.facilityId = facilityId;
 		this.name = name;
 		this.description = description;
@@ -54,6 +54,14 @@ public class Resource extends PerunEntity {
 
 	@Override
 	public JSONObject toJson() {
-		return null;
+		JSONObject json = new JSONObject();
+		json.put("id", this.getId());
+		json.put("facility_id", this.facilityId);
+		json.put("name", this.name);
+		json.put("description", this.description);
+		json.put("vo_id", this.voId);
+		json.put("attributes", this.attributesToJson());
+
+		return json;
 	}
 }

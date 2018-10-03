@@ -24,7 +24,7 @@ public class SearcherService {
 
 	public JSONArray performSearch(String input) throws IllegalRelationException, InputParseException, IncorrectCoreAttributeTypeException {
 		InputEntity parsedInput = JsonToInputParser.parseInput(input);
-		Query query = parsedInput.toQuery();
+		Query query = parsedInput.toQuery(null);
 		List<PerunEntity> result = dao.executeQuery(query);
 
 		return buildResultString(result);

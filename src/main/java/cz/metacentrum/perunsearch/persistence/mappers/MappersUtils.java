@@ -5,6 +5,8 @@ import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,5 +26,33 @@ public class MappersUtils {
 		}
 
 		return result;
+	}
+
+	public static String getString(JSONObject json, String key) {
+		return (json.has(key) && json.get(key) != null) ?
+				json.getString(key) : null;
+	}
+
+	public static Boolean getBoolean(JSONObject json, String key) {
+		return (json.has(key) && json.get(key) != null) ?
+				json.getBoolean(key) : null;
+	}
+
+	public static Long getLong(JSONObject json, String key) {
+		return (json.has(key) && json.get(key) != null) ?
+				json.getLong(key) : null;
+	}
+
+	public static Integer getInt(JSONObject json, String key) {
+		return (json.has(key) && json.get(key) != null) ?
+				json.getInt(key) : null;
+	}
+
+	public static Long getTimestampMilis(JSONObject json, String key) {
+		if (json.has(key) && json.get(key) != null) {
+			LocalDateTime time = LocalDateTime.parse(json.getString(key));
+			return time.toEpochSecond(ZoneOffset.UTC);
+		}
+		return null;
 	}
 }

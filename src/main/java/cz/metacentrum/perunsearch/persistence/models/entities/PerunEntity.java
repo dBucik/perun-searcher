@@ -11,10 +11,12 @@ public abstract class PerunEntity {
 
 	private Long id;
 	private Map<String, PerunAttribute> attributes = new HashMap<>();
+	private Long foreignId;
 
-	public PerunEntity(Long id, Map<String, PerunAttribute> attributes) {
+	public PerunEntity(Long id, Map<String, PerunAttribute> attributes, Long foreignId) {
 		this.id = id;
 		this.attributes.putAll(attributes);
+		this.foreignId = foreignId;
 	}
 
 	public void setId(Long id) {
@@ -30,7 +32,15 @@ public abstract class PerunEntity {
 	}
 
 	public void setAttributes(Map<String, PerunAttribute> attributes) {
-		this.attributes = attributes;
+		this.attributes.putAll(attributes);
+	}
+
+	public Long getForeignId() {
+		return foreignId;
+	}
+
+	public void setForeignId(Long foreignId) {
+		this.foreignId = foreignId;
 	}
 
 	public abstract JSONObject toJson();

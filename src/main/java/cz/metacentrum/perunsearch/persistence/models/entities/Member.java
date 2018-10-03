@@ -9,10 +9,10 @@ public class Member extends PerunEntity {
 
 	private Long userId;
 	private Long voId;
-	private boolean sponsored;
+	private Boolean sponsored;
 
-	public Member(Long id, Long userId, Long voId, boolean sponsored, Map<String, PerunAttribute> attributes) {
-		super(id, attributes);
+	public Member(Long id, Long userId, Long voId, Boolean sponsored, Map<String, PerunAttribute> attributes, Long foreignId) {
+		super(id, attributes, foreignId);
 		this.userId = userId;
 		this.voId = voId;
 		this.sponsored = sponsored;
@@ -34,16 +34,23 @@ public class Member extends PerunEntity {
 		this.voId = voId;
 	}
 
-	public boolean isSponsored() {
+	public Boolean isSponsored() {
 		return sponsored;
 	}
 
-	public void setSponsored(boolean sponsored) {
+	public void setSponsored(Boolean sponsored) {
 		this.sponsored = sponsored;
 	}
 
 	@Override
 	public JSONObject toJson() {
-		return null;
+		JSONObject json = new JSONObject();
+		json.put("id", this.getId());
+		json.put("user_id", this.userId);
+		json.put("vo_id", this.voId);
+		json.put("sponsored", this.sponsored);
+		json.put("attributes", this.attributesToJson());
+
+		return json;
 	}
 }

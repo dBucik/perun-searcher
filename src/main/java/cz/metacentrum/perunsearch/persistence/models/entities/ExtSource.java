@@ -10,8 +10,8 @@ public class ExtSource extends PerunEntity {
 	private String name;
 	private String type;
 
-	public ExtSource(Long id, String name, String type, Map<String, PerunAttribute> attributes) {
-		super(id, attributes);
+	public ExtSource(Long id, String name, String type, Map<String, PerunAttribute> attributes, Long foreignId) {
+		super(id, attributes, foreignId);
 		this.name = name;
 		this.type = type;
 	}
@@ -34,6 +34,12 @@ public class ExtSource extends PerunEntity {
 
 	@Override
 	public JSONObject toJson() {
-		return null;
+		JSONObject json = new JSONObject();
+		json.put("id", this.getId());
+		json.put("name", this.name);
+		json.put("type", this.type);
+		json.put("attributes", this.attributesToJson());
+
+		return json;
 	}
 }

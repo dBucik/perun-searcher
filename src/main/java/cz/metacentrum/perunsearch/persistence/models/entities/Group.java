@@ -12,8 +12,8 @@ public class Group extends PerunEntity {
 	private Long voId;
 	private Long parentGroupId;
 
-	public Group(Long id, String name, String description, Long voId, Long parentGroupId, Map<String, PerunAttribute> attributes) {
-		super(id, attributes);
+	public Group(Long id, String name, String description, Long voId, Long parentGroupId, Map<String, PerunAttribute> attributes, Long foreignId) {
+		super(id, attributes, foreignId);
 		this.name = name;
 		this.description = description;
 		this.voId = voId;

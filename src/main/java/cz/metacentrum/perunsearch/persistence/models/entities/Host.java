@@ -11,8 +11,8 @@ public class Host extends PerunEntity  {
 	private Long facilityId;
 	private String description;
 
-	public Host(Long id, String hostname, Long facilityId, String description, Map<String, PerunAttribute> attributes) {
-		super(id, attributes);
+	public Host(Long id, String hostname, Long facilityId, String description, Map<String, PerunAttribute> attributes, Long foreignId) {
+		super(id, attributes, foreignId);
 		this.hostname = hostname;
 		this.facilityId = facilityId;
 		this.description = description;
@@ -44,6 +44,13 @@ public class Host extends PerunEntity  {
 
 	@Override
 	public JSONObject toJson() {
-		return null;
+		JSONObject json = new JSONObject();
+		json.put("id", this.getId());
+		json.put("hostname", this.hostname);
+		json.put("facility_id", this.facilityId);
+		json.put("description", this.description);
+		json.put("attributes", this.attributesToJson());
+
+		return json;
 	}
 }

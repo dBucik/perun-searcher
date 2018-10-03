@@ -3,7 +3,6 @@ package cz.metacentrum.perunsearch.persistence.models.entities;
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import org.json.JSONObject;
 
-import java.util.List;
 import java.util.Map;
 
 public class UserExtSource extends PerunEntity {
@@ -11,12 +10,12 @@ public class UserExtSource extends PerunEntity {
 	private Long userId;
 	private String loginExt;
 	private Long extSourceId;
-	private int loa;
-	private long lastAccess;
+	private Integer loa;
+	private Long lastAccess;
 
 	public UserExtSource(Long id, Long userId, String loginExt, Long extSourceId,
-						 int loa, long lastAccess, Map<String, PerunAttribute> attributes) {
-		super(id, attributes);
+						 Integer loa, Long lastAccess, Map<String, PerunAttribute> attributes, Long foreignId) {
+		super(id, attributes, foreignId);
 		this.userId = userId;
 		this.loginExt = loginExt;
 		this.extSourceId = extSourceId;
@@ -48,24 +47,33 @@ public class UserExtSource extends PerunEntity {
 		this.extSourceId = extSourceId;
 	}
 
-	public int getLoa() {
+	public Integer getLoa() {
 		return loa;
 	}
 
-	public void setLoa(int loa) {
+	public void setLoa(Integer loa) {
 		this.loa = loa;
 	}
 
-	public long getLastAccess() {
+	public Long getLastAccess() {
 		return lastAccess;
 	}
 
-	public void setLastAccess(long lastAccess) {
+	public void setLastAccess(Long lastAccess) {
 		this.lastAccess = lastAccess;
 	}
 
 	@Override
 	public JSONObject toJson() {
-		return null;
+		JSONObject json = new JSONObject();
+		json.put("id", this.getId());
+		json.put("user_id", this.userId);
+		json.put("login_ext", this.loginExt);
+		json.put("ext_source_id", this.extSourceId);
+		json.put("loa", this.loa);
+		json.put("last_access", this.lastAccess);
+		json.put("attributes", this.attributesToJson());
+
+		return json;
 	}
 }
