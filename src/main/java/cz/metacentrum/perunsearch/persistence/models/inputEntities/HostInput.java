@@ -6,6 +6,7 @@ import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.FACILITY;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.HOST;
@@ -20,7 +21,7 @@ public class HostInput extends InputEntity {
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Collections.singletonList(FACILITY);
 
-	public HostInput(boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes,
+	public HostInput(boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
 					 List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(TYPE, isTopLevel, core, attributes, attrNames, innerInputs);
 	}

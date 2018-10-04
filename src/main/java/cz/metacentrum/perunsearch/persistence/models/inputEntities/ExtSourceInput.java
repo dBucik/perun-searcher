@@ -6,6 +6,7 @@ import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.EXT_SOURCE;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.GROUP;
@@ -22,7 +23,7 @@ public class ExtSourceInput extends InputEntity {
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(VO, GROUP, USER_EXT_SOURCE);
 
-	public ExtSourceInput(boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes,
+	public ExtSourceInput(boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
 						  List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(TYPE, isTopLevel, core, attributes, attrNames, innerInputs);
 	}

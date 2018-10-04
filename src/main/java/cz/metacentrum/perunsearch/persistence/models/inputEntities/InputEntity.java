@@ -1,12 +1,12 @@
 package cz.metacentrum.perunsearch.persistence.models.inputEntities;
 
-import cz.metacentrum.perunsearch.persistence.enums.InputAttributeType;
 import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
 import cz.metacentrum.perunsearch.persistence.exceptions.IncorrectCoreAttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.Query;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,16 +25,16 @@ public abstract class InputEntity {
 
 	private PerunEntityType entityType;
 	private boolean isTopLevel;
-	private List<InputAttribute> core = new ArrayList<>();
+	private Map<String, Object> core = new HashMap<>();
 	private List<InputAttribute> attributes = new ArrayList<>();
 	private List<String> attrNames = new ArrayList<>();
 	private Map<PerunEntityType, InputEntity> innerInputs = new HashMap<>();
 
-	public InputEntity(PerunEntityType entityType, boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes,
+	public InputEntity(PerunEntityType entityType, boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
 					   List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		this.entityType = entityType;
 		this.isTopLevel = isTopLevel;
-		this.core.addAll(core);
+		this.core.putAll(core);
 		this.attributes.addAll(attributes);
 		this.attrNames.addAll(attrNames);
 		for (InputEntity e: innerInputs) {
@@ -61,7 +61,7 @@ public abstract class InputEntity {
 		return isTopLevel;
 	}
 
-	public List<InputAttribute> getCore() {
+	public Map<String, Object> getCore() {
 		return core;
 	}
 
@@ -101,7 +101,7 @@ public abstract class InputEntity {
 		if (! isSimple) {
 			List<String> names = mergeNames(attrNames, attributes);
 			String attributesQuery = buildAttributesQuery(query, names, entityId, attrValuesTable, attrsTable);
-			queryString.append(" ent JOIN (").append(attributesQuery)
+			queryString.append(" JOIN (").append(attributesQuery)
 					.append(") AS attributes ON ent.id = attributes.").append(entityId);
 		}
 		String where = outerWhere(query, this.getCore());
@@ -136,24 +136,24 @@ public abstract class InputEntity {
 		return new ArrayList<>(names);
 	}
 
-	private String outerWhere(Query query, List<InputAttribute> core) throws IncorrectCoreAttributeTypeException {
+	private String outerWhere(Query query, Map<String, Object> core) throws IncorrectCoreAttributeTypeException {
 		if (core == null || core.isEmpty()) {
 			return NO_VALUE;
 		}
 
 		StringJoiner attrs = new StringJoiner(" AND ");
-		for (InputAttribute a: core) {
-			String operator = resolveMatchOperator(a.getType());
+		for (Map.Entry<String, Object> a: core.entrySet()) {
+			String operator = resolveMatchOperator(a.getValue());
 			String part;
 			if (operator.equals(NULL_MATCH)) {
-				part = "ent." + a.getFriendlyName() + operator;
+				part = "ent." + a.getKey() + operator;
 			} else {
-				part = "ent." + a.getFriendlyName() + operator + query.nextParamName();
+				part = "ent." + a.getKey() + operator + query.nextParamName();
 				if (operator.equals(LIKE_MATCH)) {
 					//TODO
-					query.addParameter('%' + (String) getTrueValue(a) + '%');
+					query.addParameter('%' + (String) a.getValue() + '%');
 				}
-				query.addParameter(getTrueValue(a));
+				query.addParameter(a.getValue());
 			}
 			attrs.add(part);
 		}
@@ -161,14 +161,13 @@ public abstract class InputEntity {
 		return "WHERE " + attrs.toString();
 	}
 
-	private String resolveMatchOperator(InputAttributeType type) throws IncorrectCoreAttributeTypeException {
-		switch (type) {
-			case NULL: return NULL_MATCH;
-			case STRING:
-			case INTEGER:
-			case BOOLEAN: return EXACT_MATCH;
-			default:
-				throw new IncorrectCoreAttributeTypeException("Unsupported core attribute type found for input");
+	private String resolveMatchOperator(Object o) throws IncorrectCoreAttributeTypeException {
+		if (o == null) {
+			return NULL_MATCH;
+		} else if ((o instanceof String) || (o instanceof Long) || (o instanceof Boolean) || (o instanceof Timestamp)) {
+			return EXACT_MATCH;
+		} else {
+			throw new IncorrectCoreAttributeTypeException("Unsupported core attribute type found for input");
 		}
 	}
 
@@ -199,14 +198,5 @@ public abstract class InputEntity {
 		}
 
 		return "WHERE " + where.toString();
-	}
-
-	private Object getTrueValue(InputAttribute a) {
-		switch (a.getType()) {
-			case STRING: return a.valueAsString();
-			case INTEGER: return a.valueAsInt();
-			case BOOLEAN: return a.valueAsBoolean();
-			default: return null; // TODO :throw new exception probably
-		}
 	}
 }
