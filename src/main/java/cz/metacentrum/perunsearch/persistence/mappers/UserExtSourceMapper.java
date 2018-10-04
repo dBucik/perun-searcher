@@ -26,7 +26,7 @@ public class UserExtSourceMapper implements RowMapper<UserExtSource> {
 		String loginExt = MappersUtils.getString(entityJson,"login_ext");
 		Long extSourceId = MappersUtils.getLong(entityJson, "ext_source_id");
 		Integer loa = MappersUtils.getInt(entityJson, "loa");
-		Long lastAccess = MappersUtils.getTimestampMilis(entityJson, "last_access");
+		Long lastAccess = MappersUtils.getTimestampMillis(entityJson, "last_access");
 
 		Map<String, PerunAttribute> attributes = new HashMap<>();
 		try {

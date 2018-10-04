@@ -29,27 +29,27 @@ public class MappersUtils {
 	}
 
 	public static String getString(JSONObject json, String key) {
-		return (json.has(key) && json.get(key) != null) ?
+		return (json.has(key) && json.get(key) != JSONObject.NULL) ?
 				json.getString(key) : null;
 	}
 
 	public static Boolean getBoolean(JSONObject json, String key) {
-		return (json.has(key) && json.get(key) != null) ?
+		return (json.has(key) && json.get(key) != JSONObject.NULL) ?
 				json.getBoolean(key) : null;
 	}
 
 	public static Long getLong(JSONObject json, String key) {
-		return (json.has(key) && json.get(key) != null) ?
+		return (json.has(key) && json.get(key) != JSONObject.NULL) ?
 				json.getLong(key) : null;
 	}
 
 	public static Integer getInt(JSONObject json, String key) {
-		return (json.has(key) && json.get(key) != null) ?
+		return (json.has(key) && json.get(key) != JSONObject.NULL) ?
 				json.getInt(key) : null;
 	}
 
-	public static Long getTimestampMilis(JSONObject json, String key) {
-		if (json.has(key) && json.get(key) != null) {
+	public static Long getTimestampMillis(JSONObject json, String key) {
+		if (json.has(key) && json.get(key) != JSONObject.NULL) {
 			LocalDateTime time = LocalDateTime.parse(json.getString(key));
 			return time.toEpochSecond(ZoneOffset.UTC);
 		}
