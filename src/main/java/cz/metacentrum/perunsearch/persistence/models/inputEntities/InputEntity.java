@@ -19,6 +19,9 @@ import java.util.StringJoiner;
 public abstract class InputEntity {
 
 	private static final String NO_VALUE = null;
+	private static final String EXACT_MATCH = " = ";
+	private static final String LIKE_MATCH = " LIKE ";
+	private static final String NULL_MATCH = " IS NULL ";
 
 	private PerunEntityType entityType;
 	private boolean isTopLevel;
@@ -127,7 +130,7 @@ public abstract class InputEntity {
 	private List<String> mergeNames(List<String> attrNames, List<InputAttribute> attributes) {
 		Set<String> names = new HashSet<>(attrNames);
 		for(InputAttribute a: attributes) {
-			names.add(a.getFriendlyName());
+			names.add(a.getName());
 		}
 
 		return new ArrayList<>(names);
@@ -140,8 +143,18 @@ public abstract class InputEntity {
 
 		StringJoiner attrs = new StringJoiner(" AND ");
 		for (InputAttribute a: core) {
-			String part = "ent." + a.getFriendlyName() + resolveMatchOperator(a.getType()) + query.nextParamName();
-			query.addParameter(getTrueValue(a));
+			String operator = resolveMatchOperator(a.getType());
+			String part;
+			if (operator.equals(NULL_MATCH)) {
+				part = "ent." + a.getFriendlyName() + operator;
+			} else {
+				part = "ent." + a.getFriendlyName() + operator + query.nextParamName();
+				if (operator.equals(LIKE_MATCH)) {
+					//TODO
+					query.addParameter('%' + (String) getTrueValue(a) + '%');
+				}
+				query.addParameter(getTrueValue(a));
+			}
 			attrs.add(part);
 		}
 
@@ -150,9 +163,10 @@ public abstract class InputEntity {
 
 	private String resolveMatchOperator(InputAttributeType type) throws IncorrectCoreAttributeTypeException {
 		switch (type) {
-			case STRING: return " LIKE ";
+			case NULL: return NULL_MATCH;
+			case STRING:
 			case INTEGER:
-			case BOOLEAN: return " = ";
+			case BOOLEAN: return EXACT_MATCH;
 			default:
 				throw new IncorrectCoreAttributeTypeException("Unsupported core attribute type found for input");
 		}
@@ -180,7 +194,7 @@ public abstract class InputEntity {
 
 		StringJoiner where = new StringJoiner(" OR ");
 		for (String name: attrNames) {
-			where.add("(friendly_name = " + query.nextParamName() + ')');
+			where.add("(attr_name = " + query.nextParamName() + ')');
 			query.addParameter(name);
 		}
 

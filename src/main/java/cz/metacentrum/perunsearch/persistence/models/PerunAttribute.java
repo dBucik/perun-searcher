@@ -104,6 +104,7 @@ public class PerunAttribute {
 			return null;
 		}
 
+		//TODO: split only at unescaped chars
 		String[] parts = value.split(";");
 		return Arrays.asList(parts);
 	}
@@ -117,6 +118,7 @@ public class PerunAttribute {
 			return null;
 		}
 
+		//TODO: split only at unescaped chars
 		String[] parts = value.split(";");
 		Map<String, String> valuesMap = new LinkedHashMap<>();
 		for (String part: parts) {

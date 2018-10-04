@@ -8,6 +8,7 @@ import cz.metacentrum.perunsearch.persistence.models.inputEntities.FacilityInput
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.GroupInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.HostInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputUtils;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.MemberInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.ResourceInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.ServiceInput;
@@ -138,12 +139,18 @@ public class JsonToInputParser {
 	private static InputAttribute parseAttribute(JSONObject attributeJson) throws InputParseException {
 		String name = attributeJson.getString("name");
 		boolean isCore = name.contains(":core:");
-		String friendlyName = extractFriendlyName(name);
-		String type = attributeJson.getString("type");
+		String friendlyName;
+
+		if (isCore) {
+			friendlyName = InputUtils.translateCoreAttribute(name);
+		} else {
+			friendlyName = extractFriendlyName(name);
+		}
+
 		Object value = attributeJson.get("value");
 
 		try {
-			return new InputAttribute(friendlyName, name, type, value, isCore);
+			return new InputAttribute(friendlyName, name, value, isCore);
 		} catch (AttributeTypeException e) {
 			throw new InputParseException("Input attribute cannot be parsed", e);
 		}

@@ -23,10 +23,10 @@ public class InputAttribute {
 	private boolean isCore;
 	private Object value;
 
-	public InputAttribute(String friendlyName, String name, String type, Object value, boolean isCore) throws AttributeTypeException {
+	public InputAttribute(String friendlyName, String name, Object value, boolean isCore) throws AttributeTypeException {
 		this.friendlyName = friendlyName;
 		this.name = name;
-		this.type = InputAttributeType.fromString(type);
+		this.type = getType(value);
 		this.value = value;
 		this.isCore = isCore;
 	}
@@ -53,10 +53,6 @@ public class InputAttribute {
 
 	public void setType(InputAttributeType type) {
 		this.type = type;
-	}
-
-	public void setType(String type) throws AttributeTypeException {
-		this.type = InputAttributeType.fromString(type);
 	}
 
 	public void setValue(Object value) {
@@ -104,5 +100,23 @@ public class InputAttribute {
 		}
 
 		return value;
+	}
+
+	private InputAttributeType getType(Object value) throws AttributeTypeException {
+		if (value instanceof String) {
+			return InputAttributeType.STRING;
+		} else if (value instanceof Integer) {
+			return InputAttributeType.INTEGER;
+		} else if (value instanceof Boolean) {
+			return InputAttributeType.BOOLEAN;
+		} else if (value instanceof JSONArray) {
+			return InputAttributeType.ARRAY;
+		} else if (value instanceof JSONObject) {
+			return InputAttributeType.MAP;
+		} else if (value == JSONObject.NULL) {
+			return InputAttributeType.NULL;
+		}
+
+		else throw new AttributeTypeException("Attribute cannot have type: " + type);
 	}
 }
