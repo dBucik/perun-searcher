@@ -20,7 +20,7 @@ public class InputUtils {
 		}
 
 		if (! isSimple) {
-			queryString.append(", attributes.data AS attrs");
+			queryString.append(", attributes.data AS attributes");
 		}
 		queryString.append(" FROM ").append(entityTable).append(" ent");
 		if (join != null) {

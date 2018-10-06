@@ -16,13 +16,11 @@ public class MappersUtils {
 		Map<String, PerunAttribute> result = new HashMap<>();
 		for (int i = 0; i < json.length(); i++) {
 			JSONObject attribute = json.getJSONObject(i);
-			Long id = attribute.getLong("id");
-			String namespace = attribute.getString("namespace");
-			String friendlyName = attribute.getString("friendlyName");
+			String name = attribute.getString("name");
 			String type = attribute.getString("type");
 			String value = attribute.getString("value");
 
-			result.put(friendlyName, new PerunAttribute(id, namespace, friendlyName, type, value));
+			result.put(name, new PerunAttribute(name, type, value));
 		}
 
 		return result;

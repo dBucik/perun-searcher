@@ -25,6 +25,8 @@ import java.util.Map;
 
 public class JsonToInputParser {
 
+	public static final List<String> ALL_ATTRS = null;
+
 	public static InputEntity parseInput(String inputString) throws InputParseException, IllegalRelationException {
 		JSONObject json = new JSONObject(inputString);
 		return parseInputEntity(json, true);
@@ -44,6 +46,11 @@ public class JsonToInputParser {
 		List<String> attrsNames = parseAttrsNames(attrsNamesJsonArray);
 		List<InputEntity> entities = parseInnerInputs(entitiesJsonArray);
 
+		return resolveEntity(isTopLevel, json, entity, attributes, attrsNames, entities);
+	}
+
+	private static InputEntity resolveEntity(boolean isTopLevel, JSONObject json, String entity, List<InputAttribute> attributes,
+											 List<String> attrsNames, List<InputEntity> entities) throws IllegalRelationException {
 		switch (entity.toUpperCase()) {
 			case "EXT_SOURCE": {
 				Map<String, Object> core = mapCoreExtSource(json);
@@ -372,6 +379,19 @@ public class JsonToInputParser {
 		return attributes;
 	}
 
+	private static List<String> parseAttrsNames(JSONArray attrsNamesJsonArray) {
+		List<String> attrsNames = new ArrayList<>();
+		if (attrsNamesJsonArray != null) {
+			for (int i = 0; i < attrsNamesJsonArray.length(); i++) {
+				attrsNames.add(attrsNamesJsonArray.getString(i));
+			}
+
+			return attrsNames;
+		}
+
+		return ALL_ATTRS;
+	}
+
 	private static List<InputEntity> parseInnerInputs(JSONArray entitiesJsonArray) throws IllegalRelationException, InputParseException {
 		List<InputEntity> entities = new ArrayList<>();
 		if (entitiesJsonArray != null) {
@@ -384,35 +404,15 @@ public class JsonToInputParser {
 		return entities;
 	}
 
-	private static List<String> parseAttrsNames(JSONArray attrsNamesJsonArray) {
-		List<String> attrsNames = new ArrayList<>();
-		if (attrsNamesJsonArray != null) {
-			for (int i = 0; i < attrsNamesJsonArray.length(); i++) {
-				attrsNames.add(attrsNamesJsonArray.getString(i));
-			}
-		}
-
-		return attrsNames;
-	}
-
 	private static InputAttribute parseAttribute(JSONObject attributeJson) throws InputParseException {
 		String name = attributeJson.getString("name");
-		boolean isCore = name.contains(":core:");
-		String friendlyName = extractFriendlyName(name);
 		Object value = attributeJson.get("value");
 
 		try {
-			return new InputAttribute(friendlyName, name, value, isCore);
+			return new InputAttribute(name, value);
 		} catch (AttributeTypeException e) {
 			throw new InputParseException("Input attribute cannot be parsed", e);
 		}
-	}
-
-	private static String extractFriendlyName(String name) {
-		String[] parts = name.split(":");
-		int last = parts.length - 1;
-
-		return parts[last];
 	}
 
 	private static String getString(JSONObject json, String key) {

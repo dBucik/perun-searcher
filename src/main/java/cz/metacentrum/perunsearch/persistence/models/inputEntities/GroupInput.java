@@ -17,7 +17,7 @@ import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.VO;
 public class GroupInput extends InputEntity {
 
 	private static final PerunEntityType TYPE = GROUP;
-	private static final String ENTITY_ID_FIELD = "id";
+	private static final String ENTITY_ID_FIELD = "group_id";
 	private static final String ENTITY_TABLE = "groups";
 	private static final String ENTITY_ATTRS_TABLE = "group_attr_values";
 	private static final String ATTR_NAMES_TABLE = "attr_names";
@@ -44,7 +44,7 @@ public class GroupInput extends InputEntity {
 	}
 
 	@Override
-	public String getEntityId() {
+	public String getEntityIdForAttrs() {
 		return ENTITY_ID_FIELD;
 	}
 

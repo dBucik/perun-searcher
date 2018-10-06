@@ -23,12 +23,14 @@ public abstract class InputEntity {
 	private static final String LIKE_MATCH = " LIKE ";
 	private static final String NULL_MATCH = " IS NULL ";
 
+	private static final List<String> ALL_ATTRS = null;
+
 	private PerunEntityType entityType;
 	private boolean isTopLevel;
 	private Map<String, Object> core = new HashMap<>();
 	private List<InputAttribute> attributes = new ArrayList<>();
 	private List<String> attrNames = new ArrayList<>();
-	private Map<PerunEntityType, InputEntity> innerInputs = new HashMap<>();
+	private List<InputEntity> innerInputs = new ArrayList<>();
 
 	public InputEntity(PerunEntityType entityType, boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
 					   List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
@@ -36,14 +38,20 @@ public abstract class InputEntity {
 		this.isTopLevel = isTopLevel;
 		this.core.putAll(core);
 		this.attributes.addAll(attributes);
-		this.attrNames.addAll(attrNames);
+
+		if ((attrNames == null)) {
+			this.attrNames = null;
+		} else {
+			this.attrNames.addAll(attrNames);
+		}
+
 		for (InputEntity e: innerInputs) {
 			if (!isAllowedInnerInput(e.getEntityType())) {
 				throw new IllegalRelationException(e.getEntityType() +
 						" does not have a relationship with " + this.entityType);
 			}
 
-			this.innerInputs.put(e.getEntityType(), e);
+			this.innerInputs.add(e);
 		}
 	}
 
@@ -51,7 +59,7 @@ public abstract class InputEntity {
 
 	public abstract String getEntityTable();
 
-	public abstract String getEntityId();
+	public abstract String getEntityIdForAttrs();
 
 	public abstract String getEntityAttrsTable();
 
@@ -60,6 +68,8 @@ public abstract class InputEntity {
 	public boolean isTopLevel() {
 		return isTopLevel;
 	}
+
+	public abstract String getSelectFrom(PerunEntityType sourceType, boolean isSimple);
 
 	public Map<String, Object> getCore() {
 		return core;
@@ -73,7 +83,7 @@ public abstract class InputEntity {
 		return attrNames;
 	}
 
-	public Map<PerunEntityType, InputEntity> getInnerInputs() {
+	public List<InputEntity> getInnerInputs() {
 		return innerInputs;
 	}
 
@@ -87,33 +97,33 @@ public abstract class InputEntity {
 
 	public Query toQuery(PerunEntityType sourceType) throws IncorrectCoreAttributeTypeException {
 		boolean isSimple = this.isSimpleQuery();
-		String entityId = getEntityId();
-		String attrValuesTable = getEntityAttrsTable();
-		String attrsTable = getAttrsTable();
+		String entityId = this.getEntityIdForAttrs();
+		String attrValuesTable = this.getEntityAttrsTable();
+		String attrsTable = this.getAttrsTable();
 
 		Query query = new Query();
-		query.setEntityType(entityType);
+		query.setEntityType(this.entityType);
 		StringBuilder queryString = new StringBuilder();
-
 		String selectFrom = this.getSelectFrom(sourceType, isSimple);
+		String where = outerWhere(query, this.getCore());
+		List<Query> innerQueries = new ArrayList<>();
 
 		queryString.append(selectFrom);
 		if (! isSimple) {
 			List<String> names = mergeNames(attrNames, attributes);
 			String attributesQuery = buildAttributesQuery(query, names, entityId, attrValuesTable, attrsTable);
 			queryString.append(" JOIN (").append(attributesQuery)
-					.append(") AS attributes ON ent.id = attributes.").append(entityId);
+					.append(") AS attributes ON ent.id = attributes.").append(getEntityIdForAttrs());
 		}
-		String where = outerWhere(query, this.getCore());
+
 		if (! Objects.equals(where, NO_VALUE)) {
 			query.setHasWhere(true);
 			queryString.append(' ').append(where);
 		}
 
 		query.setQueryString(queryString.toString());
-		Map<PerunEntityType, Query> innerQueries = new HashMap<>();
-		for (Map.Entry<PerunEntityType, InputEntity> input : innerInputs.entrySet()) {
-			innerQueries.put(input.getKey(), input.getValue().toQuery(this.entityType));
+		for (InputEntity e : innerInputs) {
+			innerQueries.add(e.toQuery(this.entityType));
 		}
 		query.setInnerQueries(innerQueries);
 		query.setInputAttributes(attributes);
@@ -121,13 +131,18 @@ public abstract class InputEntity {
 		return query;
 	}
 
-	public boolean isSimpleQuery() {
+	private boolean isSimpleQuery() {
+		if (this.attrNames == ALL_ATTRS) {
+			return false;
+		}
 		return this.attributes.isEmpty() && this.attrNames.isEmpty();
 	}
 
-	public abstract String getSelectFrom(PerunEntityType sourceType, boolean isSimple);
-
 	private List<String> mergeNames(List<String> attrNames, List<InputAttribute> attributes) {
+		if (attrNames == ALL_ATTRS) {
+			return null;
+		}
+
 		Set<String> names = new HashSet<>(attrNames);
 		for(InputAttribute a: attributes) {
 			names.add(a.getName());
@@ -144,16 +159,13 @@ public abstract class InputEntity {
 		StringJoiner attrs = new StringJoiner(" AND ");
 		for (Map.Entry<String, Object> a: core.entrySet()) {
 			String operator = resolveMatchOperator(a.getValue());
-			String part;
-			if (operator.equals(NULL_MATCH)) {
-				part = "ent." + a.getKey() + operator;
-			} else {
-				part = "ent." + a.getKey() + operator + query.nextParamName();
+			String part = "ent." + a.getKey() + operator;
+			if (! operator.equals(NULL_MATCH)) {
 				if (operator.equals(LIKE_MATCH)) {
-					//TODO
-					query.addParameter('%' + (String) a.getValue() + '%');
+					part += query.nextParam('%' + (String) a.getValue() + '%');
+				} else {
+					part += query.nextParam( a.getValue());
 				}
-				query.addParameter(a.getValue());
 			}
 			attrs.add(part);
 		}
@@ -171,13 +183,15 @@ public abstract class InputEntity {
 		}
 	}
 
-	private String buildAttributesQuery(Query query, List<String> attrNames, String entityId, String attrValuesTable, String attrNamesTable) {
+	private String buildAttributesQuery(Query query, List<String> attrNames, String entityId, String attrValuesTable,
+										String attrNamesTable) {
 		StringBuilder queryString = new StringBuilder();
 		String where = buildAttributesWhere(query, attrNames);
-		queryString.append("SELECT ").append(entityId).append(", json_object_agg(friendly_name, json_build_object(")
-				.append("'value', COALESCE(attr_value, attr_value_text), 'type', type, 'namespace', namespace))")
+		queryString.append("SELECT ").append(entityId).append(", json_agg(json_build_object(") //TODO: json_arr_agg?
+				.append("'name', attr_name, 'value', COALESCE(attr_value, attr_value_text), 'type', type))")
 				.append(" AS data ");
-		queryString.append("FROM ").append(attrValuesTable).append(" av JOIN ").append(attrNamesTable).append(" an ON av.attr_id = an.id ");
+		queryString.append("FROM ").append(attrValuesTable).append(" av JOIN ").append(attrNamesTable)
+				.append(" an ON av.attr_id = an.id ");
 		if (!Objects.equals(where, NO_VALUE)) {
 			queryString.append(where).append(' ');
 		}
@@ -193,8 +207,7 @@ public abstract class InputEntity {
 
 		StringJoiner where = new StringJoiner(" OR ");
 		for (String name: attrNames) {
-			where.add("(attr_name = " + query.nextParamName() + ')');
-			query.addParameter(name);
+			where.add("(attr_name = " + query.nextParam(name) + ')');
 		}
 
 		return "WHERE " + where.toString();

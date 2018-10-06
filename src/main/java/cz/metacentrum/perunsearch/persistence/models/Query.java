@@ -3,9 +3,8 @@ package cz.metacentrum.perunsearch.persistence.models;
 import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class Query {
@@ -14,8 +13,8 @@ public class Query {
 	private String queryString;
 	private MapSqlParameterSource parameters = new MapSqlParameterSource();
 
-	private int paramCounter = 1;
-	private Map<PerunEntityType,Query> innerQueries = new HashMap<>();
+	private int paramCounter = 0;
+	private List<Query> innerQueries = new ArrayList<>();
 	private List<InputAttribute> inputAttributes;
 
 	private boolean hasWhere;
@@ -36,11 +35,11 @@ public class Query {
 		this.queryString = queryString;
 	}
 
-	public Map<PerunEntityType, Query> getInnerQueries() {
+	public List<Query> getInnerQueries() {
 		return innerQueries;
 	}
 
-	public void setInnerQueries(Map<PerunEntityType, Query> innerQueries) {
+	public void setInnerQueries(List<Query> innerQueries) {
 		this.innerQueries = innerQueries;
 	}
 
@@ -52,12 +51,10 @@ public class Query {
 		this.inputAttributes = inputAttributes;
 	}
 
-	public String nextParamName() {
-		return ':' + String.valueOf(paramCounter);
-	}
-
-	public void addParameter(Object value) {
+	public String nextParam(Object value) {
+		paramCounter++;
 		parameters.addValue(String.valueOf(paramCounter), value);
+		return ':' + String.valueOf(paramCounter);
 	}
 
 	public void setIds(Set<Long> ids) {
@@ -65,8 +62,7 @@ public class Query {
 			return;
 		}
 
-		String query = "ent.id IN " + nextParamName();
-		addParameter(ids.toArray(new Long[] {}));
+		String query = "ent.id IN " + nextParam(ids.toArray(new Long[] {}));
 		if (! hasWhere) {
 			query = " WHERE " + query;
 		}

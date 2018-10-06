@@ -17,8 +17,7 @@ import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.VO;
 public class MemberInput extends InputEntity {
 
 	public static final PerunEntityType TYPE = MEMBER;
-
-	private static final String ENTITY_ID_FIELD = "id";
+	private static final String ENTITY_ID_FIELD = "member_id";
 	private static final String ENTITY_TABLE = "members";
 	private static final String ENTITY_ATTRS_TABLE = "member_attr_values";
 	private static final String ATTR_NAMES_TABLE = "attr_names";
@@ -45,7 +44,7 @@ public class MemberInput extends InputEntity {
 	}
 
 	@Override
-	public String getEntityId() {
+	public String getEntityIdForAttrs() {
 		return ENTITY_ID_FIELD;
 	}
 

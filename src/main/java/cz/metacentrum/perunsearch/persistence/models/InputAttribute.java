@@ -17,26 +17,14 @@ import java.util.Map;
  */
 public class InputAttribute {
 
-	private String friendlyName;
 	private String name;
 	private InputAttributeType type;
-	private boolean isCore;
 	private Object value;
 
-	public InputAttribute(String friendlyName, String name, Object value, boolean isCore) throws AttributeTypeException {
-		this.friendlyName = friendlyName;
+	public InputAttribute(String name, Object value) throws AttributeTypeException {
 		this.name = name;
 		this.type = getType(value);
 		this.value = value;
-		this.isCore = isCore;
-	}
-
-	public String getFriendlyName() {
-		return friendlyName;
-	}
-
-	public void setFriendlyName(String friendlyName) {
-		this.friendlyName = friendlyName;
 	}
 
 	public String getName() {
@@ -61,14 +49,6 @@ public class InputAttribute {
 
 	public Object getValue() {
 		return value;
-	}
-
-	public boolean isCore() {
-		return isCore;
-	}
-
-	public void setIsCore(boolean core) {
-		isCore = core;
 	}
 
 	public String valueAsString() {

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class SearcherController {
 
@@ -19,9 +21,10 @@ public class SearcherController {
 	}
 
 	@RequestMapping(value = "search")
-	public PerunEntity[] search(@RequestParam("query") String query) throws IllegalRelationException, InputParseException, IncorrectCoreAttributeTypeException {
-		query = "{\"entityName\":\"group\", \"voId\": 62}";
+	public List<PerunEntity> search(@RequestParam("query") String query) throws IllegalRelationException, InputParseException, IncorrectCoreAttributeTypeException {
+		query = "{\"entityName\":\"group\", \"voId\": 62, \"attributes\": [{ \"name\" : \"urn:perun:group:attribute-def:def:groupExtSource\", \"value\" : \"PERUN\"}]}";
 		//TODO: delete hardcoded input
-		return searcherService.performSearch(query).toArray(new PerunEntity[]{});
+		//TODO: serialization for skipping foreignId etc...
+		return searcherService.performSearch(query);
 	}
 }

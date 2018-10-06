@@ -14,7 +14,7 @@ import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.HOST;
 public class HostInput extends InputEntity {
 
 	private static final PerunEntityType TYPE = HOST;
-	private static final String ENTITY_ID_FIELD = "id";
+	private static final String ENTITY_ID_FIELD = "host_id";
 	private static final String ENTITY_TABLE = "hosts";
 	private static final String ENTITY_ATTRS_TABLE = "host_attr_values";
 	private static final String ATTR_NAMES_TABLE = "attr_names";
@@ -41,7 +41,7 @@ public class HostInput extends InputEntity {
 	}
 
 	@Override
-	public String getEntityId() {
+	public String getEntityIdForAttrs() {
 		return ENTITY_ID_FIELD;
 	}
 

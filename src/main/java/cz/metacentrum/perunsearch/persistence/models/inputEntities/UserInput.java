@@ -16,7 +16,7 @@ import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.USER_
 public class UserInput extends InputEntity {
 
 	private static final PerunEntityType TYPE = USER;
-	private static final String ENTITY_ID_FIELD = "id";
+	private static final String ENTITY_ID_FIELD = "user_id";
 	private static final String ENTITY_TABLE = "users";
 	private static final String ENTITY_ATTRS_TABLE = "user_attr_values";
 	private static final String ATTR_NAMES_TABLE = "attr_names";
@@ -43,7 +43,7 @@ public class UserInput extends InputEntity {
 	}
 
 	@Override
-	public String getEntityId() {
+	public String getEntityIdForAttrs() {
 		return ENTITY_ID_FIELD;
 	}
 

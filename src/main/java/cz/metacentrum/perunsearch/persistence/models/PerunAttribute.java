@@ -16,42 +16,22 @@ import java.util.Map;
  */
 public class PerunAttribute {
 
-	private Long id;
-	private String namespace;
-	private String friendlyName;
+	private String name;
 	private PerunAttributeType type;
 	private String value;
 
-	public PerunAttribute(Long id, String namespace, String friendlyName, String type, String value) throws AttributeTypeException {
-		this.id = id;
-		this.namespace = namespace;
-		this.friendlyName = friendlyName;
+	public PerunAttribute(String name, String type, String value) throws AttributeTypeException {
+		this.name = name;
 		this.type = PerunAttributeType.fromString(type);
 		this.value = value;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public String getName() {
+		return name;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public String getNamespace() {
-		return namespace;
-	}
-
-	public void setNamespace(String namespace) {
-		this.namespace = namespace;
-	}
-
-	public String getFriendlyName() {
-		return friendlyName;
-	}
-
-	public void setFriendlyName(String friendlyName) {
-		this.friendlyName = friendlyName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public PerunAttributeType getType() {
@@ -135,11 +115,9 @@ public class PerunAttribute {
 	 */
 	public JSONObject toJson() {
 		JSONObject json = new JSONObject();
-		json.put("id", this.id);
-		json.put("friendlyName", this.friendlyName);
-		json.put("namespace", this.namespace);
+		json.put("name", this.name);
 		json.put("type", this.type.toString());
-		json.put("value", getTrueValue());
+		json.put("value", this.getTrueValue());
 
 		return json;
 	}

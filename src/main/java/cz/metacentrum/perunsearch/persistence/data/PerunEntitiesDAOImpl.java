@@ -55,7 +55,7 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 		String queryString = query.getQueryString();
 		MapSqlParameterSource params = query.getParameters();
 		Set<Long> ids = new HashSet<>();
-		for (Query inner: query.getInnerQueries().values()) {
+		for (Query inner: query.getInnerQueries()) {
 			ids.addAll(this.executeQueryForIds(inner));
 		}
 		query.setIds(ids);
@@ -92,7 +92,7 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 	@Override
 	public List<Long> executeQueryForIds(Query query) {
 		Set<Long> ids = new HashSet<>();
-		for (Query inner: query.getInnerQueries().values()) {
+		for (Query inner: query.getInnerQueries()) {
 			ids.addAll(this.executeQueryForIds(inner));
 		}
 		query.setIds(ids);
@@ -107,11 +107,11 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 
 	private boolean hasAllAttributes(Map<String, PerunAttribute> attributes, List<InputAttribute> inputAttributes) {
 		for (InputAttribute a: inputAttributes) {
-			if (! attributes.containsKey(a.getFriendlyName())) {
+			if (! attributes.containsKey(a.getName())) {
 				return false;
 			}
 
-			PerunAttribute attribute = attributes.get(a.getFriendlyName());
+			PerunAttribute attribute = attributes.get(a.getName());
 			if (!compareAttributeTypes(a, attribute) ||!compareAttributeValues(a, attribute)) {
 				return false;
 			}

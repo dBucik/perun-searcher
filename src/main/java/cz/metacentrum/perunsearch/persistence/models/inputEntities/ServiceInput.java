@@ -14,7 +14,7 @@ import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.SERVI
 public class ServiceInput extends InputEntity {
 
 	private static final PerunEntityType TYPE = SERVICE;
-	private static final String ENTITY_ID_FIELD = "id";
+	private static final String ENTITY_ID_FIELD = "service_id";
 	private static final String ENTITY_TABLE = "services";
 	private static final String ENTITY_ATTRS_TABLE = "service_required_attributes";
 	private static final String ATTR_NAMES_TABLE = "attr_names";
@@ -41,7 +41,7 @@ public class ServiceInput extends InputEntity {
 	}
 
 	@Override
-	public String getEntityId() {
+	public String getEntityIdForAttrs() {
 		return ENTITY_ID_FIELD;
 	}
 
