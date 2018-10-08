@@ -4,6 +4,7 @@ import cz.metacentrum.perunsearch.persistence.enums.PerunAttributeType;
 import cz.metacentrum.perunsearch.persistence.mappers.ExtSourceMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.FacilityMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.GroupMapper;
+import cz.metacentrum.perunsearch.persistence.mappers.GroupResourceMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.HostMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.MemberMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.ResourceMapper;
@@ -40,6 +41,7 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 	private static final UserExtSourceMapper USER_EXT_SOURCE_MAPPER = new UserExtSourceMapper();
 	private static final UserMapper USER_MAPPER = new UserMapper();
 	private static final VoMapper VO_MAPPER = new VoMapper();
+	private static final GroupResourceMapper GROUP_RESOURCE_MAPPER = new GroupResourceMapper();
 
 	public void setTemplate(JdbcTemplate template) {
 		if (template == null) {
@@ -87,6 +89,8 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 			case USER_EXT_SOURCE: result.addAll(template.query(queryString, params, USER_EXT_SOURCE_MAPPER));
 				break;
 			case VO: result.addAll(template.query(queryString, params, VO_MAPPER));
+				break;
+			case GROUP_RESOURCE: result.addAll(template.query(queryString, params, GROUP_RESOURCE_MAPPER));
 				break;
 		}
 

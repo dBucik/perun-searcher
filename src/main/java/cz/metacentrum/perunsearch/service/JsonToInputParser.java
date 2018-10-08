@@ -6,12 +6,16 @@ import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.ExtSourceInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.FacilityInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.GroupInput;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.GroupResourceInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.HostInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.MemberGroupInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.MemberInput;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.MemberResourceInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.ResourceInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.ServiceInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.UserExtSourceInput;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.UserFacilityInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.UserInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.VoInput;
 import org.json.JSONArray;
@@ -24,8 +28,6 @@ import java.util.List;
 import java.util.Map;
 
 public class JsonToInputParser {
-
-	public static final int ALL_ATTRS = 0;
 
 	public static InputEntity parseInput(String inputString) throws InputParseException, IllegalRelationException {
 		JSONObject json = new JSONObject(inputString);
@@ -91,6 +93,22 @@ public class JsonToInputParser {
 			case "VO": {
 				Map<String, Object> core = mapCoreVo(json);
 				return new VoInput(isTopLevel, core, attributes, attrsNames, entities);
+			}
+			case "GROUP_RESOURCE": {
+				Map<String, Object> core = mapCoreGroupResource(json);
+				return new GroupResourceInput(isTopLevel, core, attributes, attrsNames, entities);
+			}
+			case "MEMBER_GROUP": {
+				Map<String, Object> core = mapCoreMemberGroup(json);
+				return new MemberGroupInput(isTopLevel, core, attributes, attrsNames, entities);
+			}
+			case "MEMBER_RESOURCE": {
+				Map<String, Object> core = mapCoreMemberResource(json);
+				return new MemberResourceInput(isTopLevel, core, attributes, attrsNames, entities);
+			}
+			case "USER_FACILITY": {
+				Map<String, Object> core = mapCoreUserFacility(json);
+				return new UserFacilityInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 		}
 
@@ -361,6 +379,58 @@ public class JsonToInputParser {
 
 		if (json.has("shortName")) {
 			map.put("short_name", getString(json, "shortName"));
+		}
+
+		return map;
+	}
+
+	private static Map<String, Object> mapCoreGroupResource(JSONObject json) {
+		Map<String, Object> map = new HashMap<>();
+		if (json.has("groupId")) {
+			map.put("group_id", getLong(json, "groupId"));
+		}
+
+		if (json.has("resourceId")) {
+			map.put("resource_id", getLong(json, "resourceId"));
+		}
+
+		return map;
+	}
+
+	private static Map<String, Object> mapCoreMemberGroup(JSONObject json) {
+		Map<String, Object> map = new HashMap<>();
+		if (json.has("memberId")) {
+			map.put("member_id", getLong(json, "memberId"));
+		}
+
+		if (json.has("groupId")) {
+			map.put("group_id", getLong(json, "groupId"));
+		}
+
+		return map;
+	}
+
+	private static Map<String, Object> mapCoreMemberResource(JSONObject json) {
+		Map<String, Object> map = new HashMap<>();
+		if (json.has("memberId")) {
+			map.put("member_id", getLong(json, "memberId"));
+		}
+
+		if (json.has("resourceId")) {
+			map.put("resource_id", getLong(json, "resourceId"));
+		}
+
+		return map;
+	}
+
+	private static Map<String, Object> mapCoreUserFacility(JSONObject json) {
+		Map<String, Object> map = new HashMap<>();
+		if (json.has("userId")) {
+			map.put("user_id", getLong(json, "userId"));
+		}
+
+		if (json.has("facilityId")) {
+			map.put("facility_id", getLong(json, "facilityId"));
 		}
 
 		return map;

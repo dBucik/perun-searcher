@@ -22,7 +22,7 @@ public class SearcherController {
 
 	@RequestMapping(value = "search")
 	public List<PerunEntity> search(@RequestParam("query") String query) throws IllegalRelationException, InputParseException, IncorrectCoreAttributeTypeException {
-		query = "{\"entityName\":\"group\", \"attributes\": [{ \"name\" : \"urn:perun:group:attribute-def:def:groupExtSource\", \"value\" : \"PERUN\"}], \"relations\" : [{ \"entityName\" : \"vo\", \"id\" : 62 }]}";
+		query = "{\"entityName\":\"group_resource\", \"attributes\": [{ \"name\" : \"urn:perun:group:attribute-def:def:groupExtSource\", \"value\" : \"PERUN\"}], \"relations\" : [{ \"entityName\" : \"group\", \"id\" : 62 }]}";
 		//TODO: delete hardcoded input
 		//TODO: serialization for skipping foreignId etc...
 		return searcherService.performSearch(query);

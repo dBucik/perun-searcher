@@ -91,10 +91,6 @@ public abstract class InputEntity {
 
 	public Query toQuery(PerunEntityType sourceType) throws IncorrectCoreAttributeTypeException {
 		boolean isSimple = this.isSimpleQuery();
-		String entityId = this.getEntityIdForAttrs();
-		String attrValuesTable = this.getEntityAttrsTable();
-		String attrsTable = this.getAttrsTable();
-
 		Query query = new Query();
 		query.setEntityType(this.entityType);
 		StringBuilder queryString = new StringBuilder();
@@ -104,10 +100,13 @@ public abstract class InputEntity {
 
 		queryString.append(selectFrom);
 		if (! isSimple) {
+			String attrValuesTable = this.getEntityAttrsTable();
+			String entityIdForAttrs = this.getEntityIdForAttrs();
+			String attrsTable = this.getAttrsTable();
 			List<String> names = mergeNames(attrNames, attributes);
-			String attributesQuery = buildAttributesQuery(query, names, entityId, attrValuesTable, attrsTable);
+			String attributesQuery = buildAttributesQuery(query, names, entityIdForAttrs, attrValuesTable, attrsTable);
 			queryString.append(" LEFT JOIN (").append(attributesQuery)
-					.append(") AS attributes ON ent.id = attributes.").append(getEntityIdForAttrs());
+					.append(") AS attributes ON ent.id = attributes.").append(entityIdForAttrs);
 		}
 
 		if (! Objects.equals(where, NO_VALUE)) {
