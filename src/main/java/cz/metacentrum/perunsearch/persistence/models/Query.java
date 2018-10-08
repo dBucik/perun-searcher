@@ -62,7 +62,7 @@ public class Query {
 			return;
 		}
 
-		String query = "ent.id IN " + nextParam(ids.toArray(new Long[] {}));
+		String query = "ent.id IN (" + nextParam(new ArrayList<>(ids)) + ')';
 		if (! hasWhere) {
 			query = " WHERE " + query;
 		}

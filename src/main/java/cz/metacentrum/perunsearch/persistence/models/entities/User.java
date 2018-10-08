@@ -82,20 +82,4 @@ public class User extends PerunEntity {
 	public void setSponsoredAcc(Boolean sponsoredAcc) {
 		this.sponsoredAcc = sponsoredAcc;
 	}
-
-	@Override
-	public JSONObject toJson() {
-		JSONObject json = new JSONObject();
-		json.put("id", this.getId());
-		json.put("first_name", this.firstName);
-		json.put("middle_name", this.middleName);
-		json.put("last_name", this.lastName);
-		json.put("title_before", this.titleBefore);
-		json.put("title_after", this.titleAfter);
-		json.put("service", this.serviceAcc);
-		json.put("sponsored", this.sponsoredAcc);
-		json.put("attributes", this.attributesToJson());
-
-		return json;
-	}
 }

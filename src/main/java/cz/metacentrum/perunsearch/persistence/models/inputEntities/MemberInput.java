@@ -95,14 +95,14 @@ public class MemberInput extends InputEntity {
 
 	private String getQueryForResource(boolean isSimple) {
 		String select = "mrav.resource_id AS foreign_id";
-		String join = "JOIN member_resource_attr_values mrav ON mrav.member_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN member_resource_attr_values mrav ON mrav.member_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}
 
 	private String getQueryForGroup(boolean isSimple) {
 		String select = "gm.group_id AS foreign_id";
-		String join = "JOIN groups_members gm ON gm.member_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN groups_members gm ON gm.member_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}

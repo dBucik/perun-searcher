@@ -72,19 +72,4 @@ public class Service extends PerunEntity {
 	public void setScript(String script) {
 		this.script = script;
 	}
-
-	@Override
-	public JSONObject toJson() {
-		JSONObject json = new JSONObject();
-		json.put("id", this.getId());
-		json.put("name", this.name);
-		json.put("description", this.description);
-		json.put("delay", this.delay);
-		json.put("recurrence", this.recurrence);
-		json.put("enabled", this.enabled);
-		json.put("script", this.script);
-		json.put("attributes", this.attributesToJson());
-
-		return json;
-	}
 }

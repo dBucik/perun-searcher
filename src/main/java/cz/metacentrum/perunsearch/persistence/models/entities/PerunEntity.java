@@ -1,12 +1,12 @@
 package cz.metacentrum.perunsearch.persistence.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@JsonIgnoreProperties(value = {"foreignId"})
 public abstract class PerunEntity {
 
 	private Long id;
@@ -43,14 +43,4 @@ public abstract class PerunEntity {
 		this.foreignId = foreignId;
 	}
 
-	public abstract JSONObject toJson();
-
-	public JSONArray attributesToJson() {
-		JSONArray arr = new JSONArray();
-		for (PerunAttribute a: attributes.values()) {
-			arr.put(a.toJson());
-		}
-
-		return arr;
-	}
 }

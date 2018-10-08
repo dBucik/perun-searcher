@@ -83,28 +83,28 @@ public class VoInput extends InputEntity {
 
 	private String getQueryForResource(boolean isSimple) {
 		String select = "r.id AS foreign_id";
-		String join = "JOIN resources r ON r.vo_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN resources r ON r.vo_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}
 
 	private String getQueryForExtSource(boolean isSimple) {
 		String select = "ves.ext_source_id AS foreign_id";
-		String join = "JOIN vo_ext_sources ves ON ves.vo_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN vo_ext_sources ves ON ves.vo_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}
 
 	private String getQueryForMember(boolean isSimple) {
 		String select = "m.id AS foreign_id";
-		String join = "JOIN members m ON m.vo_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN members m ON m.vo_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}
 
 	private String getQueryForGroup(boolean isSimple) {
 		String select = "g.id AS foreign_id";
-		String join = "JOIN groups g ON g.vo_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN groups g ON g.vo_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}

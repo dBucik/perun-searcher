@@ -1,7 +1,6 @@
 package cz.metacentrum.perunsearch.persistence.models.entities;
 
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
-import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -50,18 +49,5 @@ public class Resource extends PerunEntity {
 
 	public void setVoId(Long voId) {
 		this.voId = voId;
-	}
-
-	@Override
-	public JSONObject toJson() {
-		JSONObject json = new JSONObject();
-		json.put("id", this.getId());
-		json.put("facility_id", this.facilityId);
-		json.put("name", this.name);
-		json.put("description", this.description);
-		json.put("vo_id", this.voId);
-		json.put("attributes", this.attributesToJson());
-
-		return json;
 	}
 }

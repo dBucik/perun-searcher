@@ -31,15 +31,4 @@ public class ExtSource extends PerunEntity {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	@Override
-	public JSONObject toJson() {
-		JSONObject json = new JSONObject();
-		json.put("id", this.getId());
-		json.put("name", this.name);
-		json.put("type", this.type);
-		json.put("attributes", this.attributesToJson());
-
-		return json;
-	}
 }

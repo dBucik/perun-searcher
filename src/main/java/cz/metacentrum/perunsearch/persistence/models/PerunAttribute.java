@@ -1,8 +1,8 @@
 package cz.metacentrum.perunsearch.persistence.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.metacentrum.perunsearch.persistence.enums.PerunAttributeType;
 import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
-import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -48,6 +48,22 @@ public class PerunAttribute {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	@JsonProperty(value = "value")
+	public Object getValue() {
+		switch (this.type) {
+			case STRING:
+			case LARGE_STRING:
+				return valueAsString();
+			case INTEGER: return valueAsInt();
+			case BOOLEAN: return valueAsBoolean();
+			case ARRAY:
+			case LARGE_ARRAY_LIST:
+				return valueAsList();
+			case MAP: return valueAsMap();
+			default: return null;
+		}
 	}
 
 	/**
@@ -108,33 +124,4 @@ public class PerunAttribute {
 
 		return valuesMap;
 	}
-
-	/**
-	 * Convert attribute to JSON representation.
-	 * @return attribute in JSON format.
-	 */
-	public JSONObject toJson() {
-		JSONObject json = new JSONObject();
-		json.put("name", this.name);
-		json.put("type", this.type.toString());
-		json.put("value", this.getTrueValue());
-
-		return json;
-	}
-
-	private Object getTrueValue() {
-		switch (this.type) {
-			case STRING:
-			case LARGE_STRING:
-				return valueAsString();
-			case INTEGER: return valueAsInt();
-			case BOOLEAN: return valueAsBoolean();
-			case ARRAY:
-			case LARGE_ARRAY_LIST:
-				return valueAsList();
-			case MAP: return valueAsMap();
-			default: return null;
-		}
-	}
-
 }

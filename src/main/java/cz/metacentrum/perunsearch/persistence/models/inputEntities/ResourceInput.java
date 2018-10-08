@@ -86,7 +86,7 @@ public class ResourceInput extends InputEntity {
 
 	private String getQueryForMember(boolean isSimple) {
 		String select = "mrav.member_id AS foreign_id";
-		String join = "JOIN member_resource_attr_values mrav ON mrav.resource_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN member_resource_attr_values mrav ON mrav.resource_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}
@@ -99,7 +99,7 @@ public class ResourceInput extends InputEntity {
 
 	private String getQueryForService(boolean isSimple) {
 		String select = "rs.service_id AS foreign_id";
-		String join = "JOIN resource_services rs ON rs.resource_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN resource_services rs ON rs.resource_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}
@@ -112,7 +112,7 @@ public class ResourceInput extends InputEntity {
 
 	private String getQueryForGroup(boolean isSimple) {
 		String select = "gr.group_id AS foreign_id";
-		String join = "JOIN group_resources gr ON gr.resource_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN group_resources gr ON gr.resource_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}

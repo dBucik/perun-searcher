@@ -80,21 +80,21 @@ public class ExtSourceInput extends InputEntity {
 
 	private String getQueryForVo(boolean isSimple) {
 		String select = "ves.vo_id AS foreign_id";
-		String join = "JOIN vo_ext_sources ves ON ves.ext_source_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN vo_ext_sources ves ON ves.ext_source_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}
 
 	private String getQueryForGroup(boolean isSimple) {
 		String select = "ges.group_id AS foreign_id";
-		String join = "JOIN group_ext_sources ges ON ges.ext_source_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN group_ext_sources ges ON ges.ext_source_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}
 
 	private String getQueryForUserExtSource(boolean isSimple) {
 		String select = "ues.id AS foreign_id";
-		String join = "JOIN user_ext_sources ues ON ues.ext_source_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN user_ext_sources ues ON ues.ext_source_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}

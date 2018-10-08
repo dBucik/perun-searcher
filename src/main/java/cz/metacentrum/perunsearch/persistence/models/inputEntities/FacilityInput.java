@@ -80,21 +80,21 @@ public class FacilityInput extends InputEntity {
 
 	private String getQueryForUser(boolean isSimple) {
 		String select = "ufav.user_id AS foreign_id";
-		String join = "JOIN user_facility_attr_values ufav ON ufav.facility_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN user_facility_attr_values ufav ON ufav.facility_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}
 
 	private String getQueryForResource(boolean isSimple) {
 		String select = "r.id AS foreign_id";
-		String join = "JOIN resources r ON r.facility_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN resources r ON r.facility_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}
 
 	private String getQueryForHost(boolean isSimple) {
 		String select = "h.id AS foreign_id";
-		String join = "JOIN hosts h ON h.facility_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN hosts h ON h.facility_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}

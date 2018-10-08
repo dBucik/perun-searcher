@@ -8,6 +8,7 @@ import cz.metacentrum.perunsearch.persistence.models.Query;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -23,8 +24,6 @@ public abstract class InputEntity {
 	private static final String LIKE_MATCH = " LIKE ";
 	private static final String NULL_MATCH = " IS NULL ";
 
-	private static final List<String> ALL_ATTRS = null;
-
 	private PerunEntityType entityType;
 	private boolean isTopLevel;
 	private Map<String, Object> core = new HashMap<>();
@@ -38,12 +37,7 @@ public abstract class InputEntity {
 		this.isTopLevel = isTopLevel;
 		this.core.putAll(core);
 		this.attributes.addAll(attributes);
-
-		if ((attrNames == null)) {
-			this.attrNames = null;
-		} else {
-			this.attrNames.addAll(attrNames);
-		}
+		this.attrNames.addAll(attrNames);
 
 		for (InputEntity e: innerInputs) {
 			if (!isAllowedInnerInput(e.getEntityType())) {
@@ -112,7 +106,7 @@ public abstract class InputEntity {
 		if (! isSimple) {
 			List<String> names = mergeNames(attrNames, attributes);
 			String attributesQuery = buildAttributesQuery(query, names, entityId, attrValuesTable, attrsTable);
-			queryString.append(" JOIN (").append(attributesQuery)
+			queryString.append(" LEFT JOIN (").append(attributesQuery)
 					.append(") AS attributes ON ent.id = attributes.").append(getEntityIdForAttrs());
 		}
 
@@ -132,19 +126,20 @@ public abstract class InputEntity {
 	}
 
 	private boolean isSimpleQuery() {
-		if (this.attrNames == ALL_ATTRS) {
-			return false;
-		}
-		return this.attributes.isEmpty() && this.attrNames.isEmpty();
+		return (this.attrNames.isEmpty() && this.attributes.isEmpty());
 	}
 
 	private List<String> mergeNames(List<String> attrNames, List<InputAttribute> attributes) {
-		if (attrNames == ALL_ATTRS) {
-			return null;
+		//fetch all attributes
+		if (attrNames.size() == 1) {
+			String param = attrNames.get(0);
+			if ("ALL".equals(param.toUpperCase())) {
+				return Collections.emptyList();
+			}
 		}
 
 		Set<String> names = new HashSet<>(attrNames);
-		for(InputAttribute a: attributes) {
+		for (InputAttribute a : attributes) {
 			names.add(a.getName());
 		}
 
@@ -187,7 +182,7 @@ public abstract class InputEntity {
 										String attrNamesTable) {
 		StringBuilder queryString = new StringBuilder();
 		String where = buildAttributesWhere(query, attrNames);
-		queryString.append("SELECT ").append(entityId).append(", json_agg(json_build_object(") //TODO: json_arr_agg?
+		queryString.append("SELECT ").append(entityId).append(", json_agg(json_build_object(")
 				.append("'name', attr_name, 'value', COALESCE(attr_value, attr_value_text), 'type', type))")
 				.append(" AS data ");
 		queryString.append("FROM ").append(attrValuesTable).append(" av JOIN ").append(attrNamesTable)

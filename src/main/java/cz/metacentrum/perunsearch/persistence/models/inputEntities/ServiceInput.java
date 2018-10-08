@@ -74,7 +74,7 @@ public class ServiceInput extends InputEntity {
 
 	private String getQueryForResource(boolean isSimple) {
 		String select = "rs.resource_id AS foreign_id";
-		String join = "JOIN resource_services rs ON rs.service_id = " + ENTITY_TABLE + '.' + ENTITY_ID_FIELD;
+		String join = "JOIN resource_services rs ON rs.service_id = ent.id";
 
 		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
 	}

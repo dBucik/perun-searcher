@@ -41,16 +41,4 @@ public class Member extends PerunEntity {
 	public void setSponsored(Boolean sponsored) {
 		this.sponsored = sponsored;
 	}
-
-	@Override
-	public JSONObject toJson() {
-		JSONObject json = new JSONObject();
-		json.put("id", this.getId());
-		json.put("user_id", this.userId);
-		json.put("vo_id", this.voId);
-		json.put("sponsored", this.sponsored);
-		json.put("attributes", this.attributesToJson());
-
-		return json;
-	}
 }

@@ -62,18 +62,4 @@ public class UserExtSource extends PerunEntity {
 	public void setLastAccess(Long lastAccess) {
 		this.lastAccess = lastAccess;
 	}
-
-	@Override
-	public JSONObject toJson() {
-		JSONObject json = new JSONObject();
-		json.put("id", this.getId());
-		json.put("user_id", this.userId);
-		json.put("login_ext", this.loginExt);
-		json.put("ext_source_id", this.extSourceId);
-		json.put("loa", this.loa);
-		json.put("last_access", this.lastAccess);
-		json.put("attributes", this.attributesToJson());
-
-		return json;
-	}
 }

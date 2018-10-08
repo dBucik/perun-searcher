@@ -29,8 +29,11 @@ public class GroupMapper implements RowMapper<Group> {
 
 		Map<String, PerunAttribute> attributes = new HashMap<>();
 		try {
-			JSONArray attributesJson = new JSONArray(resultSet.getString("attributes"));
-			attributes = mapAttributes(attributesJson);
+			String attrsString = resultSet.getString("attributes");
+			if (attrsString != null) {
+				JSONArray attributesJson = new JSONArray(resultSet.getString("attributes"));
+				attributes = mapAttributes(attributesJson);
+			}
 		} catch (PSQLException e) {
 			//this is fine, no attributes were fetched;
 		} catch (AttributeTypeException e) {

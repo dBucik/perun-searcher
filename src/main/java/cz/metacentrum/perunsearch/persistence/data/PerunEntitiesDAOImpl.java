@@ -20,6 +20,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -52,13 +53,18 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 
 	@Override
 	public List<PerunEntity> executeQuery(Query query) {
-		String queryString = query.getQueryString();
-		MapSqlParameterSource params = query.getParameters();
 		Set<Long> ids = new HashSet<>();
 		for (Query inner: query.getInnerQueries()) {
 			ids.addAll(this.executeQueryForIds(inner));
 		}
+
+		if (query.getInnerQueries() != null && !query.getInnerQueries().isEmpty() && ids.isEmpty()) {
+			return Collections.emptyList();
+		}
 		query.setIds(ids);
+
+		String queryString = query.getQueryString();
+		MapSqlParameterSource params = query.getParameters();
 
 		List<PerunEntity> result = new ArrayList<>();
 		switch (query.getEntityType()) {

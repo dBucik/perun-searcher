@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class JsonToInputParser {
 
-	public static final List<String> ALL_ATTRS = null;
+	public static final int ALL_ATTRS = 0;
 
 	public static InputEntity parseInput(String inputString) throws InputParseException, IllegalRelationException {
 		JSONObject json = new JSONObject(inputString);
@@ -385,11 +385,9 @@ public class JsonToInputParser {
 			for (int i = 0; i < attrsNamesJsonArray.length(); i++) {
 				attrsNames.add(attrsNamesJsonArray.getString(i));
 			}
-
-			return attrsNames;
 		}
 
-		return ALL_ATTRS;
+		return attrsNames;
 	}
 
 	private static List<InputEntity> parseInnerInputs(JSONArray entitiesJsonArray) throws IllegalRelationException, InputParseException {

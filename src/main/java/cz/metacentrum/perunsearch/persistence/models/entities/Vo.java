@@ -31,15 +31,4 @@ public class Vo extends PerunEntity {
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
-
-	@Override
-	public JSONObject toJson() {
-		JSONObject json = new JSONObject();
-		json.put("id", this.getId());
-		json.put("name", this.name);
-		json.put("short_name", this.shortName);
-		json.put("attributes", this.attributesToJson());
-
-		return json;
-	}
 }

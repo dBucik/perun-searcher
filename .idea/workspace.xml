@@ -3,25 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8cb00044-9fb0-4257-a2c0-c05fb888d825" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/data/PerunEntitiesDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/data/PerunEntitiesDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/MappersUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/MappersUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/InputAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/InputAttribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/PerunAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/PerunAttribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/Query.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/Query.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ExtSourceInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ExtSourceInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/FacilityInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/FacilityInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/GroupInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/GroupInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/HostInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/HostInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/InputEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/InputEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/InputUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/InputUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/MemberInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/MemberInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ResourceInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ResourceInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ServiceInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ServiceInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/UserExtSourceInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/UserExtSourceInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/UserInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/UserInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/VoInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/VoInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/service/JsonToInputParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/service/JsonToInputParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/web/SearcherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/web/SearcherController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -38,7 +20,7 @@
     <session id="744133394">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="22" />
+          <entry key="project.closed" value="24" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.162" value="1" />
           <entry key="project.open.time.19" value="1" />
@@ -55,23 +37,25 @@
           <entry key="project.open.time.39" value="1" />
           <entry key="project.open.time.43" value="1" />
           <entry key="project.open.time.47" value="1" />
-          <entry key="project.open.time.48" value="1" />
+          <entry key="project.open.time.48" value="2" />
+          <entry key="project.open.time.49" value="1" />
           <entry key="project.open.time.58" value="1" />
           <entry key="project.open.time.60" value="1" />
-          <entry key="project.opened" value="22" />
+          <entry key="project.open.time.62" value="1" />
+          <entry key="project.opened" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="10" />
-          <entry key="java" value="36355" />
+          <entry key="java" value="37642" />
           <entry key="properties" value="182" />
           <entry key="xml" value="391" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="36355" />
+          <entry key="JAVA" value="37642" />
           <entry key="PLAIN_TEXT" value="10" />
           <entry key="Properties" value="182" />
           <entry key="XML" value="391" />
@@ -79,16 +63,16 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="39" />
-          <entry key="java" value="438" />
+          <entry key="class" value="40" />
+          <entry key="java" value="489" />
           <entry key="properties" value="6" />
           <entry key="xml" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="39" />
-          <entry key="JAVA" value="438" />
+          <entry key="CLASS" value="40" />
+          <entry key="JAVA" value="489" />
           <entry key="Properties" value="6" />
           <entry key="XML" value="8" />
         </counts>
@@ -107,22 +91,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/GroupMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+            <state relative-caret-position="43">
+              <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/Query.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/web/SearcherController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="24" column="209" lean-forward="true" selection-start-line="24" selection-start-column="209" selection-end-line="24" selection-end-column="209" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/InputEntity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="331">
-              <caret line="201" lean-forward="true" selection-start-line="201" selection-end-line="201" />
+              <caret line="108" column="33" selection-start-line="108" selection-start-column="33" selection-end-line="108" selection-end-column="33" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#InputEntity#0;class#InputEntity#0" />
-                <element signature="method#isSimpleQuery#0;class#InputEntity#0" />
-                <element signature="method#mergeNames#0;class#InputEntity#0" />
+                <element signature="e#4177#4178#0" expanded="true" />
+                <element signature="e#4242#4243#0" expanded="true" />
                 <element signature="method#outerWhere#0;class#InputEntity#0" />
                 <element signature="method#resolveMatchOperator#0;class#InputEntity#0" />
                 <element signature="method#buildAttributesWhere#0;class#InputEntity#0" />
@@ -132,81 +132,30 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/PerunAttribute.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/service/JsonToInputParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="119" column="31" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
+            <state relative-caret-position="704">
+              <caret line="378" column="26" lean-forward="true" selection-start-line="378" selection-start-column="26" selection-end-line="378" selection-end-column="26" />
               <folding>
-                <element signature="e#820#821#0" expanded="true" />
-                <element signature="e#843#844#0" expanded="true" />
+                <element signature="method#parseInput#0;class#JsonToInputParser#0" />
+                <element signature="method#resolveEntity#0;class#JsonToInputParser#0" />
+                <element signature="method#mapCoreExtSource#0;class#JsonToInputParser#0" />
+                <element signature="method#mapCoreFacility#0;class#JsonToInputParser#0" />
+                <element signature="method#mapCoreGroup#0;class#JsonToInputParser#0" />
+                <element signature="method#mapCoreHost#0;class#JsonToInputParser#0" />
+                <element signature="method#mapCoreMember#0;class#JsonToInputParser#0" />
+                <element signature="method#mapCoreResource#0;class#JsonToInputParser#0" />
+                <element signature="method#mapCoreService#0;class#JsonToInputParser#0" />
+                <element signature="method#mapCoreUserExtSource#0;class#JsonToInputParser#0" />
+                <element signature="method#mapCoreUser#0;class#JsonToInputParser#0" />
+                <element signature="method#mapCoreVo#0;class#JsonToInputParser#0" />
+                <element signature="method#parseInnerInputs#0;class#JsonToInputParser#0" />
+                <element signature="method#parseAttribute#0;class#JsonToInputParser#0" />
+                <element signature="method#getString#0;class#JsonToInputParser#0" />
+                <element signature="method#getBoolean#0;class#JsonToInputParser#0" />
+                <element signature="method#getLong#0;class#JsonToInputParser#0" />
+                <element signature="method#getInt#0;class#JsonToInputParser#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/enums/PerunAttributeType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-367">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/web/SearcherController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/service/SearcherService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/PerunEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="12" column="69" selection-start-line="12" selection-start-column="69" selection-end-line="12" selection-end-column="69" />
-              <folding>
-                <element signature="method#PerunEntity#0;class#PerunEntity#0" />
-                <element signature="method#attributesToJson#0;class#PerunEntity#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Group.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-326">
-              <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/InputUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-144">
-              <caret line="22" column="62" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/MappersUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
@@ -230,6 +179,7 @@
       <find>getTr</find>
       <find>List&lt;InputAttribute&gt; core</find>
       <find>public</find>
+      <find>[</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;entity&quot;</replace>
@@ -258,19 +208,8 @@
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/XMLConfiguration.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/exceptions/IncorrectCoreAttributeTypeException.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/data/PerunEntitiesDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/ExtSource.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Facility.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Group.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Host.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Member.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Resource.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Service.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/UserExtSource.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Vo.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/ExtSourceMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/FacilityMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/GroupMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/HostMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/MemberMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/ResourceMapper.java" />
@@ -284,27 +223,38 @@
         <option value="$PROJECT_DIR$/src/main/resources/cz.metacentrum.perunsearch.persistence.models.inputEntities/coreAttrsTranslationTable.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/enums/InputAttributeType.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/VoInput.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/InputAttribute.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/HostInput.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/UserExtSourceInput.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/InputUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/MappersUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/service/SearcherService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Vo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/UserExtSource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Service.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Resource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Member.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Host.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Group.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Facility.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/ExtSource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/PerunEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/PerunAttribute.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/VoInput.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/UserInput.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ServiceInput.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ResourceInput.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/MemberInput.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/GroupInput.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/FacilityInput.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ExtSourceInput.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/web/SearcherController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/service/JsonToInputParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/data/PerunEntitiesDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/Query.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ExtSourceInput.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/FacilityInput.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/GroupInput.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/HostInput.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/MemberInput.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ResourceInput.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ServiceInput.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/UserExtSourceInput.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/UserInput.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/GroupMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/InputEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/InputUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/MappersUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/PerunAttribute.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/service/SearcherService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/PerunEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/web/SearcherController.java" />
       </list>
     </option>
   </component>
@@ -333,6 +283,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -383,7 +334,28 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="perunsearch" type="462c0819:PsiDirectoryNode" />
               <item name="persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="mappers" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="perunsearch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="perunsearch" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="perunsearch" type="462c0819:PsiDirectoryNode" />
+              <item name="persistence" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="perunsearch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="perunsearch" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="perunsearch" type="462c0819:PsiDirectoryNode" />
+              <item name="persistence" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="inputEntities" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="perunsearch" type="b2602c69:ProjectViewProjectNode" />
@@ -419,7 +391,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -429,7 +400,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538821798325" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538993833465" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -438,17 +409,17 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="cz.metacentrum.perunsearch.persistence.exceptions" />
+      <recent name="cz.metacentrum.perunsearch" />
+      <recent name="cz.metacentrum.perunsearch.persistence.enums" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="cz.metacentrum.perunsearch.persistence.mappers" />
       <recent name="cz.metacentrum.perunsearch.persistence.models.inputEntities" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="cz.metacentrum.perunsearch.persistence.exceptions" />
-      <recent name="cz.metacentrum.perunsearch" />
-      <recent name="cz.metacentrum.perunsearch.persistence.enums" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -569,11 +540,14 @@
       <workItem from="1538814954851" duration="672000" />
       <workItem from="1538815906340" duration="1639000" />
       <workItem from="1538817992365" duration="3667000" />
+      <workItem from="1538979413555" duration="2561000" />
+      <workItem from="1538983653450" duration="435000" />
+      <workItem from="1538987102465" duration="7090000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88119000" />
+    <option name="totallyTimeSpent" value="98205000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -585,10 +559,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1366" height="744" extended-state="6" />
+    <frame x="-2" y="-1" width="1370" height="747" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3280303" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3439394" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -624,7 +598,7 @@
       <window_info anchor="right" id="Bean Validation" order="9" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28484848" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33333334" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -635,13 +609,13 @@
       <window_info id="Web" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32903227" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.38225806" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32903227" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.38225806" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32903227" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3279743" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3951613" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32903227" />
       <window_info anchor="bottom" id="Java Enterprise" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
@@ -666,15 +640,28 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="SpringBootApplicationConfigurationType">
-        <watch expression="a.toJson()" language="JAVA" />
-      </configuration>
-    </watches-manager>
-  </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>ids.toArray(new Long[]{})</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>parameters.getValue(&quot;2&quot;);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>template.query(queryString, params, VO_MAPPER)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>result.addAll(template.query(queryString, params, VO_MAPPER));</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>a.toJson()</expression-string>
         <language-id>JAVA</language-id>
@@ -705,26 +692,6 @@
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>resultSet.getString(&quot;attributes&quot;);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>query.getParameters().getValue(&quot;1&quot;)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>query.getParameters().getParameterNames()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>query.getParameters().getValue(&quot;:1&quot;)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
     <expressions id="setValue">
       <expression>
@@ -735,76 +702,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Member.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Resource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Service.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="17" column="88" selection-start-line="17" selection-start-column="88" selection-end-line="17" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="18" column="112" selection-start-line="18" selection-start-column="112" selection-end-line="18" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/UserExtSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Vo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="12" column="108" selection-start-line="12" selection-start-column="108" selection-end-line="12" selection-end-column="108" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/FacilityMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="46" column="64" selection-start-line="46" selection-start-column="64" selection-end-line="46" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/VoMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="46" column="64" selection-start-line="46" selection-start-column="64" selection-end-line="46" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/HostMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="45" column="9" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/MemberMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="47" column="76" selection-start-line="47" selection-start-column="76" selection-end-line="47" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/ResourceMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -883,13 +780,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/ExtSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/lang/String.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-324">
@@ -918,100 +808,265 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/InputAttribute.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/enums/PerunAttributeType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+        <state relative-caret-position="648">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/MappersUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/io/Serializable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Vo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/UserExtSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="83" column="5" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Service.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="73" column="5" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Resource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Member.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Host.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Facility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/ExtSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Group.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/PerunEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
           <folding>
-            <element signature="method#valueAsList#0;class#InputAttribute#0" />
-            <element signature="method#valueAsMap#0;class#InputAttribute#0" />
+            <element signature="method#PerunEntity#0;class#PerunEntity#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/Query.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/PerunAttribute.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="59" column="38" selection-start-line="59" selection-start-column="38" selection-end-line="59" selection-end-column="38" />
+        <state relative-caret-position="810">
+          <caret line="66" column="5" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
           <folding>
-            <element signature="method#nextParam#0;class#Query#0" />
-            <element signature="method#setIds#0;class#Query#0" />
+            <element signature="method#PerunAttribute#0;class#PerunAttribute#0" />
+            <element signature="docComment;method#valueAsString#0;class#PerunAttribute#0" />
+            <element signature="method#valueAsString#0;class#PerunAttribute#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ExtSourceInput.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/data/PerunEntitiesDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="18" column="62" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/FacilityInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="18" column="60" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/GroupInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="19" column="57" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/HostInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ResourceInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="20" column="60" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ServiceInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="16" column="59" selection-start-line="16" selection-start-column="59" selection-end-line="16" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/UserExtSourceInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="17" column="67" selection-start-line="17" selection-start-column="67" selection-end-line="17" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/UserInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="18" column="56" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
+        <state relative-caret-position="72">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/VoInput.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1043">
-          <caret line="80" column="31" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
+        <state relative-caret-position="162">
+          <caret line="85" column="51" lean-forward="true" selection-start-line="85" selection-start-column="51" selection-end-line="85" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/UserInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="96" column="61" selection-start-line="96" selection-start-column="61" selection-end-line="96" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/UserExtSourceInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ServiceInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="76" column="76" selection-start-line="76" selection-start-column="76" selection-end-line="76" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ResourceInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="114" column="75" selection-start-line="114" selection-start-column="75" selection-end-line="114" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/MemberInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="104" column="72" selection-start-line="104" selection-start-column="72" selection-end-line="104" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/InputUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="22" column="62" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/GroupInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="113" column="73" selection-start-line="113" selection-start-column="73" selection-end-line="113" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/FacilityInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="96" column="63" selection-start-line="96" selection-start-column="63" selection-end-line="96" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/ExtSourceInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="96" column="80" selection-start-line="96" selection-start-column="80" selection-end-line="96" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/HostInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-512">
+          <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/service/SearcherService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/InputAttribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/service/JsonToInputParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="704">
+          <caret line="378" column="26" lean-forward="true" selection-start-line="378" selection-start-column="26" selection-end-line="378" selection-end-column="26" />
+          <folding>
+            <element signature="method#parseInput#0;class#JsonToInputParser#0" />
+            <element signature="method#resolveEntity#0;class#JsonToInputParser#0" />
+            <element signature="method#mapCoreExtSource#0;class#JsonToInputParser#0" />
+            <element signature="method#mapCoreFacility#0;class#JsonToInputParser#0" />
+            <element signature="method#mapCoreGroup#0;class#JsonToInputParser#0" />
+            <element signature="method#mapCoreHost#0;class#JsonToInputParser#0" />
+            <element signature="method#mapCoreMember#0;class#JsonToInputParser#0" />
+            <element signature="method#mapCoreResource#0;class#JsonToInputParser#0" />
+            <element signature="method#mapCoreService#0;class#JsonToInputParser#0" />
+            <element signature="method#mapCoreUserExtSource#0;class#JsonToInputParser#0" />
+            <element signature="method#mapCoreUser#0;class#JsonToInputParser#0" />
+            <element signature="method#mapCoreVo#0;class#JsonToInputParser#0" />
+            <element signature="method#parseInnerInputs#0;class#JsonToInputParser#0" />
+            <element signature="method#parseAttribute#0;class#JsonToInputParser#0" />
+            <element signature="method#getString#0;class#JsonToInputParser#0" />
+            <element signature="method#getBoolean#0;class#JsonToInputParser#0" />
+            <element signature="method#getLong#0;class#JsonToInputParser#0" />
+            <element signature="method#getInt#0;class#JsonToInputParser#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/web/SearcherController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="24" column="209" lean-forward="true" selection-start-line="24" selection-start-column="209" selection-end-line="24" selection-end-column="209" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/Query.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/data/PerunEntitiesDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        <state relative-caret-position="236">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#setTemplate#0;class#PerunEntitiesDAOImpl#0" />
-            <element signature="method#executeQueryForIds#0;class#PerunEntitiesDAOImpl#0" />
-            <element signature="method#hasAllAttributes#0;class#PerunEntitiesDAOImpl#0" />
             <element signature="method#compareAttributeTypes#0;class#PerunEntitiesDAOImpl#0" />
             <element signature="method#compareAttributeValues#0;class#PerunEntitiesDAOImpl#0" />
             <element signature="method#compareMapValues#0;class#PerunEntitiesDAOImpl#0" />
@@ -1023,104 +1078,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/MemberInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-738">
-          <caret line="19" column="58" selection-start-line="19" selection-start-column="58" selection-end-line="19" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/service/JsonToInputParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/InputUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-144">
-          <caret line="22" column="62" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/GroupMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+        <state relative-caret-position="43">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/inputEntities/InputEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
-          <caret line="201" lean-forward="true" selection-start-line="201" selection-end-line="201" />
+          <caret line="108" column="33" selection-start-line="108" selection-start-column="33" selection-end-line="108" selection-end-column="33" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#InputEntity#0;class#InputEntity#0" />
-            <element signature="method#isSimpleQuery#0;class#InputEntity#0" />
-            <element signature="method#mergeNames#0;class#InputEntity#0" />
+            <element signature="e#4177#4178#0" expanded="true" />
+            <element signature="e#4242#4243#0" expanded="true" />
             <element signature="method#outerWhere#0;class#InputEntity#0" />
             <element signature="method#resolveMatchOperator#0;class#InputEntity#0" />
             <element signature="method#buildAttributesWhere#0;class#InputEntity#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/Group.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-326">
-          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/enums/PerunAttributeType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-367">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/PerunAttribute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="119" column="31" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
-          <folding>
-            <element signature="e#820#821#0" expanded="true" />
-            <element signature="e#843#844#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/mappers/MappersUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/service/SearcherService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/persistence/models/entities/PerunEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="12" column="69" selection-start-line="12" selection-start-column="69" selection-end-line="12" selection-end-column="69" />
-          <folding>
-            <element signature="method#PerunEntity#0;class#PerunEntity#0" />
-            <element signature="method#attributesToJson#0;class#PerunEntity#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cz/metacentrum/perunsearch/web/SearcherController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
         </state>
       </provider>
     </entry>

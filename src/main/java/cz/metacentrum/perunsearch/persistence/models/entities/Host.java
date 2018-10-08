@@ -41,16 +41,4 @@ public class Host extends PerunEntity  {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	@Override
-	public JSONObject toJson() {
-		JSONObject json = new JSONObject();
-		json.put("id", this.getId());
-		json.put("hostname", this.hostname);
-		json.put("facility_id", this.facilityId);
-		json.put("description", this.description);
-		json.put("attributes", this.attributesToJson());
-
-		return json;
-	}
 }
