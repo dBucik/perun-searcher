@@ -1,7 +1,7 @@
 package cz.metacentrum.perunsearch.persistence.mappers;
 
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
-import cz.metacentrum.perunsearch.persistence.models.entities.GroupResource;
+import cz.metacentrum.perunsearch.persistence.models.entities.relations.GroupResource;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

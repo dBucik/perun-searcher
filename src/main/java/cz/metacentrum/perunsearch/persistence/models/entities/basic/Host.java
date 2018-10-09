@@ -1,11 +1,12 @@
-package cz.metacentrum.perunsearch.persistence.models.entities;
+package cz.metacentrum.perunsearch.persistence.models.entities.basic;
 
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
+import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
 import org.json.JSONObject;
 
 import java.util.Map;
 
-public class Host extends PerunEntity  {
+public class Host extends PerunEntity {
 
 	private String hostname;
 	private Long facilityId;

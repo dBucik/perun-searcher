@@ -1,8 +1,10 @@
-package cz.metacentrum.perunsearch.persistence.models.inputEntities;
+package cz.metacentrum.perunsearch.persistence.models.inputEntities.relations;
 
 import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.RelationInputEntity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,11 +14,13 @@ import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.FACIL
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.USER;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.USER_FACILITY;
 
-public class UserFacilityInput extends InputEntity {
+public class UserFacilityInput extends RelationInputEntity {
 
 	private static final PerunEntityType TYPE = USER_FACILITY;
-	private static final String ENTITY_ATTRS_TABLE = "user_facility_attr_values";
+	private static final String RELATION_TABLE = "user_facility_attr_values";
 	private static final String ATTR_NAMES_TABLE = "attr_names";
+	private static final String PRIMARY_KEY = "user_id";
+	private static final String SECONDARY_KEY = "facility_id";
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(USER, FACILITY);
 
@@ -35,27 +39,27 @@ public class UserFacilityInput extends InputEntity {
 	}
 
 	@Override
-	public String getEntityTable() {
-		return "";
+	public String getPrimaryKey() {
+		return PRIMARY_KEY;
 	}
 
 	@Override
-	public String getEntityIdForAttrs() {
-		return "";
+	public String getSecondaryKey() {
+		return SECONDARY_KEY;
 	}
 
 	@Override
-	public String getEntityAttrsTable() {
-		return ENTITY_ATTRS_TABLE;
+	protected String getRelationTable() {
+		return RELATION_TABLE;
 	}
 
 	@Override
-	public String getAttrsTable() {
+	public String getAttrNamesTable() {
 		return ATTR_NAMES_TABLE;
 	}
 
 	@Override
-	public String getSelectFrom(PerunEntityType sourceType, boolean isSimple) {
+	public String buildSelectFrom(PerunEntityType sourceType, boolean isSimple) {
 		if (sourceType == null) {
 			return getDefaultQuery(isSimple);
 		}
@@ -72,20 +76,20 @@ public class UserFacilityInput extends InputEntity {
 	private String getDefaultQuery(boolean isSimple) {
 		String select = "ent.user_id, ent.facility_id";
 
-		return InputUtils.getQueryForRelation(isSimple, select, null, ATTR_NAMES_TABLE);
+		return this.getSelectFrom(isSimple, select, null);
 	}
 
 	private String getQueryForUser(boolean isSimple) {
 		String select = "ent.user_id, ent.facility_id, ent.user_id AS foreign_id";
 		String join = "JOIN users u ON u.id = ent.user_id";
 
-		return InputUtils.getQueryForRelation(isSimple, select, join, ATTR_NAMES_TABLE);
+		return this.getSelectFrom(isSimple, select, join);
 	}
 
 	private String getQueryForFacility(boolean isSimple) {
 		String select = "ent.user_id, ent.facility_id, ent.facility_id AS foreign_id";
 		String join = "JOIN facilities f ON f.id = ent.facility_id";
 
-		return InputUtils.getQueryForRelation(isSimple, select, join, ATTR_NAMES_TABLE);
+		return this.getSelectFrom(isSimple, select, join);
 	}
 }

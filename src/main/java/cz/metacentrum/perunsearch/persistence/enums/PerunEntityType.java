@@ -15,5 +15,12 @@ public enum PerunEntityType {
 	GROUP_RESOURCE,
 	MEMBER_GROUP,
 	MEMBER_RESOURCE,
-	USER_FACILITY
+	USER_FACILITY;
+
+	public static boolean isRelation(PerunEntityType entityType) {
+		return entityType == GROUP_RESOURCE ||
+				entityType == MEMBER_GROUP ||
+				entityType == MEMBER_RESOURCE ||
+				entityType == USER_FACILITY;
+	}
 }

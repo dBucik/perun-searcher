@@ -6,8 +6,12 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.StringJoiner;
 
 public class Query {
+
+	private String primaryKey;
+	private String secondaryKey;
 
 	private PerunEntityType entityType;
 	private String queryString;
@@ -63,11 +67,28 @@ public class Query {
 		}
 
 		String query = "ent.id IN (" + nextParam(new ArrayList<>(ids)) + ')';
-		if (! hasWhere) {
+		if (! this.hasWhere) {
 			query = " WHERE " + query;
 		}
 
-		queryString += query;
+		this.queryString += query;
+	}
+
+	public void setIds(String key1, Set<Long> ids1, String key2, Set<Long> ids2) {
+		StringJoiner query = new StringJoiner(" AND ");
+		if (key1 != null && ids1 != null && !ids1.isEmpty()) {
+			query.add(key1 + " IN (" +  nextParam(new ArrayList<>(ids1)) + ')');
+		}
+
+		if (key2 != null && ids2 != null && !ids2.isEmpty()) {
+			query.add(key2 + " IN (" +  nextParam(new ArrayList<>(ids2)) + ')');
+		}
+
+		if (! this.hasWhere) {
+			this.queryString += " WHERE ";
+		}
+
+		this.queryString += query.toString();
 	}
 
 	public void setHasWhere(boolean hasWhere) {
@@ -76,5 +97,21 @@ public class Query {
 
 	public MapSqlParameterSource getParameters() {
 		return parameters;
+	}
+
+	public String getPrimaryKey() {
+		return primaryKey;
+	}
+
+	public void setPrimaryKey(String primaryKey) {
+		this.primaryKey = primaryKey;
+	}
+
+	public String getSecondaryKey() {
+		return secondaryKey;
+	}
+
+	public void setSecondaryKey(String secondaryKey) {
+		this.secondaryKey = secondaryKey;
 	}
 }

@@ -1,8 +1,10 @@
-package cz.metacentrum.perunsearch.persistence.models.inputEntities;
+package cz.metacentrum.perunsearch.persistence.models.inputEntities.basic;
 
 import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.BasicInputEntity;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,11 +12,13 @@ import java.util.Map;
 
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.GROUP;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.MEMBER;
+import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.MEMBER_GROUP;
+import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.MEMBER_RESOURCE;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.RESOURCE;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.USER;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.VO;
 
-public class MemberInput extends InputEntity {
+public class MemberInput extends BasicInputEntity {
 
 	public static final PerunEntityType TYPE = MEMBER;
 	private static final String ENTITY_ID_FIELD = "member_id";
@@ -22,7 +26,7 @@ public class MemberInput extends InputEntity {
 	private static final String ENTITY_ATTRS_TABLE = "member_attr_values";
 	private static final String ATTR_NAMES_TABLE = "attr_names";
 
-	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(VO, USER, RESOURCE, GROUP);
+	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(VO, USER, RESOURCE, GROUP, MEMBER_GROUP, MEMBER_RESOURCE);
 
 	public MemberInput(boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
 					   List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
@@ -44,22 +48,22 @@ public class MemberInput extends InputEntity {
 	}
 
 	@Override
-	public String getEntityIdForAttrs() {
+	public String getEntityIdInAttrValuesTable() {
 		return ENTITY_ID_FIELD;
 	}
 
 	@Override
-	public String getEntityAttrsTable() {
+	public String getAttrValuesTable() {
 		return ENTITY_ATTRS_TABLE;
 	}
 
 	@Override
-	public String getAttrsTable() {
+	public String getAttrNamesTable() {
 		return ATTR_NAMES_TABLE;
 	}
 
 	@Override
-	public String getSelectFrom(PerunEntityType sourceType, boolean isSimple) {
+	public String buildSelectFrom(PerunEntityType sourceType, boolean isSimple) {
 		if (sourceType == null) {
 			return getDefaultQuery(isSimple);
 		}
@@ -78,32 +82,32 @@ public class MemberInput extends InputEntity {
 	}
 
 	private String getDefaultQuery(boolean isSimple) {
-		return InputUtils.getQuery(isSimple, null, null, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, null, null, ENTITY_TABLE);
 	}
 
 	private String getQueryForVo(boolean isSimple) {
 		String select = "ent.vo_id AS foreign_id";
 
-		return InputUtils.getQuery(isSimple, select, null, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, select, null, ENTITY_TABLE);
 	}
 
 	private String getQueryForUser(boolean isSimple) {
 		String select = "ent.user_id AS foreign_id";
 
-		return InputUtils.getQuery(isSimple, select, null, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, select, null, ENTITY_TABLE);
 	}
 
 	private String getQueryForResource(boolean isSimple) {
 		String select = "mrav.resource_id AS foreign_id";
 		String join = "JOIN member_resource_attr_values mrav ON mrav.member_id = ent.id";
 
-		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
 	}
 
 	private String getQueryForGroup(boolean isSimple) {
 		String select = "gm.group_id AS foreign_id";
 		String join = "JOIN groups_members gm ON gm.member_id = ent.id";
 
-		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
 	}
 }

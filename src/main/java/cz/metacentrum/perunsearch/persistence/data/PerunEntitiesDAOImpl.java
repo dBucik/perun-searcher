@@ -1,6 +1,7 @@
 package cz.metacentrum.perunsearch.persistence.data;
 
 import cz.metacentrum.perunsearch.persistence.enums.PerunAttributeType;
+import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import cz.metacentrum.perunsearch.persistence.mappers.ExtSourceMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.FacilityMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.GroupMapper;
@@ -21,12 +22,23 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.FACILITY;
+import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.GROUP;
+import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.GROUP_RESOURCE;
+import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.MEMBER;
+import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.MEMBER_GROUP;
+import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.MEMBER_RESOURCE;
+import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.RESOURCE;
+import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.USER;
+import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.USER_FACILITY;
 
 public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 
@@ -55,15 +67,28 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 
 	@Override
 	public List<PerunEntity> executeQuery(Query query) {
-		Set<Long> ids = new HashSet<>();
-		for (Query inner: query.getInnerQueries()) {
-			ids.addAll(this.executeQueryForIds(inner));
-		}
 
-		if (query.getInnerQueries() != null && !query.getInnerQueries().isEmpty() && ids.isEmpty()) {
-			return Collections.emptyList();
+		if (PerunEntityType.isRelation(query.getEntityType())) {
+			Set<Long> ids1 = getIdsForPrimaryKey(query.getPrimaryKey(), query.getInnerQueries());
+			Set<Long> ids2 = getIdsForSecondaryKey(query.getSecondaryKey(), query.getInnerQueries());
+
+			if (query.getInnerQueries() != null && !query.getInnerQueries().isEmpty()
+					&& ids1.isEmpty() && ids2.isEmpty()) {
+				return Collections.emptyList();
+			}
+
+			query.setIds(query.getPrimaryKey(), ids1, query.getSecondaryKey(), ids2);
+		} else {
+			Set<Long> ids = new HashSet<>();
+			for (Query inner: query.getInnerQueries()) {
+				ids.addAll(this.executeQueryForIds(inner));
+			}
+			if (query.getInnerQueries() != null && !query.getInnerQueries().isEmpty() && ids.isEmpty()) {
+				return Collections.emptyList();
+			}
+
+			query.setIds(ids);
 		}
-		query.setIds(ids);
 
 		String queryString = query.getQueryString();
 		MapSqlParameterSource params = query.getParameters();
@@ -97,6 +122,70 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 		return result.stream()
 				.filter(e -> hasAllAttributes(e.getAttributes(), query.getInputAttributes()))
 				.collect(Collectors.toList());
+	}
+
+	private Set<Long> getIdsForPrimaryKey(String primaryKey, List<Query> innerQueries) {
+		Set<Long> result = new HashSet<>();
+		List<Query> queries = filterQueriesPrimaryKey(primaryKey, innerQueries);
+
+		for (Query inner: queries) {
+			result.addAll(this.executeQueryForIds(inner));
+		}
+
+		return result;
+	}
+
+	private List<Query> filterQueriesPrimaryKey(String primaryKey, List<Query> innerQueries) {
+		List<PerunEntityType> lookFor = new ArrayList<>();
+		switch (primaryKey) {
+			case "group_id" : lookFor = Arrays.asList(GROUP, GROUP_RESOURCE, MEMBER_GROUP);
+				break;
+			case "member_id" : lookFor = Arrays.asList(MEMBER, MEMBER_GROUP, MEMBER_RESOURCE);
+				break;
+			case "user_id" : lookFor = Arrays.asList(USER, USER_FACILITY);
+				break;
+		}
+
+		List<Query> queriesToExecute = new ArrayList<>();
+		for (Query q: innerQueries) {
+			if (lookFor.contains(q.getEntityType())) {
+				queriesToExecute.add(q);
+			}
+		}
+
+		return queriesToExecute;
+	}
+
+	private Set<Long> getIdsForSecondaryKey(String secondaryKey, List<Query> innerQueries) {
+		Set<Long> result = new HashSet<>();
+		List<Query> queries = filterQueriesSecondaryKey(secondaryKey, innerQueries);
+
+		for (Query inner: queries) {
+			result.addAll(this.executeQueryForIds(inner));
+		}
+
+		return result;
+	}
+
+	private List<Query> filterQueriesSecondaryKey(String secondaryKey, List<Query> innerQueries) {
+		List<PerunEntityType> lookFor = new ArrayList<>();
+		switch (secondaryKey) {
+			case "resource_id" : lookFor = Arrays.asList(RESOURCE, GROUP_RESOURCE, MEMBER_RESOURCE);
+				break;
+			case "group_id" : lookFor = Arrays.asList(GROUP, MEMBER_GROUP);
+				break;
+			case "facility_id" : lookFor = Arrays.asList(FACILITY, USER_FACILITY);
+				break;
+		}
+
+		List<Query> queriesToExecute = new ArrayList<>();
+		for (Query q: innerQueries) {
+			if (lookFor.contains(q.getEntityType())) {
+				queriesToExecute.add(q);
+			}
+		}
+
+		return queriesToExecute;
 	}
 
 	@Override

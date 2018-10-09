@@ -1,8 +1,10 @@
-package cz.metacentrum.perunsearch.persistence.models.inputEntities;
+package cz.metacentrum.perunsearch.persistence.models.inputEntities.basic;
 
 import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.BasicInputEntity;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.Map;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.RESOURCE;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.SERVICE;
 
-public class ServiceInput extends InputEntity {
+public class ServiceInput extends BasicInputEntity {
 
 	private static final PerunEntityType TYPE = SERVICE;
 	private static final String ENTITY_ID_FIELD = "service_id";
@@ -41,22 +43,22 @@ public class ServiceInput extends InputEntity {
 	}
 
 	@Override
-	public String getEntityIdForAttrs() {
+	public String getEntityIdInAttrValuesTable() {
 		return ENTITY_ID_FIELD;
 	}
 
 	@Override
-	public String getEntityAttrsTable() {
+	public String getAttrValuesTable() {
 		return ENTITY_ATTRS_TABLE;
 	}
 
 	@Override
-	public String getAttrsTable() {
+	public String getAttrNamesTable() {
 		return ATTR_NAMES_TABLE;
 	}
 
 	@Override
-	public String getSelectFrom(PerunEntityType sourceType, boolean isSimple) {
+	public String buildSelectFrom(PerunEntityType sourceType, boolean isSimple) {
 		if (sourceType == null) {
 			return getDefaultQuery(isSimple);
 		}
@@ -69,13 +71,13 @@ public class ServiceInput extends InputEntity {
 	}
 
 	private String getDefaultQuery(boolean isSimple) {
-		return InputUtils.getQuery(isSimple, null, null, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, null, null, ENTITY_TABLE);
 	}
 
 	private String getQueryForResource(boolean isSimple) {
 		String select = "rs.resource_id AS foreign_id";
 		String join = "JOIN resource_services rs ON rs.service_id = ent.id";
 
-		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
 	}
 }

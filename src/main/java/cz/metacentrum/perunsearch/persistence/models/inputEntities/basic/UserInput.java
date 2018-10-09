@@ -1,8 +1,10 @@
-package cz.metacentrum.perunsearch.persistence.models.inputEntities;
+package cz.metacentrum.perunsearch.persistence.models.inputEntities.basic;
 
 import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.BasicInputEntity;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,8 +14,9 @@ import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.FACIL
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.MEMBER;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.USER;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.USER_EXT_SOURCE;
+import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.USER_FACILITY;
 
-public class UserInput extends InputEntity {
+public class UserInput extends BasicInputEntity {
 
 	private static final PerunEntityType TYPE = USER;
 	private static final String ENTITY_ID_FIELD = "user_id";
@@ -21,7 +24,7 @@ public class UserInput extends InputEntity {
 	private static final String ENTITY_ATTRS_TABLE = "user_attr_values";
 	private static final String ATTR_NAMES_TABLE = "attr_names";
 
-	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(FACILITY, MEMBER, USER_EXT_SOURCE);
+	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(FACILITY, MEMBER, USER_EXT_SOURCE, USER_FACILITY);
 
 	public UserInput(boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
 					 List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
@@ -43,22 +46,22 @@ public class UserInput extends InputEntity {
 	}
 
 	@Override
-	public String getEntityIdForAttrs() {
+	public String getEntityIdInAttrValuesTable() {
 		return ENTITY_ID_FIELD;
 	}
 
 	@Override
-	public String getEntityAttrsTable() {
+	public String getAttrValuesTable() {
 		return ENTITY_ATTRS_TABLE;
 	}
 
 	@Override
-	public String getAttrsTable() {
+	public String getAttrNamesTable() {
 		return ATTR_NAMES_TABLE;
 	}
 
 	@Override
-	public String getSelectFrom(PerunEntityType sourceType, boolean isSimple) {
+	public String buildSelectFrom(PerunEntityType sourceType, boolean isSimple) {
 		if (sourceType == null) {
 			return getDefaultQuery(isSimple);
 		}
@@ -75,27 +78,27 @@ public class UserInput extends InputEntity {
 	}
 
 	private String getDefaultQuery(boolean isSimple) {
-		return InputUtils.getQuery(isSimple, null, null, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, null, null, ENTITY_TABLE);
 	}
 
 	private String getQueryForFacility(boolean isSimple) {
 		String select = "ufav.facility_id AS foreign_id";
 		String join = "JOIN user_facility_attr_values ufav ON ufav.user_id = ent.id";
 
-		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
 	}
 
 	private String getQueryForUserExtSource(boolean isSimple) {
 		String select = "ues.id AS foreign_id";
 		String join = "JOIN user_ext_sources ues ON ues.user_id = ent.id";
 
-		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
 	}
 
 	private String getQueryForMember(boolean isSimple) {
 		String select = "m.id AS foreign_id";
 		String join = "JOIN members m ON m.user_id = ent.id";
 
-		return InputUtils.getQuery(isSimple, select, join, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
 	}
 }

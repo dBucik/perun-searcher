@@ -1,8 +1,10 @@
-package cz.metacentrum.perunsearch.persistence.models.inputEntities;
+package cz.metacentrum.perunsearch.persistence.models.inputEntities.relations;
 
 import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.RelationInputEntity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,11 +14,13 @@ import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.GROUP
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.MEMBER;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.MEMBER_GROUP;
 
-public class MemberGroupInput extends InputEntity {
+public class MemberGroupInput extends RelationInputEntity {
 
 	private static final PerunEntityType TYPE = MEMBER_GROUP;
-	private static final String ENTITY_ATTRS_TABLE = "member_group_attr_values";
+	private static final String RELATION_TABLE = "member_group_attr_values";
 	private static final String ATTR_NAMES_TABLE = "attr_names";
+	private static final String PRIMARY_KEY = "member_id";
+	private static final String SECONDARY_KEY = "group_id";
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(MEMBER, GROUP);
 
@@ -35,27 +39,27 @@ public class MemberGroupInput extends InputEntity {
 	}
 
 	@Override
-	public String getEntityTable() {
-		return "";
+	public String getPrimaryKey() {
+		return PRIMARY_KEY;
 	}
 
 	@Override
-	public String getEntityIdForAttrs() {
-		return "";
+	public String getSecondaryKey() {
+		return SECONDARY_KEY;
 	}
 
 	@Override
-	public String getEntityAttrsTable() {
-		return ENTITY_ATTRS_TABLE;
+	protected String getRelationTable() {
+		return RELATION_TABLE;
 	}
 
 	@Override
-	public String getAttrsTable() {
+	public String getAttrNamesTable() {
 		return ATTR_NAMES_TABLE;
 	}
 
 	@Override
-	public String getSelectFrom(PerunEntityType sourceType, boolean isSimple) {
+	public String buildSelectFrom(PerunEntityType sourceType, boolean isSimple) {
 		if (sourceType == null) {
 			return getDefaultQuery(isSimple);
 		}
@@ -72,20 +76,20 @@ public class MemberGroupInput extends InputEntity {
 	private String getDefaultQuery(boolean isSimple) {
 		String select = "ent.group_id, ent.member_id";
 
-		return InputUtils.getQueryForRelation(isSimple, select, null, ATTR_NAMES_TABLE);
+		return this.getSelectFrom(isSimple, select, null);
 	}
 
 	private String getQueryForMember(boolean isSimple) {
 		String select = "ent.group_id, ent.member_id, ent.member_id AS foreign_id";
 		String join = "JOIN members m ON m.id = ent.member_id";
 
-		return InputUtils.getQueryForRelation(isSimple, select, join, ATTR_NAMES_TABLE);
+		return this.getSelectFrom(isSimple, select, join);
 	}
 
 	private String getQueryForGroup(boolean isSimple) {
 		String select = "ent.group_id, ent.memberId_id, ent.group_id AS foreign_id";
 		String join = "JOIN groups g ON g.id = ent.group_id";
 
-		return InputUtils.getQueryForRelation(isSimple, select, join, ATTR_NAMES_TABLE);
+		return this.getSelectFrom(isSimple, select, join);
 	}
 }

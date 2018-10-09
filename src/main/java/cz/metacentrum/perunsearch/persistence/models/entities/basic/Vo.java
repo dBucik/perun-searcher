@@ -1,7 +1,7 @@
-package cz.metacentrum.perunsearch.persistence.models.entities;
+package cz.metacentrum.perunsearch.persistence.models.entities.basic;
 
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
-import org.json.JSONObject;
+import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
 
 import java.util.Map;
 

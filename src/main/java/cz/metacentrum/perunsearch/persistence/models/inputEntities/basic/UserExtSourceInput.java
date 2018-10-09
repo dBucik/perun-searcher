@@ -1,8 +1,10 @@
-package cz.metacentrum.perunsearch.persistence.models.inputEntities;
+package cz.metacentrum.perunsearch.persistence.models.inputEntities.basic;
 
 import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.BasicInputEntity;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +14,7 @@ import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.EXT_S
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.USER;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.USER_EXT_SOURCE;
 
-public class UserExtSourceInput extends InputEntity {
+public class UserExtSourceInput extends BasicInputEntity {
 
 	private static final PerunEntityType TYPE = USER_EXT_SOURCE;
 	private static final String ENTITY_ID_FIELD = "user_ext_source_id";
@@ -42,22 +44,22 @@ public class UserExtSourceInput extends InputEntity {
 	}
 
 	@Override
-	public String getEntityIdForAttrs() {
+	public String getEntityIdInAttrValuesTable() {
 		return ENTITY_ID_FIELD;
 	}
 
 	@Override
-	public String getEntityAttrsTable() {
+	public String getAttrValuesTable() {
 		return ENTITY_ATTRS_TABLE;
 	}
 
 	@Override
-	public String getAttrsTable() {
+	public String getAttrNamesTable() {
 		return ATTR_NAMES_TABLE;
 	}
 
 	@Override
-	public String getSelectFrom(PerunEntityType sourceType, boolean isSimple) {
+	public String buildSelectFrom(PerunEntityType sourceType, boolean isSimple) {
 		if (sourceType == null) {
 			return getDefaultQuery(isSimple);
 		}
@@ -72,18 +74,18 @@ public class UserExtSourceInput extends InputEntity {
 	}
 
 	private String getDefaultQuery(boolean isSimple) {
-		return InputUtils.getQuery(isSimple, null, null, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, null, null, ENTITY_TABLE);
 	}
 
 	private String getQueryForUser(boolean isSimple) {
 		String select = "ent.user_id AS foreign_id";
 
-		return InputUtils.getQuery(isSimple, select, null, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, select, null, ENTITY_TABLE);
 	}
 
 	private String getQueryForExtSource(boolean isSimple) {
 		String select = "ent.ext_source_id AS foreign_id";
 
-		return InputUtils.getQuery(isSimple, select, null, ENTITY_TABLE);
+		return this.getSelectFrom(isSimple, select, null, ENTITY_TABLE);
 	}
 }
