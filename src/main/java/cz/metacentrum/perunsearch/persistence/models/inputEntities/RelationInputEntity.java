@@ -74,7 +74,6 @@ public abstract class RelationInputEntity extends InputEntity {
 			query.setHasWhere(true);
 			queryString.append(' ').append(where);
 		}
-		queryString.append(" GROUP BY ent.").append(this.getPrimaryKey()).append(", ent.").append(this.getSecondaryKey());
 
 		query.setQueryString(queryString.toString());
 		for (InputEntity e : this.getInnerInputs()) {

@@ -5,6 +5,7 @@ import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationExceptio
 import cz.metacentrum.perunsearch.persistence.exceptions.IncorrectCoreAttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.Query;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -57,27 +58,27 @@ public abstract class InputEntity {
 
 	public abstract String buildSelectFrom(PerunEntityType sourceType, boolean isSimple);
 
-	protected PerunEntityType getEntityType() {
+	public PerunEntityType getEntityType() {
 		return entityType;
 	}
 
-	protected boolean isTopLevel() {
+	public boolean isTopLevel() {
 		return isTopLevel;
 	}
 
-	protected Map<String, Object> getCore() {
+	public Map<String, Object> getCore() {
 		return core;
 	}
 
-	protected List<InputAttribute> getAttributes() {
+	public List<InputAttribute> getAttributes() {
 		return attributes;
 	}
 
-	protected List<String> getAttrNames() {
+	public List<String> getAttrNames() {
 		return attrNames;
 	}
 
-	protected List<InputEntity> getInnerInputs() {
+	public List<InputEntity> getInnerInputs() {
 		return innerInputs;
 	}
 
@@ -109,6 +110,33 @@ public abstract class InputEntity {
 			return EXACT_MATCH;
 		} else {
 			throw new IncorrectCoreAttributeTypeException("Unsupported core attribute type found for input");
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = this.entityType.hashCode();
+		hash *= 31 * this.attributes.hashCode();
+		hash *= 31 * this.core.hashCode();
+		hash *= 31 * this.attrNames.hashCode();
+		hash *= 31 * this.innerInputs.hashCode();
+
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null) {
+			return false;
+		} else if (! this.getClass().equals(o.getClass())) {
+			return false;
+		} else {
+			InputEntity them = (InputEntity) o;
+			return this.entityType == them.entityType
+					&& this.isTopLevel == them.isTopLevel
+					&& this.core.equals(them.core)
+					&& CollectionUtils.isEqualCollection(this.attributes, them.attributes)
+					&& CollectionUtils.isEqualCollection(this.innerInputs, them.innerInputs);
 		}
 	}
 }

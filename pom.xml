@@ -70,6 +70,13 @@
             <artifactId>json</artifactId>
             <version>20180130</version>
         </dependency>
+
+        <!-- APACHE COMMONS -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.2</version>
+        </dependency>
     </dependencies>
 
     <repositories>

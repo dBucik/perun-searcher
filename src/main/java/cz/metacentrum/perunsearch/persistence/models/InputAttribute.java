@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Attribute obtained as input from user in query.
@@ -85,7 +86,7 @@ public class InputAttribute {
 	private InputAttributeType getType(Object value) throws AttributeTypeException {
 		if (value instanceof String) {
 			return InputAttributeType.STRING;
-		} else if (value instanceof Integer) {
+		} else if (value instanceof Number) {
 			return InputAttributeType.INTEGER;
 		} else if (value instanceof Boolean) {
 			return InputAttributeType.BOOLEAN;
@@ -98,5 +99,37 @@ public class InputAttribute {
 		}
 
 		else throw new AttributeTypeException("Attribute cannot have type: " + type);
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 1;
+		if (this.name != null) {
+			hash *= 31 * this.name.hashCode();
+		}
+
+		if (this.type != null) {
+			hash *= 31 * this.type.hashCode();
+		}
+
+		if (this.value != null) {
+			hash *= 31 * this.value.hashCode();
+		}
+
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null) {
+			return false;
+		} else if (! this.getClass().equals(o.getClass())) {
+			return false;
+		} else {
+			InputAttribute them = (InputAttribute) o;
+			return Objects.equals(this.name, them.name)
+					&& Objects.equals(this.type, them.type)
+					&& Objects.equals(this.value, them.value);
+		}
 	}
 }

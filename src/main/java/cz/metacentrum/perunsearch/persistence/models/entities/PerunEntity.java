@@ -1,5 +1,6 @@
 package cz.metacentrum.perunsearch.persistence.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 
@@ -11,6 +12,7 @@ public abstract class PerunEntity {
 
 	private Long id;
 	private Map<String, PerunAttribute> attributes = new HashMap<>();
+	@JsonIgnore
 	private Long foreignId;
 
 	public PerunEntity(Long id, Map<String, PerunAttribute> attributes, Long foreignId) {

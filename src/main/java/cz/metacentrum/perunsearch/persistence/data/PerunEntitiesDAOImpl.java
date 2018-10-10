@@ -67,13 +67,12 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 
 	@Override
 	public List<PerunEntity> executeQuery(Query query) {
-
 		if (PerunEntityType.isRelation(query.getEntityType())) {
 			Set<Long> ids1 = getIdsForPrimaryKey(query.getPrimaryKey(), query.getInnerQueries());
 			Set<Long> ids2 = getIdsForSecondaryKey(query.getSecondaryKey(), query.getInnerQueries());
 
 			if (query.getInnerQueries() != null && !query.getInnerQueries().isEmpty()
-					&& ids1.isEmpty() && ids2.isEmpty()) {
+					&& (ids1.isEmpty() && ids2.isEmpty())) {
 				return Collections.emptyList();
 			}
 
@@ -190,12 +189,6 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 
 	@Override
 	public List<Long> executeQueryForIds(Query query) {
-		Set<Long> ids = new HashSet<>();
-		for (Query inner: query.getInnerQueries()) {
-			ids.addAll(this.executeQueryForIds(inner));
-		}
-		query.setIds(ids);
-
 		List<PerunEntity> entities = executeQuery(query);
 
 		return entities.stream()
