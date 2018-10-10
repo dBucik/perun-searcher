@@ -2,10 +2,13 @@ package cz.metacentrum.perunsearch.service;
 
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
-import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.ExtSourceInput;
-import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.VoInput;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.FacilityInput;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.UserInput;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +18,9 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class JsonToInputParserTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class JsonToInputParserParsingFacilityInputTest {
 
 	private String input;
 	private Map<String, Object> core;
@@ -33,14 +38,14 @@ public class JsonToInputParserTest {
 	}
 
 	private void setUpInputString() {
-		input = "{\n" +
-				"  \"entityName\": \"EXT_SOURCE\",\n" +
+		this.input = "{\n" +
+				"  \"entityName\": \"FACILITY\",\n" +
 				"  \"id\": 1,\n" +
-				"  \"name\": \"test_ext_source\",\n" +
-				"  \"type\": \"test_type\",\n" +
+				"  \"name\": \"test_facility\",\n" +
+				"  \"description\": \"test_description\",\n" +
 				"  \"attributes\": [\n" +
 				"    {\n" +
-				"      \"name\": \"urn:perun:ext_source:attribute-def:def:attribute1\",\n" +
+				"      \"name\": \"urn:perun:facility:attribute-def:def:attribute1\",\n" +
 				"      \"value\": 1\n" +
 				"    }\n" +
 				"  ],\n" +
@@ -49,89 +54,76 @@ public class JsonToInputParserTest {
 				"  ],\n" +
 				"  \"relations\": [\n" +
 				"    {\n" +
-				"      \"entityName\": \"VO\",\n" +
-				"      \"id\": 1,\n" +
-				"      \"shortName\": \"testVo\",\n" +
-				"      \"name\": \"test_vo\",\n" +
-				"      \"attributes\": [\n" +
-				"        {\n" +
-				"          \"name\": \"urn:perun:vo:attribute-def:def:attribute3\",\n" +
-				"          \"value\": 1\n" +
-				"        }\n" +
-				"      ],\n" +
-				"      \"attributeNames\": [\n" +
-				"        \"attribute4\"\n" +
-				"      ]\n" +
+				"      \"entityName\": \"USER\"" +
 				"    }\n" +
 				"  ]\n" +
 				"}";
 	}
 
 	private void setUpCoreAttributes() {
-		core = new HashMap<>();
+		Map<String, Object> core = new HashMap<>();
 		core.put("id", 1L);
-		core.put("name", "test_ext_source");
-		core.put("type", "test_type");
+		core.put("name", "test_facility");
+		core.put("dsc", "test_description");
+
+		this.core = core;
 	}
 
 	private void setUpAttributes() throws Exception {
-		attributes = new ArrayList<>();
-		InputAttribute attr = new InputAttribute("urn:perun:ext_source:attribute-def:def:attribute1", 1);
+		List<InputAttribute> attributes = new ArrayList<>();
+		InputAttribute attr = new InputAttribute("urn:perun:facility:attribute-def:def:attribute1", 1);
 		attributes.add(attr);
+
+		this.attributes = attributes;
 	}
 
 	private void setUpAttributesNames() {
-		attributeNames = new ArrayList<>();
+		List<String> attributeNames = new ArrayList<>();
 		attributeNames.add("attribute2");
+
+		this.attributeNames = attributeNames;
 	}
 
 	private void setUpInnerInputs() throws Exception {
 		Map<String, Object> core = new HashMap<>();
-		core.put("id", 1L);
-		core.put("short_name", "testVo");
-		core.put("name", "test_vo");
-
 		List<InputAttribute> attributes = new ArrayList<>();
-		InputAttribute a = new InputAttribute("urn:perun:vo:attribute-def:def:attribute3", 1);
-		attributes.add(a);
-
 		List<String> attributeNames = new ArrayList<>();
-		attributeNames.add("attribute4");
-
 		List<InputEntity> inputs = new ArrayList<>();
 
-		VoInput vo = new VoInput(false, core, attributes, attributeNames, inputs);
+		UserInput user = new UserInput(false, core, attributes, attributeNames, inputs);
 
-		innerInputs = new ArrayList<>();
-		innerInputs.add(vo);
+		List<InputEntity> innerInputs = new ArrayList<>();
+		innerInputs.add(user);
+
+		this.innerInputs = innerInputs;
 	}
 
 	@Test
-	public void testExtSourceInputClass() throws Exception {
+	public void testFacilityInputClass() throws Exception {
 		InputEntity entity = JsonToInputParser.parseInput(input);
-		assertTrue(entity instanceof ExtSourceInput);
+		assertTrue(entity instanceof FacilityInput);
 	}
 
 	@Test
-	public void testExtSourceInputCore() throws Exception {
+	public void testFacilityInputCore() throws Exception {
 		InputEntity entity = JsonToInputParser.parseInput(input);
 		assertEquals(this.core, entity.getCore());
 	}
 
 	@Test
-	public void testExtSourceInputAttributes() throws Exception {
+	public void testFacilityInputAttributes() throws Exception {
 		InputEntity entity = JsonToInputParser.parseInput(input);
 		assertEquals(this.attributes, entity.getAttributes());
 	}
 
 	@Test
-	public void testExtSourceInputAttributeNames() throws Exception {
+	public void testFacilityInputAttributeNames() throws Exception {
 		InputEntity entity = JsonToInputParser.parseInput(input);
 		assertEquals(this.attributeNames, entity.getAttrNames());
 	}
 
 	@Test
-	public void testExtSourceInputInnerInputs() throws Exception {
+	public void testFacilityInputInnerInputs() throws Exception {
 		InputEntity entity = JsonToInputParser.parseInput(input);
 		assertEquals(this.innerInputs, entity.getInnerInputs());
 	}
