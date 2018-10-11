@@ -20,8 +20,7 @@ public class ServiceMapper implements RowMapper<Service> {
 		String description = MappersUtils.getString(entityJson,"description");
 		Integer delay = MappersUtils.getInt(entityJson, "delay");
 		Integer recurrence = MappersUtils.getInt(entityJson, "recurrence");
-		String enabledStr = MappersUtils.getString(entityJson,"enabled");
-		Boolean enabled = (enabledStr != null) ? "t".equals(enabledStr) : null;
+		Boolean enabled = "1".equals(MappersUtils.getString(entityJson, "enabled"));
 		String script = MappersUtils.getString(entityJson,"script");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);

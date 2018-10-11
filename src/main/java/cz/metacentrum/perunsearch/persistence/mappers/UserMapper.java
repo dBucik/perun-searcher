@@ -22,8 +22,8 @@ public class UserMapper implements RowMapper<User> {
 		String lastName = MappersUtils.getString(entityJson, "last_name");
 		String titleBefore = MappersUtils.getString(entityJson, "title_before");
 		String titleAfter = MappersUtils.getString(entityJson, "title_after");
-		Boolean service = "t".equals(MappersUtils.getString(entityJson, "service_acc"));
-		Boolean sponsored = "t".equals(MappersUtils.getString(entityJson, "sponsored_acc"));
+		Boolean service = "1".equals(MappersUtils.getString(entityJson, "service_acc"));
+		Boolean sponsored = "1".equals(MappersUtils.getString(entityJson, "sponsored_acc"));
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
 		Long foreignId = MappersUtils.getForeignId(resultSet);
