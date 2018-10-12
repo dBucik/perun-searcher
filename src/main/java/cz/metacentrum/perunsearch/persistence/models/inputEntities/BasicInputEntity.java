@@ -66,26 +66,25 @@ public abstract class BasicInputEntity extends InputEntity {
 		return query;
 	}
 
-	private String outerWhere(Query query, Map<String, Object> core) throws IncorrectCoreAttributeTypeException {
-		if (core == null || core.isEmpty()) {
-			return NO_VALUE;
+	public String getSelectFrom(boolean isSimple, String select, String join, String entityTable) {
+		StringBuilder queryString = new StringBuilder();
+		queryString.append("SELECT to_json(ent) AS entity");
+		if (select != null) {
+			queryString.append(", ").append(select);
 		}
 
-		StringJoiner where = new StringJoiner(" AND ");
-		for (Map.Entry<String, Object> a: core.entrySet()) {
-			String operator = resolveMatchOperator(a.getValue());
-			String part = "ent." + a.getKey() + operator;
-			if (! operator.equals(NULL_MATCH)) {
-				//TODO: add also LIKE MATCH
-				part += query.nextParam( a.getValue());
-			}
-			where.add(part);
+		if (! isSimple) {
+			queryString.append(", attributes.data AS attributes");
+		}
+		queryString.append(" FROM ").append(entityTable).append(" ent");
+		if (join != null) {
+			queryString.append(' ').append(join);
 		}
 
-		return "WHERE " + where.toString();
+		return queryString.toString();
 	}
 
-	private String buildAttributesQuery(Query query, List<String> attrNames) {
+	protected String buildAttributesQuery(Query query, List<String> attrNames) {
 		String entityId = this.getEntityIdInAttrValuesTable();
 		String attrValuesTable = this.getAttrValuesTable();
 		String attrNamesTable = this.getAttrNamesTable();
@@ -105,7 +104,7 @@ public abstract class BasicInputEntity extends InputEntity {
 		return queryString.toString();
 	}
 
-	private String buildAttributesWhere(Query query, List<String> attrNames) {
+	protected String buildAttributesWhere(Query query, List<String> attrNames) {
 		if (attrNames == null || attrNames.isEmpty()) {
 			return NO_VALUE;
 		}
@@ -118,21 +117,22 @@ public abstract class BasicInputEntity extends InputEntity {
 		return "WHERE " + where.toString();
 	}
 
-	public String getSelectFrom(boolean isSimple, String select, String join, String entityTable) {
-		StringBuilder queryString = new StringBuilder();
-		queryString.append("SELECT to_json(ent) AS entity");
-		if (select != null) {
-			queryString.append(", ").append(select);
+	private String outerWhere(Query query, Map<String, Object> core) throws IncorrectCoreAttributeTypeException {
+		if (core == null || core.isEmpty()) {
+			return NO_VALUE;
 		}
 
-		if (! isSimple) {
-			queryString.append(", attributes.data AS attributes");
-		}
-		queryString.append(" FROM ").append(entityTable).append(" ent");
-		if (join != null) {
-			queryString.append(' ').append(join);
+		StringJoiner where = new StringJoiner(" AND ");
+		for (Map.Entry<String, Object> a: core.entrySet()) {
+			String operator = resolveMatchOperator(a.getValue());
+			String part = "ent." + a.getKey() + operator;
+			if (! operator.equals(NULL_MATCH)) {
+				//TODO: add also LIKE MATCH
+				part += query.nextParam( a.getValue());
+			}
+			where.add(part);
 		}
 
-		return queryString.toString();
+		return "WHERE " + where.toString();
 	}
 }

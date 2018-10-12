@@ -287,3 +287,160 @@ create table user_facility_attr_values (
 	constraint usrfacav_fac_fk foreign key (facility_id) references facilities(id),
 	constraint usrfacav_accattnam_fk foreign key (attr_id) references attr_names(id)
 );
+
+
+
+
+
+INSERT INTO ext_sources(id, name, type) VALUES (1, 'ext_source1', 'LDAP');
+INSERT INTO ext_sources(id, name, type) VALUES (2, 'ext_source2', 'LDAP');
+INSERT INTO ext_sources(id, name, type) VALUES (3, 'ext_source3', 'IdP');
+INSERT INTO ext_sources(id, name, type) VALUES (4, 'ext_source4', 'IdP');
+
+INSERT INTO facilities(id, name, dsc) VALUES (1, 'facility1', 'dsc1');
+INSERT INTO facilities(id, name, dsc) VALUES (2, 'facility2', 'dsc2');
+INSERT INTO facilities(id, name, dsc) VALUES (3, 'facility3', 'dsc3');
+
+INSERT INTO vos(id, name, short_name) VALUES (1, 'virtual_organization1', 'vo1');
+INSERT INTO vos(id, name, short_name) VALUES (1, 'virtual_organization2', 'vo2');
+INSERT INTO vos(id, name, short_name) VALUES (1, 'virtual_organization3', 'vo3');
+
+INSERT INTO services(id, name, description, delay, recurrence, enabled, script)
+VALUES (1, 'service1', 'dsc1', 1, 1, '1', 'script1');
+INSERT INTO services(id, name, description, delay, recurrence, enabled, script)
+VALUES (2, 'service2', 'dsc2', 2, 2, '0', 'script2');
+INSERT INTO services(id, name, description, delay, recurrence, enabled, script)
+VALUES (3, 'service3', 'dsc3', 3, 3, '0', 'script3');
+
+INSERT INTO users(id, first_name, last_name, middle_name, title_before, title_after, service_acc, sponsored_acc)
+VALUES (1, 'first_name1', 'last_name1', 'middle_name1', 'title_before1', 'title_after1', '1', '0' );
+INSERT INTO users(id, first_name, last_name, middle_name, title_before, title_after, service_acc, sponsored_acc)
+VALUES (2, 'first_name2', 'last_name2', 'middle_name2', 'title_before2', 'title_after2', '0', '0' );
+INSERT INTO users(id, first_name, last_name, middle_name, title_before, title_after, service_acc, sponsored_acc)
+VALUES (3, 'first_name3', 'last_name3', 'middle_name3', 'title_before3', 'title_after3', '0', '1' );
+
+INSERT INTO hosts(id, hostname, facility_id, dsc) VALUES (1, 'hostname1', 1, 'dsc1');
+INSERT INTO hosts(id, hostname, facility_id, dsc) VALUES (2, 'hostname2', 2, 'dsc2');
+INSERT INTO hosts(id, hostname, facility_id, dsc) VALUES (3, 'hostname3', 3, 'dsc3');
+
+INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (1, 'group1', 'dsc1', 1, null);
+INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (2, 'group2', 'dsc2', 2, null);
+INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (3, 'group3', 'dsc3', 3, null);
+INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (4, 'child_group1', 'dsc4', 1, 1);
+INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (5, 'child_group2', 'dsc4', 2, 2);
+INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (6, 'child_group3', 'dsc4', 3, 3);
+
+INSERT INTO user_ext_sources(id, user_id, login_ext, ext_sources_id, loa, last_access)
+VALUES (1, 1, 'login_ext1', 1, 1, ???);
+INSERT INTO user_ext_sources(id, user_id, login_ext, ext_sources_id, loa, last_access)
+VALUES (2, 2, 'login_ext2', 2, 2, ???);
+INSERT INTO user_ext_sources(id, user_id, login_ext, ext_sources_id, loa, last_access)
+VALUES (3, 3, 'login_ext3', 3, 0, ???);
+
+INSERT INTO resources(id, facility_id, name, dsc, vo_id) VALUES (1, 1, 'resource1', 'dsc1', 1);
+INSERT INTO resources(id, facility_id, name, dsc, vo_id) VALUES (2, 2, 'resource2', 'dsc2', 2);
+INSERT INTO resources(id, facility_id, name, dsc, vo_id) VALUES (3, 3, 'resource3', 'dsc3', 3);
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (1, 'facility_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (2, 'facility_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (3, 'facility_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (4, 'facility_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (5, 'facility_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (6, 'facility_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (7, 'facility_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (8, 'group_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (9, 'group_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (10, 'group_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (11, 'group_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (12, 'group_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (13, 'group_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (14, 'group_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (15, 'host_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (16, 'host_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (17, 'host_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (18, 'host_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (19, 'host_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (20, 'host_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (21, 'host_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (22, 'member_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (23, 'member_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (24, 'member_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (25, 'member_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (26, 'member_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (27, 'member_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (28, 'member_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (29, 'resource_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (30, 'resource_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (31, 'resource_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (32, 'resource_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (33, 'resource_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (34, 'resource_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (35, 'resource_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (36, 'service_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (37, 'service_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (38, 'service_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (39, 'service_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (40, 'service_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (41, 'service_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (42, 'service_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (43, 'user_ext_source_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (44, 'user_ext_source_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (45, 'user_ext_source_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (46, 'user_ext_source_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (47, 'user_ext_source_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (48, 'user_ext_source_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (49, 'user_ext_source_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (50, 'user_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (51, 'user_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (52, 'user_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (53, 'user_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (54, 'user_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (55, 'user_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (56, 'user_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (57, 'vo_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (58, 'vo_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (59, 'vo_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (60, 'vo_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (61, 'vo_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (62, 'vo_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (63, 'vo_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (64, 'group_resource_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (65, 'group_resource_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (66, 'group_resource_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (67, 'group_resource_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (68, 'group_resource_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (69, 'group_resource_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (70, 'group_resource_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (71, 'member_group_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (72, 'member_group_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (73, 'member_group_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (74, 'member_group_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (75, 'member_group_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (76, 'member_group_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (77, 'member_group_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (78, 'member_resource_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (79, 'member_resource_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (80, 'member_resource_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (81, 'member_resource_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (82, 'member_resource_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (83, 'member_resource_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (84, 'member_resource_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO attr_names(id, attr_name, type) VALUES (85, 'user_facility_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (86, 'user_facility_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (87, 'user_facility_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (88, 'user_facility_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (89, 'user_facility_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (90, 'user_facility_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (91, 'user_facility_attr_larray', 'java.lang.LargeArrayList');

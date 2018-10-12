@@ -3,12 +3,14 @@ package cz.metacentrum.perunsearch.persistence.models.inputEntities.basic;
 import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
+import cz.metacentrum.perunsearch.persistence.models.Query;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.BasicInputEntity;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.EXT_SOURCE;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.GROUP;
@@ -18,10 +20,9 @@ import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.VO;
 public class ExtSourceInput extends BasicInputEntity {
 
 	private static final PerunEntityType TYPE = EXT_SOURCE;
-	private static final String ENTITY_ID_FIELD = "ext_source_id";
+	private static final String ENTITY_ID_FIELD = "ext_sources_id";
 	private static final String ENTITY_TABLE = "ext_sources";
-	private static final String ENTITY_ATTRS_TABLE = "ext_source_attr_values";
-	private static final String ATTR_NAMES_TABLE = "attr_names";
+	private static final String ENTITY_ATTRS_TABLE = "ext_source_attributes";
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(VO, GROUP, USER_EXT_SOURCE);
 
@@ -56,7 +57,7 @@ public class ExtSourceInput extends BasicInputEntity {
 
 	@Override
 	public String getAttrNamesTable() {
-		return ATTR_NAMES_TABLE;
+		return null;
 	}
 
 	@Override
@@ -74,6 +75,25 @@ public class ExtSourceInput extends BasicInputEntity {
 				return getQueryForUserExtSource(isSimple);
 			default: return null; //TODO: throw exception
 		}
+	}
+
+	@Override
+	protected String buildAttributesQuery(Query query, List<String> attrNames) {
+		String entityId = this.getEntityIdInAttrValuesTable();
+		String attrValuesTable = this.getAttrValuesTable();
+
+		StringBuilder queryString = new StringBuilder();
+		String where = buildAttributesWhere(query, attrNames);
+
+		queryString.append("SELECT ").append(entityId).append(" AS entity_id, json_agg(json_build_object(")
+				.append("'name', attr_name, 'value', attr_value,)) AS data")
+				.append(" FROM ").append(attrValuesTable).append(" av");
+		if (!Objects.equals(where, NO_VALUE)) {
+			queryString.append(where).append(' ');
+		}
+		queryString.append("GROUP BY ").append(entityId);
+
+		return queryString.toString();
 	}
 
 	private String getDefaultQuery(boolean isSimple) {
@@ -96,7 +116,7 @@ public class ExtSourceInput extends BasicInputEntity {
 
 	private String getQueryForUserExtSource(boolean isSimple) {
 		String select = "ues.id AS foreign_id";
-		String join = "JOIN user_ext_sources ues ON ues.ext_source_id = ent.id";
+		String join = "JOIN user_ext_sources ues ON ues.ext_sources_id = ent.id";
 
 		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
 	}
