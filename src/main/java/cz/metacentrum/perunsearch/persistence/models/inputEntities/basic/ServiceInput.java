@@ -13,6 +13,9 @@ import java.util.Map;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.RESOURCE;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.SERVICE;
 
+//TODO: does not have attributes
+//TODO: create OWNER as copy of this
+
 public class ServiceInput extends BasicInputEntity {
 
 	private static final PerunEntityType TYPE = SERVICE;

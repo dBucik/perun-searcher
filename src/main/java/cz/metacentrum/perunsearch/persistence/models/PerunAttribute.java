@@ -101,7 +101,8 @@ public class PerunAttribute {
 		}
 
 		//TODO: split only at unescaped chars
-		String[] parts = value.split(";");
+		//TODO: find
+		String[] parts = value.split(",");
 		return Arrays.asList(parts);
 	}
 
@@ -115,10 +116,10 @@ public class PerunAttribute {
 		}
 
 		//TODO: split only at unescaped chars
-		String[] parts = value.split(";");
+		String[] parts = value.split(",");
 		Map<String, String> valuesMap = new LinkedHashMap<>();
 		for (String part: parts) {
-			String[] subParts = part.split("=");
+			String[] subParts = part.split(":");
 			valuesMap.put(subParts[0], subParts[1]);
 		}
 
