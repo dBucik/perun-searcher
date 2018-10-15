@@ -440,3 +440,15 @@ INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value,
 INSERT INTO vo_ext_sources(vo_id, ext_sources_id) VALUES (1, 1);
 INSERT INTO vo_ext_sources(vo_id, ext_sources_id) VALUES (2, 2);
 INSERT INTO vo_ext_sources(vo_id, ext_sources_id) VALUES (3, 3);
+
+INSERT INTO groups_resources(group_id, resource_id) VALUES(1, 1);
+INSERT INTO groups_resources(group_id, resource_id) VALUES(2, 2);
+INSERT INTO groups_resources(group_id, resource_id) VALUES(3, 3);
+
+INSERT INTO resource_services(resource_id, service_id) VALUES (1, 1);
+INSERT INTO resource_services(resource_id, service_id) VALUES (2, 2);
+INSERT INTO resource_services(resource_id, service_id) VALUES (3, 3);
+
+INSERT INTO groups_members(group_id, member_id) VALUES (1, 1);
+INSERT INTO groups_members(group_id, member_id) VALUES (2, 2);
+INSERT INTO groups_members(group_id, member_id) VALUES (3, 3);

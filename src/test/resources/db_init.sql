@@ -279,3 +279,26 @@ create table vo_ext_sources (
   constraint vousrsrc_usrsrc_fk foreign key(ext_sources_id) references ext_sources(id),
   constraint vousrsrc_vos_fk foreign key(vo_id) references vos(id)
 );
+
+create table groups_resources (
+	group_id integer not null,
+	resource_id integer not null,
+	constraint grres_grp_res_u unique (group_id,resource_id),
+  constraint grres_gr_fk foreign key (group_id) references groups(id),
+  constraint grres_res_fk foreign key (resource_id) references resources(id)
+);
+
+create table resource_services (
+	service_id integer not null,
+	resource_id integer not null,
+	constraint resrcsrv_pk primary key (service_id,resource_id),
+  constraint resrcsrv_srv_fk foreign key (service_id) references services(id),
+  constraint resrcsrv_rsrc_fk foreign key (resource_id) references resources(id)
+);
+
+create table groups_members (
+	group_id integer not null,
+	member_id integer not null,
+  constraint grpmem_gr_fk foreign key (group_id) references groups(id),
+  constraint grpmem_mem_fk foreign key (member_id) references members(id)
+);
