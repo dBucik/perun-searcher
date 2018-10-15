@@ -74,21 +74,21 @@ public class GroupResourceInput extends RelationInputEntity {
 	}
 
 	private String getDefaultQuery(boolean isSimple) {
-		String select = "ent.group_id, ent.resource_id";
+		String select = "rel.group_id, rel.resource_id";
 
 		return this.getSelectFrom(isSimple, select, null);
 	}
 
 	private String getQueryForGroup(boolean isSimple) {
-		String select = "ent.group_id, ent.resource_id, ent.group_id AS foreign_id";
-		String join = "JOIN groups g ON g.id = ent.group_id";
+		String select = "rel.group_id, rel.resource_id, rel.group_id AS foreign_id";
+		String join = "JOIN groups g ON g.id = rel.group_id";
 
 		return this.getSelectFrom(isSimple, select, join);
 	}
 
 	private String getQueryForResource(boolean isSimple) {
-		String select = "ent.group_id, ent.resource_id, ent.resource_id AS foreign_id";
-		String join = "JOIN resources r ON r.id = ent.resource_id";
+		String select = "rel.group_id, rel.resource_id, rel.resource_id AS foreign_id";
+		String join = "JOIN resources r ON r.id = rel.resource_id";
 
 		return this.getSelectFrom(isSimple, select, join);
 	}

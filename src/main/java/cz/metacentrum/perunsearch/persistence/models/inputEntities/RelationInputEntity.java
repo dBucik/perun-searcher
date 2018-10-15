@@ -46,10 +46,10 @@ public abstract class RelationInputEntity extends InputEntity {
 			queryString.append(", json_agg(json_build_object(")
 					.append("'name', attr_name, 'value', COALESCE(attr_value, attr_value_text), 'type', type)) AS attributes");
 		}
-		queryString.append(" FROM ").append(relationTable).append(" ent");
+		queryString.append(" FROM ").append(relationTable).append(" rel");
 		if (!isSimple) {
 			queryString.append(" LEFT JOIN ").append(attrNamesTable).append(" an")
-					.append(" ON ent.attr_id = an.id");
+					.append(" ON rel.attr_id = an.id");
 		}
 		if (join != null) {
 			queryString.append(' ').append(join);
@@ -86,7 +86,7 @@ public abstract class RelationInputEntity extends InputEntity {
 	}
 
 	private String buildWhere(Query query, Map<String, Object> core, List<String> attrNames) throws IncorrectCoreAttributeTypeException {
-		if ((core == null || core.isEmpty()) && (attrNames == null || !attrNames.isEmpty())) {
+		if ((core == null || core.isEmpty()) && (attrNames == null || attrNames.isEmpty())) {
 			return NO_VALUE;
 		}
 
@@ -110,7 +110,9 @@ public abstract class RelationInputEntity extends InputEntity {
 				attributes.add("(attr_name = " + query.nextParam(name) + ')');
 			}
 
-			where.add(attributes.toString());
+			if (! attrNames.isEmpty()) {
+				where.add(attributes.toString());
+			}
 
 		}
 

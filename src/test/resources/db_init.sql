@@ -271,3 +271,11 @@ create table user_facility_attr_values (
 	constraint usrfacav_fac_fk foreign key (facility_id) references facilities(id),
 	constraint usrfacav_accattnam_fk foreign key (attr_id) references attr_names(id)
 );
+
+create table vo_ext_sources (
+	vo_id integer not null,
+	ext_sources_id integer not null,
+	constraint vousrsrc_pk primary key (vo_id,ext_sources_id),
+  constraint vousrsrc_usrsrc_fk foreign key(ext_sources_id) references ext_sources(id),
+  constraint vousrsrc_vos_fk foreign key(vo_id) references vos(id)
+);

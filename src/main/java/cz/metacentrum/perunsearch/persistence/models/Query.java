@@ -76,20 +76,22 @@ public class Query {
 
 	public void setIds(String key1, Set<Long> ids1, String key2, Set<Long> ids2) {
 		StringJoiner query = new StringJoiner(" AND ");
-		if (key1 != null && ids1 != null && !ids1.isEmpty()) {
-			query.add("ent." + key1 + " IN (" +  nextParam(new ArrayList<>(ids1)) + ')');
-		}
+		if ((ids1 != null && !ids1.isEmpty()) || (ids2 != null && !ids2.isEmpty())) {
+			if (key1 != null && ids1 != null && !ids1.isEmpty()) {
+				query.add("rel." + key1 + " IN (" + nextParam(new ArrayList<>(ids1)) + ')');
+			}
 
-		if (key2 != null && ids2 != null && !ids2.isEmpty()) {
-			query.add("ent." + key2 + " IN (" +  nextParam(new ArrayList<>(ids2)) + ')');
-		}
+			if (key2 != null && ids2 != null && !ids2.isEmpty()) {
+				query.add("rel." + key2 + " IN (" + nextParam(new ArrayList<>(ids2)) + ')');
+			}
 
-		if (! this.hasWhere) {
-			this.queryString += " WHERE ";
-		}
+			if (!this.hasWhere) {
+				this.queryString += " WHERE ";
+			}
 
-		this.queryString += query.toString();
-		this.queryString += " GROUP BY ent." + getPrimaryKey() + ", ent." + getSecondaryKey();
+			this.queryString += query.toString();
+		}
+		this.queryString += " GROUP BY rel." + getPrimaryKey() + ", rel." + getSecondaryKey();
 	}
 
 	public void setHasWhere(boolean hasWhere) {

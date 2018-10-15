@@ -102,7 +102,7 @@ public class ExtSourceInput extends BasicInputEntity {
 
 	private String getQueryForVo(boolean isSimple) {
 		String select = "ves.vo_id AS foreign_id";
-		String join = "JOIN vo_ext_sources ves ON ves.ext_source_id = ent.id";
+		String join = "JOIN vo_ext_sources ves ON ves.ext_sources_id = ent.id";
 
 		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
 	}

@@ -309,7 +309,7 @@ public class JsonToInputParser {
 				map.put("last_access", null);
 			} else {
 				//TODO: exception when not in correct format?
-				map.put("lastAccess", Timestamp.valueOf(last));
+				map.put("last_access", Timestamp.valueOf(last));
 			}
 		}
 
@@ -339,7 +339,7 @@ public class JsonToInputParser {
 		}
 
 		if (json.has("titleAfter")) {
-			map.put("titleAfter", getString(json, "titleAfter"));
+			map.put("title_after", getString(json, "titleAfter"));
 		}
 
 		if (json.has("serviceAcc")) {
@@ -347,9 +347,9 @@ public class JsonToInputParser {
 			if (param == null) {
 				map.put("service_acc", null);
 			} else if (param) {
-				map.put("service_acc", "t");
+				map.put("service_acc", "1");
 			} else {
-				map.put("service_acc", "f");
+				map.put("service_acc", "0");
 			}
 		}
 
@@ -358,9 +358,9 @@ public class JsonToInputParser {
 			if (param == null) {
 				map.put("sponsored_acc", null);
 			} else if (param) {
-				map.put("sponsored_acc", "t");
+				map.put("sponsored_acc", "1");
 			} else {
-				map.put("sponsored_acc", "f");
+				map.put("sponsored_acc", "0");
 			}
 		}
 

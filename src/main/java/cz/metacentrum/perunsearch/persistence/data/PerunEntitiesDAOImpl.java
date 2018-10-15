@@ -7,10 +7,13 @@ import cz.metacentrum.perunsearch.persistence.mappers.FacilityMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.GroupMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.GroupResourceMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.HostMapper;
+import cz.metacentrum.perunsearch.persistence.mappers.MemberGroupMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.MemberMapper;
+import cz.metacentrum.perunsearch.persistence.mappers.MemberResourceMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.ResourceMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.ServiceMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.UserExtSourceMapper;
+import cz.metacentrum.perunsearch.persistence.mappers.UserFacilityMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.UserMapper;
 import cz.metacentrum.perunsearch.persistence.mappers.VoMapper;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
@@ -54,6 +57,10 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 	private static final UserMapper USER_MAPPER = new UserMapper();
 	private static final VoMapper VO_MAPPER = new VoMapper();
 	private static final GroupResourceMapper GROUP_RESOURCE_MAPPER = new GroupResourceMapper();
+	private static final MemberGroupMapper MEMBER_GROUP_MAPPER = new MemberGroupMapper();
+	private static final MemberResourceMapper MEMBER_RESOURCE_MAPPER = new MemberResourceMapper();
+	private static final UserFacilityMapper USER_FACILITY_MAPPER = new UserFacilityMapper();
+
 
 	public void setTemplate(JdbcTemplate template) {
 		if (template == null) {
@@ -115,6 +122,12 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 			case VO: result.addAll(template.query(queryString, params, VO_MAPPER));
 				break;
 			case GROUP_RESOURCE: result.addAll(template.query(queryString, params, GROUP_RESOURCE_MAPPER));
+				break;
+			case MEMBER_GROUP: result.addAll(template.query(queryString, params, MEMBER_GROUP_MAPPER));
+				break;
+			case MEMBER_RESOURCE: result.addAll(template.query(queryString, params, MEMBER_RESOURCE_MAPPER));
+				break;
+			case USER_FACILITY: result.addAll(template.query(queryString, params, USER_FACILITY_MAPPER));
 				break;
 		}
 

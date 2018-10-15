@@ -274,5 +274,53 @@ public class VoSearchingTests {
 		assertEquals(1, result.size());
 		assertEquals(EXPECTED1, result.get(0));
 	}
+
+	@Test
+	public void findVoByResourceEntity() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
+				"{ \"entityName\" : \"resource\", \"id\" : 1 }" +
+				"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(1, result.size());
+		assertEquals(EXPECTED1, result.get(0));
+	}
+
+	@Test
+	public void findVoByExtSourceEntity() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
+				"{ \"entityName\" : \"ext_source\", \"id\" : 1 }" +
+				"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(1, result.size());
+		assertEquals(EXPECTED1, result.get(0));
+	}
+
+	@Test
+	public void findVoByGroupEntity() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
+				"{ \"entityName\" : \"group\", \"id\" : 1 }" +
+				"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(1, result.size());
+		assertEquals(EXPECTED1, result.get(0));
+	}
+
+	@Test
+	public void findVoByMemberEntity() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
+				"{ \"entityName\" : \"member\", \"id\" : 1 }" +
+				"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(1, result.size());
+		assertEquals(EXPECTED1, result.get(0));
+	}
 }
 

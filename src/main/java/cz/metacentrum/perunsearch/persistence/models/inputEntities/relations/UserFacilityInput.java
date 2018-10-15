@@ -74,21 +74,21 @@ public class UserFacilityInput extends RelationInputEntity {
 	}
 
 	private String getDefaultQuery(boolean isSimple) {
-		String select = "ent.user_id, ent.facility_id";
+		String select = "rel.user_id, rel.facility_id";
 
 		return this.getSelectFrom(isSimple, select, null);
 	}
 
 	private String getQueryForUser(boolean isSimple) {
-		String select = "ent.user_id, ent.facility_id, ent.user_id AS foreign_id";
-		String join = "JOIN users u ON u.id = ent.user_id";
+		String select = "rel.user_id, rel.facility_id, rel.user_id AS foreign_id";
+		String join = "JOIN users u ON u.id = rel.user_id";
 
 		return this.getSelectFrom(isSimple, select, join);
 	}
 
 	private String getQueryForFacility(boolean isSimple) {
-		String select = "ent.user_id, ent.facility_id, ent.facility_id AS foreign_id";
-		String join = "JOIN facilities f ON f.id = ent.facility_id";
+		String select = "rel.user_id, rel.facility_id, rel.facility_id AS foreign_id";
+		String join = "JOIN facilities f ON f.id = rel.facility_id";
 
 		return this.getSelectFrom(isSimple, select, join);
 	}

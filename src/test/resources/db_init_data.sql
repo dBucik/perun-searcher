@@ -37,11 +37,11 @@ INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (5, 'child_grou
 INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (6, 'child_group3', 'dsc4', 3, 3);
 
 INSERT INTO user_ext_sources(id, user_id, login_ext, ext_sources_id, loa, last_access)
-VALUES (1, 1, 'login_ext1', 1, 1, (TIMESTAMP '2018-01-03 08:00:00'));
+VALUES (1, 1, 'login_ext1', 1, 0, (TIMESTAMP '2018-01-01 08:00:00'));
 INSERT INTO user_ext_sources(id, user_id, login_ext, ext_sources_id, loa, last_access)
-VALUES (2, 2, 'login_ext2', 2, 2, (TIMESTAMP '2018-01-02 08:00:00'));
+VALUES (2, 2, 'login_ext2', 2, 1, (TIMESTAMP '2018-01-02 08:00:00'));
 INSERT INTO user_ext_sources(id, user_id, login_ext, ext_sources_id, loa, last_access)
-VALUES (3, 3, 'login_ext3', 3, 0, (TIMESTAMP '2018-01-01 08:00:00'));
+VALUES (3, 3, 'login_ext3', 3, 2, (TIMESTAMP '2018-01-03 08:00:00'));
 
 INSERT INTO members(id, vo_id, user_id, sponsored) VALUES (1, 1, 1, true);
 INSERT INTO members(id, vo_id, user_id, sponsored) VALUES (2, 2, 2, false);
@@ -436,3 +436,7 @@ INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value,
 INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 61, null, 'key5:value5,key6:value6');
 INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 62, null, 'long_value3');
 INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 63, null, '5,6');
+
+INSERT INTO vo_ext_sources(vo_id, ext_sources_id) VALUES (1, 1);
+INSERT INTO vo_ext_sources(vo_id, ext_sources_id) VALUES (2, 2);
+INSERT INTO vo_ext_sources(vo_id, ext_sources_id) VALUES (3, 3);

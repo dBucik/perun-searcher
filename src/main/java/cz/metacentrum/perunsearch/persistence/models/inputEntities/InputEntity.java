@@ -106,7 +106,7 @@ public abstract class InputEntity {
 	String resolveMatchOperator(Object o) throws IncorrectCoreAttributeTypeException {
 		if (o == null) {
 			return NULL_MATCH;
-		} else if ((o instanceof String) || (o instanceof Long) || (o instanceof Boolean) || (o instanceof Timestamp)) {
+		} else if ((o instanceof String) || (o instanceof Number) || (o instanceof Boolean) || (o instanceof Timestamp)) {
 			return EXACT_MATCH;
 		} else {
 			throw new IncorrectCoreAttributeTypeException("Unsupported core attribute type found for input");
