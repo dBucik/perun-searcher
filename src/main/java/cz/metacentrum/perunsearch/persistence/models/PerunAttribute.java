@@ -26,6 +26,12 @@ public class PerunAttribute {
 		this.value = value;
 	}
 
+	public PerunAttribute(String name, PerunAttributeType type, String value) {
+		this.name = name;
+		this.type = type;
+		this.value = value;
+	}
+
 	public String getName() {
 		return name;
 	}

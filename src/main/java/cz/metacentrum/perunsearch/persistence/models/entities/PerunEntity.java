@@ -6,6 +6,7 @@ import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @JsonIgnoreProperties(value = {"foreignId"})
 public abstract class PerunEntity {
@@ -17,7 +18,9 @@ public abstract class PerunEntity {
 
 	public PerunEntity(Long id, Map<String, PerunAttribute> attributes, Long foreignId) {
 		this.id = id;
-		this.attributes.putAll(attributes);
+		if (attributes != null) {
+			this.attributes.putAll(attributes);
+		}
 		this.foreignId = foreignId;
 	}
 
@@ -45,4 +48,16 @@ public abstract class PerunEntity {
 		this.foreignId = foreignId;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof PerunEntity)) {
+			return false;
+		} else if (! this.getClass().equals(o.getClass())) {
+			return false;
+		}
+
+		PerunEntity them = (PerunEntity) o;
+
+		return Objects.equals(this.id, them.id);
+	}
 }

@@ -17,7 +17,7 @@ public class VoMapper implements RowMapper<Vo> {
 
 		Long id = entityJson.getLong("id");
 		String name = MappersUtils.getString(entityJson, "name");
-		String shortName = MappersUtils.getString(entityJson, "shortName");
+		String shortName = MappersUtils.getString(entityJson, "short_name");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
 		Long foreignId = MappersUtils.getForeignId(resultSet);

@@ -1,39 +1,33 @@
--- database version 3.1.48 (lightweight version)
-
---ENTITIES
-
--- ATTR_NAMES - list of possible attributes
 create table attr_names (
 	id integer not null,
-	attr_name varchar(384) not null,  --full name of attribute
-	type varchar(256) not null,       --type of attribute data (string,number,array...)
+	attr_name varchar(384) not null,
+	type varchar(256) not null,
+	friendly_name varchar(256),
+	namespace varchar(256),
 	constraint attnam_pk primary key(id),
 	constraint attnam_u unique (attr_name),
 	constraint attfullnam_u unique (friendly_name,namespace)
 );
 
--- EXT_SOURCES - external sourcces from which we can gain data about users
 create table ext_sources (
 	id integer not null,
-	name varchar(256) not null,    --name of source
-	type varchar(64),              --type of source (LDAP/IdP...)
+	name varchar(256) not null,
+	type varchar(64),
 	constraint usrsrc_pk primary key(id),
 	constraint usrsrc_u unique (name)
 );
 
--- VOS - virtual organizations
 create table vos (
 	id integer not null,
-	name varchar(128) not null,   -- full name of VO
-	short_name varchar(32) not null, -- commonly used name
+	name varchar(128) not null,
+	short_name varchar(32) not null,
 	constraint vo_pk primary key (id),
 	constraint vo_u unique (name)
 );
 
--- SERVICES - provided services, their atomic form
 create table services (
 	id integer not null,
-	name varchar(128) not null,    --name of service
+	name varchar(128) not null,
 	description varchar(1024),
 	delay integer not null default 10,
 	recurrence integer not null default 2,
@@ -43,83 +37,79 @@ create table services (
 	constraint serv_u unique(name)
 );
 
--- USERS - information about user as real person
+
 create table users (
 	id integer not null,
-	first_name varchar(64),   -- christening name
-	last_name varchar(64),    -- family name
-	middle_name varchar(64),   -- second name
-	title_before varchar(40),  -- academic degree used before name
-	title_after varchar(40),   -- academic degree used after name
-	service_acc char(1) default '0' not null, --is it service account?
-	sponsored_acc char(1) default '0' not null, --is it sponsored account?
+	first_name varchar(64),
+	last_name varchar(64),
+	middle_name varchar(64),
+	title_before varchar(40),
+	title_after varchar(40),
+	service_acc char(1) default '0' not null,
+	sponsored_acc char(1) default '0' not null,
 	constraint usr_pk primary key (id),
 	constraint usr_srvacc_chk check (service_acc in ('0','1'))
 );
 
--- FACILITIES - sources, devices - includes clusters,hosts,storages...
+
 create table facilities (
 	id integer not null,
-	name varchar(128) not null, --unique name of facility
+	name varchar(128) not null,
 	dsc varchar(1024),
 	constraint fac_pk primary key(id),
 	constraint fac_name_u unique (name)
 );
 
--- HOSTS - detail information about hosts and cluster nodes
 create table hosts (
 	id integer not null,
-	hostname varchar(128) not null,  --full name of machine
-	facility_id integer not null,    --identifier of facility containing the host (facilities.id)
-	dsc varchar(1024),  --description
+	hostname varchar(128) not null,
+	facility_id integer not null,
+	dsc varchar(1024),
 	constraint host_pk primary key (id),
 	constraint host_fac_fk foreign key(facility_id) references facilities(id)
 );
 
--- RESOURCES - facility assigned to VO
+
 create table resources (
 	id integer not null,
-	facility_id integer not null, --facility identifier (facility.id)
-	name varchar(128) not null,   --name of resource
-	dsc varchar(1024),            --purpose and description
-	vo_id integer not null,   --identifier of VO (vos.id)
+	facility_id integer not null,
+	name varchar(128) not null,
+	dsc varchar(1024),
+	vo_id integer not null,
 	constraint rsrc_pk primary key (id),
 	constraint rsrc_fac_fk foreign key (facility_id) references facilities(id),
 	constraint rsrc_vo_fk foreign key (vo_id) references vos(id)
 );
 
--- GROUPS - groups of users
 create table groups (
 	id integer not null,
-	name text not null,         --group name
-	dsc varchar(1024),          --purpose and description
-	vo_id integer not null,     --identifier of VO (vos.id)
-	parent_group_id integer,    --in case of subgroup identifier of parent group (groups.id)
+	name text not null,
+	dsc varchar(1024),
+	vo_id integer not null,
+	parent_group_id integer,
 	constraint grp_pk primary key (id),
 	constraint grp_nam_vo_parentg_u unique (name,vo_id,parent_group_id),
 	constraint grp_vos_fk foreign key (vo_id) references vos(id),
 	constraint grp_grp_fk foreign key (parent_group_id) references groups(id)
 );
 
--- USER_EXT_SOURCES - external source from which user come (identification of user in his home system)
 create table user_ext_sources (
 	id integer not null,
-	user_id integer not null,          --identifier of user (users.id)
-	login_ext varchar(1300) not null,   --logname from his home system
-	ext_sources_id integer not null,   --identifier of ext. source (ext_sources.id)
-	loa integer,                       --level of assurance
-	last_access timestamp default statement_timestamp() not null, --time of last user's access (to Perun) by using this external source
+	user_id integer not null,
+	login_ext varchar(1300) not null,
+	ext_sources_id integer not null,
+	loa integer,
+	last_access timestamp default statement_timestamp() not null,
 	constraint usrex_p primary key(id),
 	constraint usrex_u unique (ext_sources_id,login_ext),
 	constraint usrex_usr_fk foreign key (user_id) references users(id),
 	constraint usrex_usersrc_fk foreign key(ext_sources_id) references ext_sources(id)
 );
 
--- MEMBERS - members of VO
 create table members (
 	id integer not null,
-	user_id integer not null,  --user's identifier (users.id)
-	vo_id integer not null,    --identifier of VO (vos.id)
+	user_id integer not null,
+	vo_id integer not null,
 	sponsored boolean default false not null,
 	constraint mem_pk primary key(id),
 	constraint mem_user_fk foreign key(user_id) references users(id),
@@ -127,145 +117,140 @@ create table members (
 	constraint mem_user_vo_u unique (vo_id, user_id)
 );
 
---ATTR_VALUES
 
--- EXT_SOURCES_ATTRIBUTES - values of attributes of external sources
 create table ext_sources_attributes (
-	ext_sources_id integer not null,   --identifier of ext. source (ext_sources.id)
-	attr_name varchar(128) not null,   --name of attribute at ext. source
-	attr_value varchar(4000),          --value of attribute
+	ext_sources_id integer not null,
+	attr_name varchar(128) not null,
+	attr_value varchar(4000),
 	constraint usrcatt_usrc_fk foreign key (ext_sources_id) references ext_sources(id)
 );
 
--- FACILITY_ATTR_VALUES - attribute values assigned to facility
 create table facility_attr_values (
-	facility_id integer not null,   --identifier of facility (facilities.id)
-	attr_id integer not null,       --identifier of attribute (attr_names.id)
-	attr_value varchar(4000),       --attribute valuer
-	attr_value_text text,           --attribute value in case it is very long text
+	facility_id integer not null,
+	attr_id integer not null,
+	attr_value varchar(4000),
+	attr_value_text text,
 	constraint facattval_pk primary key (facility_id,attr_id),
 	constraint facattval_nam_fk foreign key (attr_id) references attr_names(id),
 	constraint facattval_fac_fk foreign key (facility_id) references facilities (id)
 );
 
--- GROUP_ATTR_VALUES - attribute values assigned to groups
 create table group_attr_values (
-	group_id integer not null,     --identifier of group (groups.id)
-	attr_id integer not null,      --identifier of attribute (attr_names.id)
-	attr_value varchar(4000),      --attribute value
-	attr_value_text text,   --value of attribute if it is very long text
+	group_id integer not null,
+	attr_id integer not null,
+	attr_value varchar(4000),
+	attr_value_text text,
 	modified_by_uid integer,
 	constraint grpattval_pk primary key (group_id,attr_id),
 	constraint grpattval_grp_fk foreign key (group_id) references groups(id),
 	constraint grpattval_attr_fk foreign key (attr_id) references attr_names(id)
 );
 
--- HOST_ATTR_VALUES - values of attributes assigned to hosts
 create table host_attr_values (
-	host_id integer not null,  --identifier of host (hosts.id)
-	attr_id integer not null,  --identifier of attributes (attr_names.id)
-	attr_value varchar(4000),  --value of attribute
-	attr_value_text text,   --value of attribute if it is very long text
+	host_id integer not null,
+	attr_id integer not null,
+	attr_value varchar(4000),
+	attr_value_text text,
 	constraint hostav_pk primary key (host_id,attr_id),
 	constraint hostav_host_fk foreign key (host_id) references hosts(id),
 	constraint hostav_attr_fk foreign key (attr_id) references attr_names(id)
 );
 
--- MEMBER_ATTR_VALUES - values of attributes assigned to members
 create table member_attr_values (
-	member_id integer not null,   --identifier of member (members.id)
-	attr_id integer not null,     --identifier of attribute (attr_names.id)
-	attr_value varchar(4000),     --attribute value
-	attr_value_text text,         --attribute value in case it is very long text
+	member_id integer not null,
+	attr_id integer not null,
+	attr_value varchar(4000),
+	attr_value_text text,
 	constraint memattval_pk primary key (member_id,attr_id),
 	constraint memattval_mem_fk foreign key (member_id) references members(id),
 	constraint memattval_attr_fk foreign key (attr_id) references attr_names(id)
 );
 
--- RESOURCE_ATTR_VALUES - attribute values assigned to resources
 create table resource_attr_values (
-	resource_id integer not null,   --identifier of resource (resources.id)
-	attr_id integer not null,       --identifier of attribute (attr_names.id)
-	attr_value varchar(4000),       --attribute value
-	attr_value_text text,           --attribute value in case it is very long text
+	resource_id integer not null,
+	attr_id integer not null,
+	attr_value varchar(4000),
+	attr_value_text text,
 	constraint resatval_pk primary key (resource_id,attr_id),
 	constraint resatval_res_fk foreign key(resource_id) references resources(id),
 	constraint resatval_resatnam_fk foreign key(attr_id) references attr_names(id)
 );
 
--- SERVICE_REQUIRED_ATTRS - list of attributes required by the service
 create table service_required_attrs (
-	service_id integer not null,   --identifier of service (services.id)
-	attr_id integer not null,      --identifier of attribute (attr_names.id)
+	service_id integer not null,
+	attr_id integer not null,
 	constraint srvreqattr_pk primary key (service_id,attr_id),
 	constraint srvreqattr_srv_fk foreign key(service_id) references services(id),
 	constraint srvreqattr_attr_fk foreign key(attr_id) references attr_names(id)
 );
 
--- USER_ATTR_VALUES - values of attributes assigned to users
 create table user_attr_values (
-	user_id integer not null,  --identifier of user (users.id)
-	attr_id integer not null,  --identifier of attribute (attr_names.id)
-	attr_value varchar(4000),  --attribute value
-	attr_value_text text,      --attribute value in case it is very long text
+	user_id integer not null,
+	attr_id integer not null,
+	attr_value varchar(4000),
+	attr_value_text text,
 	constraint usrav_pk primary key(user_id,attr_id),
 	constraint usrav_usr_fk foreign key (user_id) references users(id),
 	constraint usrav_accattnam_fk foreign key (attr_id) references attr_names(id)
 );
 
--- VO_ATTR_VALUES - attributes specific for VO
 create table vo_attr_values (
-	vo_id integer not null,    --identifier of VO (vos.id)
-	attr_id integer not null,  --identifier of attribute (attr_names.id)
-	attr_value varchar(4000),  --attribute value
-	attr_value_text text,      --attribute value in case it is very long text
+	vo_id integer not null,
+	attr_id integer not null,
+	attr_value varchar(4000),
+	attr_value_text text,
 	constraint voattval_pk primary key (vo_id,attr_id),
 	constraint voattval_nam_fk foreign key (attr_id) references attr_names(id),
 	constraint voattval_vo_fk foreign key (vo_id) references vos (id)
 );
 
---RELATIONS
-
--- GROUP_RESOURCE_ATTR_VALUES - attribute values assigned to groups and resources
 create table group_resource_attr_values (
-	group_id integer not null,     --identifier of group (groups.id)
-	resource_id integer not null,  --identifier of resource (resources.id)
-	attr_id integer not null,      --identifier of attribute (attr_names.id)
-	attr_value varchar(4000),      --attribute value
-	attr_value_text text,          --attribute value in case it is very long text
+	group_id integer not null,
+	resource_id integer not null,
+	attr_id integer not null,
+	attr_value varchar(4000),
+	attr_value_text text,
 	constraint grpresav_pk primary key (group_id,resource_id,attr_id),
 	constraint grpresav_grp_fk foreign key (group_id) references groups(id),
 	constraint grpresav_res_fk foreign key (resource_id) references resources(id),
 	constraint grpresav_attr_fk foreign key (attr_id) references attr_names(id)
 );
 
--- MEMBER_GROUP_ATTR_VALUES - values of attributes assigned to members in groups
+create table user_ext_source_attr_values (
+	user_ext_source_id integer not null,
+	attr_id integer not null,
+	attr_value varchar(4000),
+	attr_value_text text,
+	constraint uesattrval_pk primary key (user_ext_source_id, attr_id),
+  constraint uesattrval_ues_fk foreign key (user_ext_source_id) references user_ext_sources(id),
+  constraint uesattrval_attr_fk foreign key (attr_id) references attr_names(id)
+);
+
+
 create table member_group_attr_values (
-	member_id integer not null,   --identifier of member (members.id)
-	group_id integer not null, --identifier of group (groups.id)
-	attr_id integer not null,     --identifier of attribute (attr_names.id)
-	attr_value varchar(4000),     --attribute value
-	attr_value_text text,         --attribute value in case it is very long text
+	member_id integer not null,
+	group_id integer not null,
+	attr_id integer not null,
+	attr_value varchar(4000),
+	attr_value_text text,
 	constraint memgav_pk primary key(member_id,group_id,attr_id),
 	constraint memgav_mem_fk foreign key (member_id) references members(id),
 	constraint memgav_grp_fk foreign key (group_id) references groups(id),
 	constraint memgav_accattnam_fk foreign key (attr_id) references attr_names(id)
 );
 
--- MEMBER_RESOURCE_ATTR_VALUES - values of attributes assigned to members on resources
 create table member_resource_attr_values (
-	member_id integer not null,   --identifier of member (members.id)
-	resource_id integer not null, --identifier of resource (resources.id)
-	attr_id integer not null,     --identifier of attribute (attr_names.id)
-	attr_value varchar(4000),     --attribute value
-	attr_value_text text,         --attribute value in case it is very long text
+	member_id integer not null,
+	resource_id integer not null,
+	attr_id integer not null,
+	attr_value varchar(4000),
+	attr_value_text text,
 	constraint memrav_pk primary key(member_id,resource_id,attr_id),
 	constraint memrav_mem_fk foreign key (member_id) references members(id),
 	constraint memrav_rsrc_fk foreign key (resource_id) references resources(id),
 	constraint memrav_accattnam_fk foreign key (attr_id) references attr_names(id)
 );
 
--- MEMBER_RESOURCE_ATTR_U_VALUES - unique attribute values
 CREATE TABLE member_resource_attr_u_values (
 	member_id INT NOT NULL,
 	resource_id INT NOT NULL,
@@ -275,13 +260,12 @@ CREATE TABLE member_resource_attr_u_values (
 	FOREIGN KEY (member_id,resource_id,attr_id) REFERENCES member_resource_attr_values ON DELETE CASCADE
 );
 
--- USER_FACILITY_ATTR_VALUES - values of attributes assigned to users on facilities
 create table user_facility_attr_values (
-	user_id integer not null,     --identifier of user (users.id)
-	facility_id integer not null, --identifier of facility (facilities.id)
-	attr_id integer not null,     --identifier of attribute (attr_names.id)
-	attr_value varchar(4000),     --attribute value
-	attr_value_text text,         --attribute value in case it is very long text
+	user_id integer not null,
+	facility_id integer not null,
+	attr_id integer not null,
+	attr_value varchar(4000),
+	attr_value_text text,
 	constraint usrfacav_u primary key(user_id,facility_id,attr_id),
 	constraint usrfacav_mem_fk foreign key (user_id) references users(id),
 	constraint usrfacav_fac_fk foreign key (facility_id) references facilities(id),

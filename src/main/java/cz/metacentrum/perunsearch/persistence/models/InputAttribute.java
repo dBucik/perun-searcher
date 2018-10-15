@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,8 +77,11 @@ public class InputAttribute {
 	public Map<String, String> valueAsMap() {
 		JSONObject obj = (JSONObject) this.value;
 		Map<String, String> value = new LinkedHashMap<>();
-		for (Map.Entry<String, Object> entry: obj.toMap().entrySet()) {
-			value.put(entry.getKey(), (String) entry.getValue());
+		Iterator<String> keys = obj.keys();
+		while (keys.hasNext()) {
+			String key = keys.next();
+			String val = obj.getString(key);
+			value.put(key, val);
 		}
 
 		return value;
