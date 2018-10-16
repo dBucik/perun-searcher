@@ -23,4 +23,12 @@ public enum PerunEntityType {
 				entityType == MEMBER_RESOURCE ||
 				entityType == USER_FACILITY;
 	}
+
+	public static boolean isSimpleEntity(PerunEntityType entityType) {
+		return entityType == SERVICE;
+	}
+
+	public static boolean isSimpleEntity(String entity) {
+		return "SERVICE".equalsIgnoreCase(entity);
+	}
 }

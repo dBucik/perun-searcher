@@ -1,5 +1,6 @@
 package cz.metacentrum.perunsearch.service;
 
+import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
@@ -40,8 +41,10 @@ public class JsonToInputParser {
 		}
 
 		String entity = json.getString("entityName");
-		JSONArray attributesJsonArray = json.optJSONArray("attributes");
-		JSONArray attrsNamesJsonArray = json.optJSONArray("attributeNames");
+		boolean isSimpleEntity = PerunEntityType.isSimpleEntity(entity);
+
+		JSONArray attributesJsonArray = (isSimpleEntity) ? null : json.optJSONArray("attributes");
+		JSONArray attrsNamesJsonArray = (isSimpleEntity) ? null : json.optJSONArray("attributeNames");
 		JSONArray entitiesJsonArray = json.optJSONArray("relations");
 
 		List<InputAttribute> attributes = parseAttributes(attributesJsonArray);
@@ -80,7 +83,7 @@ public class JsonToInputParser {
 			}
 			case "SERVICE": {
 				Map<String, Object> core = mapCoreService(json);
-				return new ServiceInput(isTopLevel, core, attributes, attrsNames, entities);
+				return new ServiceInput(isTopLevel, core, entities);
 			}
 			case "USER_EXT_SOURCE": {
 				Map<String, Object> core = mapCoreUserExtSource(json);
@@ -268,9 +271,9 @@ public class JsonToInputParser {
 			if (param == null) {
 				map.put("enabled", null);
 			} else if (param) {
-				map.put("enabled", "t");
+				map.put("enabled", "1");
 			} else {
-				map.put("enabled", "f");
+				map.put("enabled", "0");
 			}
 		}
 

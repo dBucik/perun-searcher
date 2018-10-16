@@ -1,10 +1,6 @@
 package cz.metacentrum.perunsearch.persistence.models.entities.basic;
 
-import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
-import org.json.JSONObject;
-
-import java.util.Map;
 
 public class Service extends PerunEntity {
 
@@ -16,8 +12,8 @@ public class Service extends PerunEntity {
 	private String script;
 
 	public Service(Long id, String name, String description, Integer delay, Integer recurrence, Boolean enabled,
-				   String script, Map<String, PerunAttribute> attributes, Long foreignId) {
-		super(id, attributes, foreignId);
+				   String script, Long foreignId) {
+		super(id, foreignId);
 		this.name = name;
 		this.description = description;
 		this.delay = delay;

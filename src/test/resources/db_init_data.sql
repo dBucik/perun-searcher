@@ -1,7 +1,6 @@
-INSERT INTO ext_sources(id, name, type) VALUES (1, 'ext_source1', 'LDAP');
-INSERT INTO ext_sources(id, name, type) VALUES (2, 'ext_source2', 'LDAP');
-INSERT INTO ext_sources(id, name, type) VALUES (3, 'ext_source3', 'IdP');
-INSERT INTO ext_sources(id, name, type) VALUES (4, 'ext_source4', 'IdP');
+INSERT INTO ext_sources(id, name, type) VALUES (1, 'ext_source1', 'type1');
+INSERT INTO ext_sources(id, name, type) VALUES (2, 'ext_source2', 'type2');
+INSERT INTO ext_sources(id, name, type) VALUES (3, 'ext_source3', 'type3');
 
 INSERT INTO facilities(id, name, dsc) VALUES (1, 'facility1', 'dsc1');
 INSERT INTO facilities(id, name, dsc) VALUES (2, 'facility2', 'dsc2');
@@ -144,7 +143,37 @@ INSERT INTO attr_names(id, attr_name, type) VALUES (82, 'user_facility_attr_map'
 INSERT INTO attr_names(id, attr_name, type) VALUES (83, 'user_facility_attr_lstring', 'java.lang.LargeString');
 INSERT INTO attr_names(id, attr_name, type) VALUES (84, 'user_facility_attr_larray', 'java.lang.LargeArrayList');
 
-INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (1, 'ext_source_attr1', 'value1');
+INSERT INTO attr_names(id, attr_name, type) VALUES (85, 'service_attr_str', 'java.lang.String');
+INSERT INTO attr_names(id, attr_name, type) VALUES (86, 'service_attr_int', 'java.lang.Integer');
+INSERT INTO attr_names(id, attr_name, type) VALUES (87, 'service_attr_bool', 'java.lang.Boolean');
+INSERT INTO attr_names(id, attr_name, type) VALUES (88, 'service_attr_array', 'java.util.ArrayList');
+INSERT INTO attr_names(id, attr_name, type) VALUES (89, 'service_attr_map', 'java.util.LinkedHashMap');
+INSERT INTO attr_names(id, attr_name, type) VALUES (90, 'service_attr_lstring', 'java.lang.LargeString');
+INSERT INTO attr_names(id, attr_name, type) VALUES (91, 'service_attr_larray', 'java.lang.LargeArrayList');
+
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (1, 'ext_source_attr_str', 'value1');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (1, 'ext_source_attr_int', '1');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (1, 'ext_source_attr_bool', 'true');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (1, 'ext_source_attr_array', '1,2');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (1, 'ext_source_attr_map', 'key1:value1,key2:value2');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (1, 'ext_source_attr_lstring', 'long_value1');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (1, 'ext_source_attr_larray', '1,2');
+
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (2, 'ext_source_attr_str', 'value2');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (2, 'ext_source_attr_int', '2');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (2, 'ext_source_attr_bool', 'false');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (2, 'ext_source_attr_array', '3,4');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (2, 'ext_source_attr_map', 'key3:value3,key4:value4');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (2, 'ext_source_attr_lstring', 'long_value2');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (2, 'ext_source_attr_larray', '3,4');
+
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_str', 'value3');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_int', '3');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_bool', 'false');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_array', '5,6');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_map', 'key5:value5,key6:value6');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_lstring', 'long_value3');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_larray', '5,6');
 
 INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (1, 1, 'value1', null);
 INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (1, 2, '1', null);

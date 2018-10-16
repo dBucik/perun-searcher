@@ -8,8 +8,6 @@ import cz.metacentrum.perunsearch.persistence.data.PerunEntitiesDAOImpl;
 import cz.metacentrum.perunsearch.persistence.enums.PerunAttributeType;
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
-import cz.metacentrum.perunsearch.persistence.models.entities.basic.User;
-import cz.metacentrum.perunsearch.persistence.models.entities.relations.MemberResource;
 import cz.metacentrum.perunsearch.persistence.models.entities.relations.UserFacility;
 import cz.metacentrum.perunsearch.service.SearcherService;
 import org.junit.AfterClass;

@@ -3,12 +3,14 @@ package cz.metacentrum.perunsearch.persistence.models.inputEntities.basic;
 import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
+import cz.metacentrum.perunsearch.persistence.models.Query;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.BasicInputEntity;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.RESOURCE;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.SERVICE;
@@ -26,9 +28,8 @@ public class ServiceInput extends BasicInputEntity {
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Collections.singletonList(RESOURCE);
 
-	public ServiceInput(boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
-						List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
-		super(TYPE, isTopLevel, core, attributes, attrNames, innerInputs);
+	public ServiceInput(boolean isTopLevel, Map<String, Object> core, List<InputEntity> innerInputs) throws IllegalRelationException {
+		super(TYPE, isTopLevel, core, Collections.EMPTY_LIST, Collections.EMPTY_LIST, innerInputs);
 	}
 
 	@Override

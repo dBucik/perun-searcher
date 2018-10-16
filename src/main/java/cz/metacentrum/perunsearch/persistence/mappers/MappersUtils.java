@@ -31,7 +31,22 @@ public class MappersUtils {
 		Map<String, PerunAttribute> attributes = new HashMap<>();
 		try {
 			JSONArray attributesJson = new JSONArray(resultSet.getString("attributes"));
-			attributes = mapAttributes(attributesJson);
+			attributes = mapAttributes(attributesJson, null);
+		} catch (PSQLException e) {
+			//this is fine, no attributes were fetched
+		} catch (AttributeTypeException e) {
+			throw new RuntimeException("Error while parsing attributes", e);
+			//TODO
+		}
+
+		return attributes;
+	}
+
+	public static Map<String, PerunAttribute> getAttributes(ResultSet resultSet, String defaultType) throws SQLException {
+		Map<String, PerunAttribute> attributes = new HashMap<>();
+		try {
+			JSONArray attributesJson = new JSONArray(resultSet.getString("attributes"));
+			attributes = mapAttributes(attributesJson, defaultType);
 		} catch (PSQLException e) {
 			//this is fine, no attributes were fetched
 		} catch (AttributeTypeException e) {
@@ -70,17 +85,18 @@ public class MappersUtils {
 		return null;
 	}
 
-	private static Map<String, PerunAttribute> mapAttributes(JSONArray json) throws AttributeTypeException {
+	private static Map<String, PerunAttribute> mapAttributes(JSONArray json, String defaultType) throws AttributeTypeException {
 		Map<String, PerunAttribute> result = new HashMap<>();
 		for (int i = 0; i < json.length(); i++) {
 			JSONObject attribute = json.getJSONObject(i);
 			String name = attribute.getString("name");
-			String type = attribute.getString("type");
-			String value = attribute.getString("value");
+			String type =  attribute.optString("type", defaultType);
+			String value = attribute.optString("value", null);
 
 			result.put(name, new PerunAttribute(name, type, value));
 		}
 
 		return result;
 	}
+
 }

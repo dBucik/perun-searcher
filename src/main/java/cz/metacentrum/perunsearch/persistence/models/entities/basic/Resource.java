@@ -1,11 +1,11 @@
 package cz.metacentrum.perunsearch.persistence.models.entities.basic;
 
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
-import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
+import cz.metacentrum.perunsearch.persistence.models.entities.PerunRichEntity;
 
 import java.util.Map;
 
-public class Resource extends PerunEntity {
+public class Resource extends PerunRichEntity {
 
 	private Long facilityId;
 	private String name;

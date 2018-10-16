@@ -84,7 +84,7 @@ public class UserExtSourceInput extends BasicInputEntity {
 	}
 
 	private String getQueryForExtSource(boolean isSimple) {
-		String select = "ent.ext_source_id AS foreign_id";
+		String select = "ent.ext_sources_id AS foreign_id";
 
 		return this.getSelectFrom(isSimple, select, null, ENTITY_TABLE);
 	}

@@ -20,6 +20,7 @@ import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import cz.metacentrum.perunsearch.persistence.models.Query;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
+import cz.metacentrum.perunsearch.persistence.models.entities.PerunRichEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -132,7 +133,7 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 		}
 
 		return result.stream()
-				.filter(e -> hasAllAttributes(e.getAttributes(), query.getInputAttributes()))
+				.filter(entity -> !(entity instanceof PerunRichEntity) || hasAllAttributes(((PerunRichEntity) entity).getAttributes(), query.getInputAttributes()))
 				.collect(Collectors.toList());
 	}
 
@@ -205,7 +206,7 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 		List<PerunEntity> entities = executeQuery(query);
 
 		return entities.stream()
-				.filter(entity -> hasAllAttributes(entity.getAttributes(), query.getInputAttributes()))
+				.filter(entity -> !(entity instanceof PerunRichEntity) || hasAllAttributes(((PerunRichEntity) entity).getAttributes(), query.getInputAttributes()))
 				.map(PerunEntity::getForeignId)
 				.collect(Collectors.toList());
 	}

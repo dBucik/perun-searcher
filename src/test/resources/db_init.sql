@@ -176,14 +176,6 @@ create table resource_attr_values (
 	constraint resatval_resatnam_fk foreign key(attr_id) references attr_names(id)
 );
 
-create table service_required_attrs (
-	service_id integer not null,
-	attr_id integer not null,
-	constraint srvreqattr_pk primary key (service_id,attr_id),
-	constraint srvreqattr_srv_fk foreign key(service_id) references services(id),
-	constraint srvreqattr_attr_fk foreign key(attr_id) references attr_names(id)
-);
-
 create table user_attr_values (
 	user_id integer not null,
 	attr_id integer not null,

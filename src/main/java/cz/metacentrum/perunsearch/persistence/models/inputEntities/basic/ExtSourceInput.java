@@ -22,7 +22,7 @@ public class ExtSourceInput extends BasicInputEntity {
 	private static final PerunEntityType TYPE = EXT_SOURCE;
 	private static final String ENTITY_ID_FIELD = "ext_sources_id";
 	private static final String ENTITY_TABLE = "ext_sources";
-	private static final String ENTITY_ATTRS_TABLE = "ext_source_attributes";
+	private static final String ENTITY_ATTRS_TABLE = "ext_sources_attributes";
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(VO, GROUP, USER_EXT_SOURCE);
 
@@ -86,12 +86,12 @@ public class ExtSourceInput extends BasicInputEntity {
 		String where = buildAttributesWhere(query, attrNames);
 
 		queryString.append("SELECT ").append(entityId).append(" AS entity_id, json_agg(json_build_object(")
-				.append("'name', attr_name, 'value', attr_value,)) AS data")
+				.append("'name', attr_name, 'value', attr_value)) AS data")
 				.append(" FROM ").append(attrValuesTable).append(" av");
 		if (!Objects.equals(where, NO_VALUE)) {
 			queryString.append(where).append(' ');
 		}
-		queryString.append("GROUP BY ").append(entityId);
+		queryString.append(" GROUP BY ").append(entityId);
 
 		return queryString.toString();
 	}

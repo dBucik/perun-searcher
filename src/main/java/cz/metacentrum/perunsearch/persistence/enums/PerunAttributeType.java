@@ -17,13 +17,13 @@ public enum PerunAttributeType {
 	LARGE_STRING,
 	LARGE_ARRAY_LIST;
 
-	private final static String STRING_TYPE = "java.lang.String";
-	private final static String INTEGER_TYPE = "java.lang.Integer";
-	private final static String BOOLEAN_TYPE = "java.lang.Boolean";
-	private final static String ARRAY_TYPE = "java.util.ArrayList";
-	private final static String MAP_TYPE = "java.util.LinkedHashMap";
-	private final static String LARGE_STRING_TYPE = "java.lang.LargeString";
-	private final static String LARGE_ARRAY_LIST_TYPE = "java.lang.LargeArrayList";
+	public final static String STRING_TYPE = "java.lang.String";
+	public final static String INTEGER_TYPE = "java.lang.Integer";
+	public final static String BOOLEAN_TYPE = "java.lang.Boolean";
+	public final static String ARRAY_TYPE = "java.util.ArrayList";
+	public final static String MAP_TYPE = "java.util.LinkedHashMap";
+	public final static String LARGE_STRING_TYPE = "java.lang.LargeString";
+	public final static String LARGE_ARRAY_LIST_TYPE = "java.lang.LargeArrayList";
 
 	/**
 	 * Get type of attribute from provided string. The type has to be fully specified class

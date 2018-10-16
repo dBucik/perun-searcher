@@ -2,14 +2,13 @@ package cz.metacentrum.perunsearch.persistence.models.entities.relations;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
-import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
-import cz.metacentrum.perunsearch.persistence.models.entities.basic.Group;
+import cz.metacentrum.perunsearch.persistence.models.entities.PerunRichEntity;
 
 import java.util.Map;
 import java.util.Objects;
 
 @JsonIgnoreProperties(value = "id")
-public class GroupResource extends PerunEntity {
+public class GroupResource extends PerunRichEntity {
 
 	private Long groupId;
 	private Long resourceId;

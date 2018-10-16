@@ -1,5 +1,6 @@
 package cz.metacentrum.perunsearch.persistence.mappers;
 
+import cz.metacentrum.perunsearch.persistence.enums.PerunAttributeType;
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import cz.metacentrum.perunsearch.persistence.models.entities.basic.ExtSource;
 import org.json.JSONObject;
@@ -19,7 +20,7 @@ public class ExtSourceMapper implements RowMapper<ExtSource> {
 		String name = MappersUtils.getString(entityJson,"name");
 		String type = MappersUtils.getString(entityJson,"type");
 
-		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
+		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet, PerunAttributeType.STRING_TYPE);
 		Long foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new ExtSource(id, name, type, attributes, foreignId);

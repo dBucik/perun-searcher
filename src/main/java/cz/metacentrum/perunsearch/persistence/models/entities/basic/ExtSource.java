@@ -1,12 +1,11 @@
 package cz.metacentrum.perunsearch.persistence.models.entities.basic;
 
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
-import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
-import org.json.JSONObject;
+import cz.metacentrum.perunsearch.persistence.models.entities.PerunRichEntity;
 
 import java.util.Map;
 
-public class ExtSource extends PerunEntity {
+public class ExtSource extends PerunRichEntity {
 
 	private String name;
 	private String type;

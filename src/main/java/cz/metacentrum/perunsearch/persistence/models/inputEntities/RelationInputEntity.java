@@ -59,7 +59,7 @@ public abstract class RelationInputEntity extends InputEntity {
 	}
 
 	public Query toQuery(PerunEntityType sourceType) throws IncorrectCoreAttributeTypeException {
-		boolean isSimple = this.isSimpleQuery();
+		boolean isSimple = PerunEntityType.isSimpleEntity(this.getEntityType()) && this.isSimpleQuery();
 		Query query = this.initQuery();
 
 		String selectFrom = this.buildSelectFrom(sourceType, isSimple);

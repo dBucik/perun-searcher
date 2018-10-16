@@ -9,7 +9,6 @@ import cz.metacentrum.perunsearch.persistence.enums.PerunAttributeType;
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
 import cz.metacentrum.perunsearch.persistence.models.entities.basic.UserExtSource;
-import cz.metacentrum.perunsearch.persistence.models.entities.basic.Vo;
 import cz.metacentrum.perunsearch.service.SearcherService;
 import org.junit.AfterClass;
 import org.junit.Before;
