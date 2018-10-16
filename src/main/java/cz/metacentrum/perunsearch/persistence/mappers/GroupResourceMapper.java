@@ -18,6 +18,6 @@ public class GroupResourceMapper implements RowMapper<GroupResource> {
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
 		Long foreignId = MappersUtils.getForeignId(resultSet);
 
-		return new GroupResource(null, groupId, resourceId, attributes, foreignId);
+		return new GroupResource(groupId, resourceId, attributes, foreignId);
 	}
 }

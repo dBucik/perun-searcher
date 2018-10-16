@@ -73,6 +73,8 @@ public class FacilityInput extends BasicInputEntity {
 				return getQueryForResource(isSimple);
 			case HOST:
 				return getQueryForHost(isSimple);
+			case USER_FACILITY:
+				return getQueryForUserFacility(isSimple);
 			default: return null; //TODO: throw exception
 		}
 	}
@@ -98,6 +100,13 @@ public class FacilityInput extends BasicInputEntity {
 	private String getQueryForHost(boolean isSimple) {
 		String select = "h.id AS foreign_id";
 		String join = "JOIN hosts h ON h.facility_id = ent.id";
+
+		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
+	}
+
+	private String getQueryForUserFacility(boolean isSimple) {
+		String select = "ufav.facility_id AS foreign_id";
+		String join = "JOIN user_facility_attr_values ufav ON ufav.facility_id = ent.id";
 
 		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
 	}

@@ -87,7 +87,7 @@ public class MemberGroupInput extends RelationInputEntity {
 	}
 
 	private String getQueryForGroup(boolean isSimple) {
-		String select = "rel.group_id, rel.memberId_id, rel.group_id AS foreign_id";
+		String select = "rel.group_id, rel.member_id, rel.group_id AS foreign_id";
 		String join = "JOIN groups g ON g.id = rel.group_id";
 
 		return this.getSelectFrom(isSimple, select, join);

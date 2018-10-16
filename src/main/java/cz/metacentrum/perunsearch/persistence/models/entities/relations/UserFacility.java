@@ -5,6 +5,7 @@ import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
 
 import java.util.Map;
+import java.util.Objects;
 
 @JsonIgnoreProperties(value = "id")
 public class UserFacility extends PerunEntity {
@@ -12,8 +13,8 @@ public class UserFacility extends PerunEntity {
 	private Long userId;
 	private Long facilityId;
 
-	public UserFacility(Long id, Long userId, Long facilityId, Map<String, PerunAttribute> attributes, Long foreignId) {
-		super(id, attributes, foreignId);
+	public UserFacility(Long userId, Long facilityId, Map<String, PerunAttribute> attributes, Long foreignId) {
+		super(null, attributes, foreignId);
 		this.userId = userId;
 		this.facilityId = facilityId;
 	}
@@ -32,5 +33,17 @@ public class UserFacility extends PerunEntity {
 
 	public void setFacilityId(Long resourceId) {
 		this.facilityId = resourceId;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof UserFacility)) {
+			return false;
+		}
+
+		UserFacility them = (UserFacility) o;
+
+		return Objects.equals(this.userId, them.userId)
+				&& Objects.equals(this.userId, them.userId);
 	}
 }

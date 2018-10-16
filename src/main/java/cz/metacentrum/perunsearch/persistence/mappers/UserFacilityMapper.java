@@ -18,6 +18,6 @@ public class UserFacilityMapper implements RowMapper<UserFacility> {
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
 		Long foreignId = MappersUtils.getForeignId(resultSet);
 
-		return new UserFacility(null, userId, facilityId, attributes, foreignId);
+		return new UserFacility(userId, facilityId, attributes, foreignId);
 	}
 }

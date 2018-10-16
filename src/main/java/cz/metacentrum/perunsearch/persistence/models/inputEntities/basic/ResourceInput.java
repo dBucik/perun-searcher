@@ -80,6 +80,10 @@ public class ResourceInput extends BasicInputEntity {
 				return getQueryForFacility(isSimple);
 			case GROUP:
 				return getQueryForGroup(isSimple);
+			case MEMBER_RESOURCE:
+				return getQueryForMemberResource(isSimple);
+			case GROUP_RESOURCE:
+				return getQueryForGroupResource(isSimple);
 			default: return null; //TODO: throw exception
 		}
 	}
@@ -116,7 +120,21 @@ public class ResourceInput extends BasicInputEntity {
 
 	private String getQueryForGroup(boolean isSimple) {
 		String select = "gr.group_id AS foreign_id";
-		String join = "JOIN group_resources gr ON gr.resource_id = ent.id";
+		String join = "JOIN groups_resources gr ON gr.resource_id = ent.id";
+
+		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
+	}
+
+	private String getQueryForMemberResource(boolean isSimple) {
+		String select = "mrav.resource_id AS foreign_id";
+		String join = "JOIN member_resource_attr_values mrav ON mrav.resource_id = ent.id";
+
+		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
+	}
+
+	private String getQueryForGroupResource(boolean isSimple) {
+		String select = "gr.resource_id AS foreign_id";
+		String join = "JOIN groups_resources gr ON gr.resource_id = ent.id";
 
 		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
 	}

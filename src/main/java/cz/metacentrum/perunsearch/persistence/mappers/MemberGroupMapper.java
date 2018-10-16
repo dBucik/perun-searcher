@@ -18,6 +18,6 @@ public class MemberGroupMapper implements RowMapper<MemberGroup> {
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
 		Long foreignId = MappersUtils.getForeignId(resultSet);
 
-		return new MemberGroup(null, memberId, groupId, attributes, foreignId);
+		return new MemberGroup(memberId, groupId, attributes, foreignId);
 	}
 }

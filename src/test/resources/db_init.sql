@@ -302,3 +302,11 @@ create table groups_members (
   constraint grpmem_gr_fk foreign key (group_id) references groups(id),
   constraint grpmem_mem_fk foreign key (member_id) references members(id)
 );
+
+create table group_ext_sources (
+	group_id integer not null,
+	ext_source_id integer not null,
+	constraint groupsrc_pk primary key (group_id,ext_source_id),
+  constraint groupsrc_src_fk foreign key(ext_source_id) references ext_sources(id),
+  constraint groupsrc_groups_fk foreign key(group_id) references groups(id)
+);

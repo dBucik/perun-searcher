@@ -77,6 +77,10 @@ public class MemberInput extends BasicInputEntity {
 				return getQueryForResource(isSimple);
 			case GROUP:
 				return getQueryForGroup(isSimple);
+			case MEMBER_GROUP:
+				return getQueryForMemberGroup(isSimple);
+			case MEMBER_RESOURCE:
+				return getQueryForMemberResource(isSimple);
 			default: return null; //TODO: throw exception
 		}
 	}
@@ -107,6 +111,20 @@ public class MemberInput extends BasicInputEntity {
 	private String getQueryForGroup(boolean isSimple) {
 		String select = "gm.group_id AS foreign_id";
 		String join = "JOIN groups_members gm ON gm.member_id = ent.id";
+
+		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
+	}
+
+	private String getQueryForMemberGroup(boolean isSimple) {
+		String select = "gm.member_id AS foreign_id";
+		String join = "JOIN groups_members gm ON gm.member_id = ent.id";
+
+		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
+	}
+
+	private String getQueryForMemberResource(boolean isSimple) {
+		String select = "mrav.member_id AS foreign_id";
+		String join = "JOIN member_resource_attr_values mrav ON mrav.member_id = ent.id";
 
 		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
 	}

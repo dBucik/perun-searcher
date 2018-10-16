@@ -5,6 +5,7 @@ import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
 
 import java.util.Map;
+import java.util.Objects;
 
 @JsonIgnoreProperties(value = "id")
 public class MemberResource extends PerunEntity {
@@ -12,8 +13,8 @@ public class MemberResource extends PerunEntity {
 	private Long memberId;
 	private Long resourceId;
 
-	public MemberResource(Long id, Long memberId, Long resourceId, Map<String, PerunAttribute> attributes, Long foreignId) {
-		super(id, attributes, foreignId);
+	public MemberResource(Long memberId, Long resourceId, Map<String, PerunAttribute> attributes, Long foreignId) {
+		super(null, attributes, foreignId);
 		this.memberId = memberId;
 		this.resourceId = resourceId;
 	}
@@ -32,5 +33,17 @@ public class MemberResource extends PerunEntity {
 
 	public void setResourceId(Long resourceId) {
 		this.resourceId = resourceId;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof MemberResource)) {
+			return false;
+		}
+
+		MemberResource them = (MemberResource) o;
+
+		return Objects.equals(this.memberId, them.memberId)
+				&& Objects.equals(this.resourceId, them.resourceId);
 	}
 }

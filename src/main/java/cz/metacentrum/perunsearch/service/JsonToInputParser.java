@@ -308,7 +308,6 @@ public class JsonToInputParser {
 			if (last == null) {
 				map.put("last_access", null);
 			} else {
-				//TODO: exception when not in correct format?
 				map.put("last_access", Timestamp.valueOf(last));
 			}
 		}

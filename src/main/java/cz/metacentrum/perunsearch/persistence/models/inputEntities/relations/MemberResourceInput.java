@@ -74,20 +74,20 @@ public class MemberResourceInput extends RelationInputEntity {
 	}
 
 	private String getDefaultQuery(boolean isSimple) {
-		String select = "rel.group_id, rel.resource_id";
+		String select = "rel.member_id, rel.resource_id";
 
 		return this.getSelectFrom(isSimple, select, null);
 	}
 
 	private String getQueryForMember(boolean isSimple) {
-		String select = "rel.resource_id, rel.member_id, rel.member_id AS foreign_id";
+		String select = "rel.member_id, rel.resource_id, rel.member_id AS foreign_id";
 		String join = "JOIN members m ON m.id = rel.member_id";
 
 		return this.getSelectFrom(isSimple, select, join);
 	}
 
 	private String getQueryForResource(boolean isSimple) {
-		String select = "rel.resource_id, rel.member_id, rel.resource_id AS foreign_id";
+		String select = "rel.member_id, rel.resource_id, rel.resource_id AS foreign_id";
 		String join = "JOIN resources r ON r.id = rel.resource_id";
 
 		return this.getSelectFrom(isSimple, select, join);

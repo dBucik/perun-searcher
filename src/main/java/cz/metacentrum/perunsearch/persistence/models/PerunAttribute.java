@@ -107,7 +107,6 @@ public class PerunAttribute {
 		}
 
 		//TODO: split only at unescaped chars
-		//TODO: find
 		String[] parts = value.split(",");
 		return Arrays.asList(parts);
 	}

@@ -73,6 +73,8 @@ public class UserInput extends BasicInputEntity {
 				return getQueryForUserExtSource(isSimple);
 			case MEMBER:
 				return getQueryForMember(isSimple);
+			case USER_FACILITY:
+				return getQueryForUserFacility(isSimple);
 			default: return null; //TODO: throw exception
 		}
 	}
@@ -98,6 +100,13 @@ public class UserInput extends BasicInputEntity {
 	private String getQueryForMember(boolean isSimple) {
 		String select = "m.id AS foreign_id";
 		String join = "JOIN members m ON m.user_id = ent.id";
+
+		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
+	}
+
+	private String getQueryForUserFacility(boolean isSimple) {
+		String select = "ufav.user_id AS foreign_id";
+		String join = "JOIN user_facility_attr_values ufav ON ufav.user_id = ent.id";
 
 		return this.getSelectFrom(isSimple, select, join, ENTITY_TABLE);
 	}
