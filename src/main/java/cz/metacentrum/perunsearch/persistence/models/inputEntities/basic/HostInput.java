@@ -23,7 +23,7 @@ public class HostInput extends BasicInputEntity {
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Collections.singletonList(FACILITY);
 
-	public HostInput(boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
+	public HostInput(boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes,
 					 List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(TYPE, isTopLevel, core, attributes, attrNames, innerInputs);
 	}

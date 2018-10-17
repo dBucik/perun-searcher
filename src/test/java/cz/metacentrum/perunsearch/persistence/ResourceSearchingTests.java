@@ -159,7 +159,7 @@ public class ResourceSearchingTests {
 
 	@Test
 	public void findResourceByIdTest() throws Exception {
-		String input = "{\"entityName\" : \"resource\", \"id\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"resource\", \"id\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -169,7 +169,7 @@ public class ResourceSearchingTests {
 
 	@Test
 	public void findResourceByFacilityIdTest() throws Exception {
-		String input = "{\"entityName\" : \"resource\", \"facilityId\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"resource\", \"facilityId\" : {\"value\": 1} , \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -179,7 +179,7 @@ public class ResourceSearchingTests {
 
 	@Test
 	public void findResourceByNameTest() throws Exception {
-		String input = "{\"entityName\" : \"resource\", \"name\" : \"resource1\", \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"resource\", \"name\" : {\"value\":\"resource1\"}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -189,7 +189,7 @@ public class ResourceSearchingTests {
 
 	@Test
 	public void findResourceByDescriptionTest() throws Exception {
-		String input = "{\"entityName\" : \"resource\", \"description\" : \"dsc1\", \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"resource\", \"description\" : {\"value\":\"dsc1\"}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -199,7 +199,7 @@ public class ResourceSearchingTests {
 
 	@Test
 	public void findResourceByVoIdTest() throws Exception {
-		String input = "{\"entityName\" : \"resource\", \"voId\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"resource\", \"voId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -291,7 +291,7 @@ public class ResourceSearchingTests {
 	@Test
 	public void findResourceByMemberEntity() throws Exception {
 		String input = "{\"entityName\" : \"resource\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"member\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"member\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -303,7 +303,7 @@ public class ResourceSearchingTests {
 	@Test
 	public void findResourceByVoEntity() throws Exception {
 		String input = "{\"entityName\" : \"resource\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"vo\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"vo\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -315,7 +315,7 @@ public class ResourceSearchingTests {
 	@Test
 	public void findResourceByServiceEntity() throws Exception {
 		String input = "{\"entityName\" : \"resource\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"service\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"service\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -327,7 +327,7 @@ public class ResourceSearchingTests {
 	@Test
 	public void findResourceByFacilityEntity() throws Exception {
 		String input = "{\"entityName\" : \"resource\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"facility\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"facility\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -339,7 +339,7 @@ public class ResourceSearchingTests {
 	@Test
 	public void findResourceByGroupEntity() throws Exception {
 		String input = "{\"entityName\" : \"resource\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"group\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"group\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -351,7 +351,7 @@ public class ResourceSearchingTests {
 	@Test
 	public void findResourceByMemberResourceRelation() throws Exception {
 		String input = "{\"entityName\" : \"resource\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"member_resource\", \"memberId\" : 1 }" +
+				"{ \"entityName\" : \"member_resource\", \"memberId\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -363,7 +363,7 @@ public class ResourceSearchingTests {
 	@Test
 	public void findResourceByGroupResourceRelation() throws Exception {
 		String input = "{\"entityName\" : \"resource\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"group_resource\", \"groupId\" : 1 }" +
+				"{ \"entityName\" : \"group_resource\", \"groupId\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);

@@ -7,7 +7,6 @@ import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.Query;
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,16 +24,16 @@ public abstract class InputEntity {
 
 	private PerunEntityType entityType;
 	private boolean isTopLevel;
-	private Map<String, Object> core = new HashMap<>();
+	private List<InputAttribute> core = new ArrayList<>();
 	private List<InputAttribute> attributes = new ArrayList<>();
 	private List<String> attrNames = new ArrayList<>();
 	private List<InputEntity> innerInputs = new ArrayList<>();
 
-	public InputEntity(PerunEntityType entityType, boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
+	public InputEntity(PerunEntityType entityType, boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes,
 					   List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		this.entityType = entityType;
 		this.isTopLevel = isTopLevel;
-		this.core.putAll(core);
+		this.core.addAll(core);
 		this.attributes.addAll(attributes);
 		this.attrNames.addAll(attrNames);
 
@@ -66,7 +65,7 @@ public abstract class InputEntity {
 		return isTopLevel;
 	}
 
-	public Map<String, Object> getCore() {
+	public List<InputAttribute> getCore() {
 		return core;
 	}
 
@@ -103,13 +102,13 @@ public abstract class InputEntity {
 		return new ArrayList<>(names);
 	}
 
-	String resolveMatchOperator(Object o) throws IncorrectCoreAttributeTypeException {
+	String resolveMatchOperator(boolean isLikeMatch, Object o) {
 		if (o == null) {
 			return NULL_MATCH;
-		} else if ((o instanceof String) || (o instanceof Number) || (o instanceof Boolean) || (o instanceof Timestamp)) {
-			return EXACT_MATCH;
+		} else if (isLikeMatch) {
+			return LIKE_MATCH;
 		} else {
-			throw new IncorrectCoreAttributeTypeException("Unsupported core attribute type found for input");
+			return EXACT_MATCH;
 		}
 	}
 

@@ -24,7 +24,7 @@ public class MemberResourceInput extends RelationInputEntity {
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(MEMBER, RESOURCE);
 
-	public MemberResourceInput(boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
+	public MemberResourceInput(boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes,
 							   List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(TYPE, isTopLevel, core, attributes, attrNames, innerInputs);
 	}

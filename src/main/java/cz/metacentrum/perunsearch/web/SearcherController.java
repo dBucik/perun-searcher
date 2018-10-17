@@ -1,5 +1,6 @@
 package cz.metacentrum.perunsearch.web;
 
+import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
 import cz.metacentrum.perunsearch.persistence.exceptions.IncorrectCoreAttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
@@ -27,7 +28,7 @@ public class SearcherController {
 	}
 
 	@RequestMapping(value = "search")
-	public List<PerunEntity> search(@RequestParam("query") String query) throws IllegalRelationException, InputParseException, IncorrectCoreAttributeTypeException {
+	public List<PerunEntity> search(@RequestParam("query") String query) throws IllegalRelationException, InputParseException, IncorrectCoreAttributeTypeException, AttributeTypeException {
 		return searcherService.performSearch(query);
 	}
 }

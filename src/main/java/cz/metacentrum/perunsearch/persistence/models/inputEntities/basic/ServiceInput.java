@@ -28,7 +28,7 @@ public class ServiceInput extends BasicInputEntity {
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Collections.singletonList(RESOURCE);
 
-	public ServiceInput(boolean isTopLevel, Map<String, Object> core, List<InputEntity> innerInputs) throws IllegalRelationException {
+	public ServiceInput(boolean isTopLevel, List<InputAttribute> core, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(TYPE, isTopLevel, core, Collections.EMPTY_LIST, Collections.EMPTY_LIST, innerInputs);
 	}
 

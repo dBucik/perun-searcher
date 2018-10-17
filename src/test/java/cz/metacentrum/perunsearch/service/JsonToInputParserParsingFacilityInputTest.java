@@ -40,9 +40,9 @@ public class JsonToInputParserParsingFacilityInputTest {
 	private void setUpInputString() {
 		this.input = "{\n" +
 				"  \"entityName\": \"FACILITY\",\n" +
-				"  \"id\": 1,\n" +
-				"  \"name\": \"test_facility\",\n" +
-				"  \"description\": \"test_description\",\n" +
+				"  \"id\": {\"value\": 1},\n" +
+				"  \"name\": {\"value\":\"test_facility\"},\n" +
+				"  \"description\": {\"value\":\"test_description\"},\n" +
 				"  \"attributes\": [\n" +
 				"    {\n" +
 				"      \"name\": \"urn:perun:facility:attribute-def:def:attribute1\",\n" +
@@ -71,7 +71,7 @@ public class JsonToInputParserParsingFacilityInputTest {
 
 	private void setUpAttributes() throws Exception {
 		List<InputAttribute> attributes = new ArrayList<>();
-		InputAttribute attr = new InputAttribute("urn:perun:facility:attribute-def:def:attribute1", 1);
+		InputAttribute attr = new InputAttribute("urn:perun:facility:attribute-def:def:attribute1", false, 1);
 		attributes.add(attr);
 
 		this.attributes = attributes;
@@ -85,7 +85,7 @@ public class JsonToInputParserParsingFacilityInputTest {
 	}
 
 	private void setUpInnerInputs() throws Exception {
-		Map<String, Object> core = new HashMap<>();
+		List<InputAttribute> core = new ArrayList<>();
 		List<InputAttribute> attributes = new ArrayList<>();
 		List<String> attributeNames = new ArrayList<>();
 		List<InputEntity> inputs = new ArrayList<>();

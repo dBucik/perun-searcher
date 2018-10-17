@@ -14,7 +14,7 @@ import java.util.StringJoiner;
 
 public abstract class RelationInputEntity extends InputEntity {
 
-	public RelationInputEntity(PerunEntityType entityType, boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes, List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
+	public RelationInputEntity(PerunEntityType entityType, boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes, List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(entityType, isTopLevel, core, attributes, attrNames, innerInputs);
 	}
 
@@ -85,7 +85,7 @@ public abstract class RelationInputEntity extends InputEntity {
 		return query;
 	}
 
-	private String buildWhere(Query query, Map<String, Object> core, List<String> attrNames) throws IncorrectCoreAttributeTypeException {
+	private String buildWhere(Query query, List<InputAttribute> core, List<String> attrNames) throws IncorrectCoreAttributeTypeException {
 		if ((core == null || core.isEmpty()) && (attrNames == null || attrNames.isEmpty())) {
 			return NO_VALUE;
 		}
@@ -93,13 +93,22 @@ public abstract class RelationInputEntity extends InputEntity {
 		StringJoiner where = new StringJoiner(" AND ");
 
 		if (core != null) {
-			for (Map.Entry<String, Object> a: core.entrySet()) {
-				String operator = resolveMatchOperator(a.getValue());
-				String part = "rel." + a.getKey() + operator;
-				if (! operator.equals(NULL_MATCH)) {
-					// TODO: add LIKE match
-					part += query.nextParam( a.getValue());
+			for (InputAttribute attr: core) {
+				String operator = resolveMatchOperator(attr.isLikeMatch(), attr.getValue());
+				String part = "";
+
+				switch (operator) {
+					case NULL_MATCH:
+						part = "rel." + attr.getName() + operator;
+						break;
+					case LIKE_MATCH:
+						part = "rel." + attr.getName() + ":VARCHAR" + operator + query.nextParam('%' + attr.stringValue() + '%');
+						break;
+					case EXACT_MATCH:
+						part = "rel." + attr.getName() + operator + query.nextParam(attr.getValue());
+						break;
 				}
+
 				where.add(part);
 			}
 		}

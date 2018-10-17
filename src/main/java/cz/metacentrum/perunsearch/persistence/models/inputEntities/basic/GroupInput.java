@@ -28,7 +28,7 @@ public class GroupInput extends BasicInputEntity {
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(GROUP, VO, EXT_SOURCE, MEMBER, RESOURCE, GROUP_RESOURCE, MEMBER_GROUP);
 
-	public GroupInput(boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
+	public GroupInput(boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes,
 					  List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(TYPE, isTopLevel, core, attributes, attrNames, innerInputs);
 	}

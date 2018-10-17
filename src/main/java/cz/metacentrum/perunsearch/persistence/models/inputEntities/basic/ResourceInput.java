@@ -29,7 +29,7 @@ public class ResourceInput extends BasicInputEntity {
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(MEMBER, VO, SERVICE, FACILITY, GROUP, MEMBER_RESOURCE, GROUP_RESOURCE);
 
-	public ResourceInput(boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
+	public ResourceInput(boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes,
 						 List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(TYPE, isTopLevel, core, attributes, attrNames, innerInputs);
 	}

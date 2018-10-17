@@ -167,7 +167,7 @@ public class UserExtSourceSearchingTests {
 
 	@Test
 	public void findUserExtSourceByIdTest() throws Exception {
-		String input = "{\"entityName\" : \"user_ext_source\", \"id\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"user_ext_source\", \"id\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -177,7 +177,7 @@ public class UserExtSourceSearchingTests {
 
 	@Test
 	public void findUserExtSourceByUserIdTest() throws Exception {
-		String input = "{\"entityName\" : \"user_ext_source\", \"userId\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"user_ext_source\", \"userId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -187,7 +187,7 @@ public class UserExtSourceSearchingTests {
 
 	@Test
 	public void findUserExtSourceByLoginExtTest() throws Exception {
-		String input = "{\"entityName\" : \"user_ext_source\", \"loginExt\" : \"login_ext1\", \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"user_ext_source\", \"loginExt\" : {\"value\":\"login_ext1\"}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -197,7 +197,7 @@ public class UserExtSourceSearchingTests {
 
 	@Test
 	public void findUserExtSourceByExtSourcesIdTest() throws Exception {
-		String input = "{\"entityName\" : \"user_ext_source\", \"extSourcesId\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"user_ext_source\", \"extSourcesId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -207,7 +207,7 @@ public class UserExtSourceSearchingTests {
 
 	@Test
 	public void findUserExtSourceByLoaTest() throws Exception {
-		String input = "{\"entityName\" : \"user_ext_source\", \"loa\" : 0, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"user_ext_source\", \"loa\" : {\"value\": 0}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -217,7 +217,7 @@ public class UserExtSourceSearchingTests {
 
 	@Test
 	public void findUserExtSourceByLastAccessTest() throws Exception {
-		String input = "{\"entityName\" : \"user_ext_source\", \"lastAccess\" : \"2018-01-01 08:00:00\", \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"user_ext_source\", \"lastAccess\" : {\"value\": \"2018-01-01 08:00:00\"}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -309,7 +309,7 @@ public class UserExtSourceSearchingTests {
 	@Test
 	public void findUserExtSourceByUserEntity() throws Exception {
 		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"user\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"user\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -321,7 +321,7 @@ public class UserExtSourceSearchingTests {
 	@Test
 	public void findUserExtSourceByExtSourceEntity() throws Exception {
 		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"ext_source\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"ext_source\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);

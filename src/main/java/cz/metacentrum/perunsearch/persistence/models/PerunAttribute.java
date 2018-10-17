@@ -130,4 +130,8 @@ public class PerunAttribute {
 
 		return valuesMap;
 	}
+
+	public String stringValue() {
+		return value;
+	}
 }

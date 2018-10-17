@@ -5,6 +5,7 @@ import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -21,11 +22,13 @@ public class InputAttribute {
 
 	private String name;
 	private InputAttributeType type;
+	private boolean likeMatch;
 	private Object value;
 
-	public InputAttribute(String name, Object value) throws AttributeTypeException {
+	public InputAttribute(String name, boolean likeMatch, Object value) throws AttributeTypeException {
 		this.name = name;
 		this.type = getType(value);
+		this.likeMatch = likeMatch;
 		this.value = value;
 	}
 
@@ -51,6 +54,18 @@ public class InputAttribute {
 
 	public Object getValue() {
 		return value;
+	}
+
+	public boolean isLikeMatch() {
+		return likeMatch;
+	}
+
+	public void setLikeMatch(boolean likeMatch) {
+		this.likeMatch = likeMatch;
+	}
+
+	public String stringValue() {
+		return value.toString();
 	}
 
 	public String valueAsString() {
@@ -100,6 +115,8 @@ public class InputAttribute {
 			return InputAttributeType.MAP;
 		} else if (value == JSONObject.NULL) {
 			return InputAttributeType.NULL;
+		} else if (value instanceof Timestamp) {
+			return InputAttributeType.TIMESTAMP;
 		}
 
 		else throw new AttributeTypeException("Attribute cannot have type: " + type);

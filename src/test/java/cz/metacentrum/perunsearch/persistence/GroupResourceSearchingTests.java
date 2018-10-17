@@ -151,7 +151,7 @@ public class GroupResourceSearchingTests {
 
 	@Test
 	public void findGroupResourceRelationByGroupIdTest() throws Exception {
-		String input = "{\"entityName\" : \"group_resource\", \"groupId\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"group_resource\", \"groupId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -161,7 +161,7 @@ public class GroupResourceSearchingTests {
 
 	@Test
 	public void findGroupResourceRelationByResourceIdTest() throws Exception {
-		String input = "{\"entityName\" : \"group_resource\", \"resourceId\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"group_resource\", \"resourceId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -252,7 +252,7 @@ public class GroupResourceSearchingTests {
 	@Test
 	public void findGroupResourceRelationByGroupEntity() throws Exception {
 		String input = "{\"entityName\" : \"group_resource\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"group\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"group\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -264,7 +264,7 @@ public class GroupResourceSearchingTests {
 	@Test
 	public void findGroupResourceByResourceEntity() throws Exception {
 		String input = "{\"entityName\" : \"group_resource\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"resource\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"resource\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);

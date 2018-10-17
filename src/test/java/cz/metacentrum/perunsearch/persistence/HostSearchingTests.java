@@ -157,7 +157,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByIdTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"id\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"id\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -167,7 +167,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByHostnameTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"hostname\" : \"hostname1\", \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"hostname\" : {\"value\":\"hostname1\"}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -177,7 +177,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByFacilityIdTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"facilityId\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"facilityId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -187,7 +187,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByDescriptionTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"description\" : \"dsc1\", \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"description\" : {\"value\":\"dsc1\"}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -278,7 +278,7 @@ public class HostSearchingTests {
 	@Test
 	public void findHostByFacilityEntity() throws Exception {
 		String input = "{\"entityName\" : \"host\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"facility\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"facility\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);

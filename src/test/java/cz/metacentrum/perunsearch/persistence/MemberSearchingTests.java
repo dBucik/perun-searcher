@@ -157,7 +157,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByIdTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"id\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"id\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -167,7 +167,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByUserIdTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"userId\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"userId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -177,7 +177,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByVoIdTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"voId\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"voId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -187,7 +187,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberBySponsoredTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"sponsored\" : false, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"sponsored\" : {\"value\": false}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -278,7 +278,7 @@ public class MemberSearchingTests {
 	@Test
 	public void findMemberByVoEntity() throws Exception {
 		String input = "{\"entityName\" : \"member\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"vo\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"vo\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -290,7 +290,7 @@ public class MemberSearchingTests {
 	@Test
 	public void findMemberByUserEntity() throws Exception {
 		String input = "{\"entityName\" : \"member\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"user\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"user\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -302,7 +302,7 @@ public class MemberSearchingTests {
 	@Test
 	public void findMemberByResourceEntity() throws Exception {
 		String input = "{\"entityName\" : \"member\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"resource\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"resource\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -314,7 +314,7 @@ public class MemberSearchingTests {
 	@Test
 	public void findMemberByGroupEntity() throws Exception {
 		String input = "{\"entityName\" : \"member\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"group\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"group\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -326,7 +326,7 @@ public class MemberSearchingTests {
 	@Test
 	public void findMemberByMemberResourceRelation() throws Exception {
 		String input = "{\"entityName\" : \"member\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"member_resource\", \"resourceId\" : 1 }" +
+				"{ \"entityName\" : \"member_resource\", \"resourceId\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -338,7 +338,7 @@ public class MemberSearchingTests {
 	@Test
 	public void findMemberByMemberGroupRelation() throws Exception {
 		String input = "{\"entityName\" : \"member\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"member_group\", \"groupId\" : 1 }" +
+				"{ \"entityName\" : \"member_group\", \"groupId\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);

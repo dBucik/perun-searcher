@@ -160,7 +160,7 @@ public class VoSearchingTests {
 
 	@Test
 	public void findVoByIdTest() throws Exception {
-		String input = "{\"entityName\" : \"vo\", \"id\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"vo\", \"id\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -170,7 +170,7 @@ public class VoSearchingTests {
 
 	@Test
 	public void findVoByNameTest() throws Exception {
-		String input = "{\"entityName\" : \"vo\", \"name\" : \"virtual_organization1\", \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"vo\", \"name\" : {\"value\":\"virtual_organization1\"}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -180,7 +180,7 @@ public class VoSearchingTests {
 
 	@Test
 	public void findVoByShortNameTest() throws Exception {
-		String input = "{\"entityName\" : \"vo\", \"shortName\" : \"vo1\", \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"vo\", \"shortName\" : {\"value\":\"vo1\"}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -271,7 +271,7 @@ public class VoSearchingTests {
 	@Test
 	public void findVoByResourceEntity() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"resource\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"resource\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -283,7 +283,7 @@ public class VoSearchingTests {
 	@Test
 	public void findVoByExtSourceEntity() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"ext_source\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"ext_source\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -295,7 +295,7 @@ public class VoSearchingTests {
 	@Test
 	public void findVoByGroupEntity() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"group\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"group\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -307,7 +307,7 @@ public class VoSearchingTests {
 	@Test
 	public void findVoByMemberEntity() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"member\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"member\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);

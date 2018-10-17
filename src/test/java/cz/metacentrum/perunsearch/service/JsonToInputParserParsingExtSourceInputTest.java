@@ -35,9 +35,9 @@ public class JsonToInputParserParsingExtSourceInputTest {
 	private void setUpInputString() {
 		input = "{\n" +
 				"  \"entityName\": \"EXT_SOURCE\",\n" +
-				"  \"id\": 1,\n" +
-				"  \"name\": \"test_ext_source\",\n" +
-				"  \"type\": \"test_type\",\n" +
+				"  \"id\": {\"value\": 1},\n" +
+				"  \"name\": {\"value\":\"test_ext_source\"},\n" +
+				"  \"type\": {\"value\":\"test_type\"},\n" +
 				"  \"attributes\": [\n" +
 				"    {\n" +
 				"      \"name\": \"urn:perun:ext_source:attribute-def:def:attribute1\",\n" +
@@ -66,7 +66,7 @@ public class JsonToInputParserParsingExtSourceInputTest {
 
 	private void setUpAttributes() throws Exception {
 		List<InputAttribute> attributes = new ArrayList<>();
-		InputAttribute attr = new InputAttribute("urn:perun:ext_source:attribute-def:def:attribute1", 1);
+		InputAttribute attr = new InputAttribute("urn:perun:ext_source:attribute-def:def:attribute1", false,1);
 		attributes.add(attr);
 
 		this.attributes = attributes;
@@ -80,7 +80,7 @@ public class JsonToInputParserParsingExtSourceInputTest {
 	}
 
 	private void setUpInnerInputs() throws Exception {
-		Map<String, Object> core = new HashMap<>();
+		List<InputAttribute> core = new ArrayList<>();
 		List<InputAttribute> attributes = new ArrayList<>();
 		List<String> attributeNames = new ArrayList<>();
 		List<InputEntity> inputs = new ArrayList<>();

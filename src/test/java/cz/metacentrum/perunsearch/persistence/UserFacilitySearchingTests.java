@@ -151,7 +151,7 @@ public class UserFacilitySearchingTests {
 
 	@Test
 	public void findUserFacilityRelationByUserIdTest() throws Exception {
-		String input = "{\"entityName\" : \"user_facility\", \"userId\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"user_facility\", \"userId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -161,7 +161,7 @@ public class UserFacilitySearchingTests {
 
 	@Test
 	public void findUserFacilityRelationByFacilityIdTest() throws Exception {
-		String input = "{\"entityName\" : \"user_facility\", \"facilityId\" : 1, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"user_facility\", \"facilityId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -252,7 +252,7 @@ public class UserFacilitySearchingTests {
 	@Test
 	public void findUserFacilityRelationByUserEntity() throws Exception {
 		String input = "{\"entityName\" : \"user_facility\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"user\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"user\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -264,7 +264,7 @@ public class UserFacilitySearchingTests {
 	@Test
 	public void findUserFacilityByFacilityEntity() throws Exception {
 		String input = "{\"entityName\" : \"user_facility\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"facility\", \"id\" : 1 }" +
+				"{ \"entityName\" : \"facility\", \"id\" : {\"value\": 1} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);

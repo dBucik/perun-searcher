@@ -11,5 +11,6 @@ public enum InputAttributeType {
 	BOOLEAN,
 	ARRAY,
 	MAP,
-	NULL
+	NULL,
+	TIMESTAMP
 }

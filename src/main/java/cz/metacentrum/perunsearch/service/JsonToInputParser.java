@@ -1,5 +1,6 @@
 package cz.metacentrum.perunsearch.service;
 
+import cz.metacentrum.perunsearch.persistence.enums.InputAttributeType;
 import cz.metacentrum.perunsearch.persistence.enums.PerunEntityType;
 import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
@@ -24,18 +25,16 @@ import org.json.JSONObject;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class JsonToInputParser {
 
-	public static InputEntity parseInput(String inputString) throws InputParseException, IllegalRelationException {
+	public static InputEntity parseInput(String inputString) throws InputParseException, IllegalRelationException, AttributeTypeException {
 		JSONObject json = new JSONObject(inputString);
 		return parseInputEntity(json, true);
 	}
 
-	private static InputEntity parseInputEntity(JSONObject json, boolean isTopLevel) throws InputParseException, IllegalRelationException {
+	private static InputEntity parseInputEntity(JSONObject json, boolean isTopLevel) throws InputParseException, IllegalRelationException, AttributeTypeException {
 		if (! json.has("entityName") || json.isNull("entityName")) {
 			throw new InputParseException("Input does not have specified entity");
 		}
@@ -55,62 +54,62 @@ public class JsonToInputParser {
 	}
 
 	private static InputEntity resolveEntity(boolean isTopLevel, JSONObject json, String entity, List<InputAttribute> attributes,
-											 List<String> attrsNames, List<InputEntity> entities) throws IllegalRelationException {
+											 List<String> attrsNames, List<InputEntity> entities) throws IllegalRelationException, AttributeTypeException {
 		switch (entity.toUpperCase()) {
 			case "EXT_SOURCE": {
-				Map<String, Object> core = mapCoreExtSource(json);
+				List<InputAttribute> core = mapCoreExtSource(json);
 				return new ExtSourceInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 			case "FACILITY": {
-				Map<String, Object> core = mapCoreFacility(json);
+				List<InputAttribute> core = mapCoreFacility(json);
 				return new FacilityInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 			case "GROUP": {
-				Map<String, Object> core = mapCoreGroup(json);
+				List<InputAttribute> core = mapCoreGroup(json);
 				return new GroupInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 			case "HOST": {
-				Map<String, Object> core = mapCoreHost(json);
+				List<InputAttribute> core = mapCoreHost(json);
 				return new HostInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 			case "MEMBER": {
-				Map<String, Object> core = mapCoreMember(json);
+				List<InputAttribute> core = mapCoreMember(json);
 				return new MemberInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 			case "RESOURCE": {
-				Map<String, Object> core = mapCoreResource(json);
+				List<InputAttribute> core = mapCoreResource(json);
 				return new ResourceInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 			case "SERVICE": {
-				Map<String, Object> core = mapCoreService(json);
+				List<InputAttribute> core = mapCoreService(json);
 				return new ServiceInput(isTopLevel, core, entities);
 			}
 			case "USER_EXT_SOURCE": {
-				Map<String, Object> core = mapCoreUserExtSource(json);
+				List<InputAttribute> core = mapCoreUserExtSource(json);
 				return new UserExtSourceInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 			case "USER": {
-				Map<String, Object> core = mapCoreUser(json);
+				List<InputAttribute> core = mapCoreUser(json);
 				return new UserInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 			case "VO": {
-				Map<String, Object> core = mapCoreVo(json);
+				List<InputAttribute> core = mapCoreVo(json);
 				return new VoInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 			case "GROUP_RESOURCE": {
-				Map<String, Object> core = mapCoreGroupResource(json);
+				List<InputAttribute> core = mapCoreGroupResource(json);
 				return new GroupResourceInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 			case "MEMBER_GROUP": {
-				Map<String, Object> core = mapCoreMemberGroup(json);
+				List<InputAttribute> core = mapCoreMemberGroup(json);
 				return new MemberGroupInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 			case "MEMBER_RESOURCE": {
-				Map<String, Object> core = mapCoreMemberResource(json);
+				List<InputAttribute> core = mapCoreMemberResource(json);
 				return new MemberResourceInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 			case "USER_FACILITY": {
-				Map<String, Object> core = mapCoreUserFacility(json);
+				List<InputAttribute> core = mapCoreUserFacility(json);
 				return new UserFacilityInput(isTopLevel, core, attributes, attrsNames, entities);
 			}
 		}
@@ -118,324 +117,301 @@ public class JsonToInputParser {
 		return null;
 	}
 
-	private static Map<String, Object> mapCoreExtSource(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreExtSource(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("id")) {
-			map.put("id", getLong(json, "id"));
+			list.add(getInputAttrWithLong(json, "id", "id"));
 		}
 
 		if (json.has("name")) {
-			map.put("name", getString(json, "name"));
+			list.add(getInputAttrWithString(json, "name", "name"));
 		}
 
 		if (json.has("type")) {
-			map.put("type", getString(json, "type"));
+			list.add(getInputAttrWithString(json, "type", "type"));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreFacility(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreFacility(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("id")) {
-			map.put("id", getLong(json, "id"));
+			list.add(getInputAttrWithLong(json, "id", "id"));
 		}
 
 		if (json.has("name")) {
-			map.put("name", getString(json, "name"));
+			list.add(getInputAttrWithString(json, "name", "name"));
 		}
 
 		if (json.has("description")) {
-			map.put("dsc", getString(json, "description"));
+			list.add(getInputAttrWithString(json, "description", "dsc"));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreGroup(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreGroup(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("id")) {
-			map.put("id", getLong(json, "id"));
+			list.add(getInputAttrWithLong(json, "id", "id"));
 		}
 
 		if (json.has("name")) {
-			map.put("name", getString(json, "name"));
+			list.add(getInputAttrWithString(json, "name", "name"));
 		}
 
 		if (json.has("description")) {
-			map.put("dsc", getString(json, "description"));
+			list.add(getInputAttrWithString(json, "description", "dsc"));
 		}
 
 		if (json.has("voId")) {
-			map.put("vo_id", getLong(json, "voId"));
+			list.add(getInputAttrWithLong(json, "voId", "vo_id"));
 		}
 
 		if (json.has("parentGroupId")) {
-			map.put("parent_group_id", getLong(json, "parentGroupId"));
+			list.add(getInputAttrWithLong(json, "parentGroupId", "parent_group_id"));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreHost(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreHost(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("id")) {
-			map.put("id", getLong(json, "id"));
+			list.add(getInputAttrWithLong(json, "id", "id"));
 		}
 
 		if (json.has("hostname")) {
-			map.put("hostname", getString(json, "hostname"));
+			list.add(getInputAttrWithString(json, "hostname", "hostname"));
 		}
 
 		if (json.has("facilityId")) {
-			map.put("facility_id", getLong(json, "facilityId"));
+			list.add(getInputAttrWithLong(json, "facilityId", "facility_id"));
 		}
 
 		if (json.has("description")) {
-			map.put("dsc", getString(json, "description"));
+			list.add(getInputAttrWithString(json, "description", "dsc"));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreMember(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreMember(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("id")) {
-			map.put("id", getLong(json, "id"));
+			list.add(getInputAttrWithLong(json, "id", "id"));
 		}
 
 		if (json.has("userId")) {
-			map.put("user_id", getLong(json, "userId"));
+			list.add(getInputAttrWithLong(json, "userId", "user_id"));
 		}
 
 		if (json.has("voId")) {
-			map.put("vo_id", getLong(json, "voId"));
+			list.add(getInputAttrWithLong(json, "voId", "vo_id"));
 		}
 
 		if (json.has("sponsored")) {
-			map.put("sponsored", getBoolean(json, "sponsored"));
+			list.add(getInputAttrWithBoolean(json, "sponsored", "sponsored"));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreResource(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreResource(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("id")) {
-			map.put("id", getLong(json, "id"));
+			list.add(getInputAttrWithLong(json, "id", "id"));
 		}
 
 		if (json.has("facilityId")) {
-			map.put("facility_id", getLong(json, "facilityId"));
+			list.add(getInputAttrWithLong(json, "facilityId", "facility_id"));
 		}
 
 		if (json.has("name")) {
-			map.put("name", getString(json, "name"));
+			list.add(getInputAttrWithString(json, "name", "name"));
 		}
 
 		if (json.has("description")) {
-			map.put("dsc", getString(json, "description"));
+			list.add(getInputAttrWithString(json, "description", "dsc"));
 		}
 
 		if (json.has("voId")) {
-			map.put("vo_id", getLong(json, "voId"));
+			list.add(getInputAttrWithLong(json, "voId", "vo_id"));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreService(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreService(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("id")) {
-			map.put("id", getLong(json, "id"));
+			list.add(getInputAttrWithLong(json, "id", "id"));
 		}
 
 		if (json.has("name")) {
-			map.put("name", getString(json, "name"));
+			list.add(getInputAttrWithString(json, "name", "name"));
 		}
 
 		if (json.has("description")) {
-			map.put("description", getString(json, "description"));
+			list.add(getInputAttrWithString(json, "description", "description"));
 		}
 
 		if (json.has("delay")) {
-			map.put("delay", getInt(json, "delay"));
+			list.add(getInputAttrWithInt(json, "delay", "delay"));
 		}
 
 		if (json.has("recurrence")) {
-			map.put("recurrence", getInt(json, "recurrence"));
+			list.add(getInputAttrWithInt(json, "recurrence", "recurrence"));
 		}
 
 		if (json.has("enabled")) {
-			Boolean param = getBoolean(json, "enabled");
-			if (param == null) {
-				map.put("enabled", null);
-			} else if (param) {
-				map.put("enabled", "1");
-			} else {
-				map.put("enabled", "0");
-			}
+			InputAttribute attr = getInputAttrWithBoolean(json, "enabled", "enabled");
+			list.add(transformBooleanToString(attr));
 		}
 
 		if (json.has("script")) {
-			map.put("script", getString(json, "script"));
+			list.add(getInputAttrWithString(json, "script", "script"));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreUserExtSource(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreUserExtSource(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("id")) {
-			map.put("id", getLong(json, "id"));
+			list.add(getInputAttrWithLong(json, "id", "id"));
 		}
 
 		if (json.has("userId")) {
-			map.put("user_id", getLong(json, "userId"));
+			list.add(getInputAttrWithLong(json, "userId", "user_id"));
 		}
 
 		if (json.has("loginExt")) {
-			map.put("login_ext", getString(json, "loginExt"));
+			list.add(getInputAttrWithString(json, "loginExt", "login_ext"));
 		}
 
 		if (json.has("extSourcesId")) {
-			map.put("ext_sources_id", getLong(json, "extSourcesId"));
+			list.add(getInputAttrWithLong(json, "extSourcesId", "ext_sources_id"));
 		}
 
 		if (json.has("loa")) {
-			map.put("loa", getInt(json, "loa"));
+			list.add(getInputAttrWithInt(json, "loa", "loa"));
 		}
 
 		if (json.has("lastAccess")) {
-			String last = getString(json, "lastAccess");
-			if (last == null) {
-				map.put("last_access", null);
-			} else {
-				map.put("last_access", Timestamp.valueOf(last));
-			}
+			list.add(getInputAttrWithTimestamp(json, "lastAccess", "last_access"));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreUser(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreUser(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("id")) {
-			map.put("id", getLong(json, "id"));
+			list.add(getInputAttrWithLong(json, "id", "id"));
 		}
 
 		if (json.has("firstName")) {
-			map.put("first_name", getString(json, "firstName"));
+			list.add(getInputAttrWithString(json, "firstName", "first_name"));
 		}
 
 		if (json.has("middleName")) {
-			map.put("middle_name", getString(json, "middleName"));
+			list.add(getInputAttrWithString(json, "middleName", "middle_name"));
 		}
 
 		if (json.has("lastName")) {
-			map.put("last_name", getString(json, "lastName"));
+			list.add(getInputAttrWithString(json, "lastName", "last_name"));
 		}
 
 		if (json.has("titleBefore")) {
-			map.put("title_before", getString(json, "titleBefore"));
+			list.add(getInputAttrWithString(json, "titleBefore", "title_before"));
 		}
 
 		if (json.has("titleAfter")) {
-			map.put("title_after", getString(json, "titleAfter"));
+			list.add(getInputAttrWithString(json, "titleAfter", "title_after"));
 		}
 
 		if (json.has("serviceAcc")) {
-			Boolean param = getBoolean(json, "serviceAcc");
-			if (param == null) {
-				map.put("service_acc", null);
-			} else if (param) {
-				map.put("service_acc", "1");
-			} else {
-				map.put("service_acc", "0");
-			}
+			InputAttribute attr = getInputAttrWithBoolean(json, "serviceAcc", "service_acc");
+			list.add(transformBooleanToString(attr));
 		}
 
 		if (json.has("sponsoredAcc")) {
-			Boolean param = getBoolean(json, "sponsoredAcc");
-			if (param == null) {
-				map.put("sponsored_acc", null);
-			} else if (param) {
-				map.put("sponsored_acc", "1");
-			} else {
-				map.put("sponsored_acc", "0");
-			}
+			InputAttribute attr = getInputAttrWithBoolean(json, "sponsoredAcc", "sponsored_acc");
+			list.add(transformBooleanToString(attr));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreVo(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreVo(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("id")) {
-			map.put("id", getLong(json, "id"));
+			list.add(getInputAttrWithLong(json, "id", "id"));
 		}
 
 		if (json.has("name")) {
-			map.put("name", getString(json, "name"));
+			list.add(getInputAttrWithString(json, "name", "name"));
 		}
 
 		if (json.has("shortName")) {
-			map.put("short_name", getString(json, "shortName"));
+			list.add(getInputAttrWithString(json, "shortName", "short_name"));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreGroupResource(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreGroupResource(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("groupId")) {
-			map.put("group_id", getLong(json, "groupId"));
+			list.add(getInputAttrWithLong(json, "groupId", "group_id"));
 		}
 
 		if (json.has("resourceId")) {
-			map.put("resource_id", getLong(json, "resourceId"));
+			list.add(getInputAttrWithLong(json, "resourceId", "resource_id"));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreMemberGroup(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreMemberGroup(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("memberId")) {
-			map.put("member_id", getLong(json, "memberId"));
+			list.add(getInputAttrWithLong(json, "memberId", "member_id"));
 		}
 
 		if (json.has("groupId")) {
-			map.put("group_id", getLong(json, "groupId"));
+			list.add(getInputAttrWithLong(json, "groupId", "group_id"));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreMemberResource(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreMemberResource(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("memberId")) {
-			map.put("member_id", getLong(json, "memberId"));
+			list.add(getInputAttrWithLong(json, "memberId", "member_id"));
 		}
 
 		if (json.has("resourceId")) {
-			map.put("resource_id", getLong(json, "resourceId"));
+			list.add(getInputAttrWithLong(json, "resourceId", "resource_id"));
 		}
 
-		return map;
+		return list;
 	}
 
-	private static Map<String, Object> mapCoreUserFacility(JSONObject json) {
-		Map<String, Object> map = new HashMap<>();
+	private static List<InputAttribute> mapCoreUserFacility(JSONObject json) throws AttributeTypeException {
+		List<InputAttribute> list = new ArrayList<>();
 		if (json.has("userId")) {
-			map.put("user_id", getLong(json, "userId"));
+			list.add(getInputAttrWithLong(json, "userId", "user_id"));
 		}
 
 		if (json.has("facilityId")) {
-			map.put("facility_id", getLong(json, "facilityId"));
+			list.add(getInputAttrWithLong(json, "facilityId", "facility_id"));
 		}
 
-		return map;
+		return list;
 	}
 
 	private static List<InputAttribute> parseAttributes(JSONArray attrsJsonArray) throws InputParseException {
@@ -462,7 +438,7 @@ public class JsonToInputParser {
 		return attrsNames;
 	}
 
-	private static List<InputEntity> parseInnerInputs(JSONArray entitiesJsonArray) throws IllegalRelationException, InputParseException {
+	private static List<InputEntity> parseInnerInputs(JSONArray entitiesJsonArray) throws IllegalRelationException, InputParseException, AttributeTypeException {
 		List<InputEntity> entities = new ArrayList<>();
 		if (entitiesJsonArray != null) {
 			for (int i = 0; i < entitiesJsonArray.length(); i++) {
@@ -476,10 +452,11 @@ public class JsonToInputParser {
 
 	private static InputAttribute parseAttribute(JSONObject attributeJson) throws InputParseException {
 		String name = attributeJson.getString("name");
+		boolean match = attributeJson.optBoolean("likeMatchEnabled", false);
 		Object value = attributeJson.get("value");
 
 		try {
-			return new InputAttribute(name, value);
+			return new InputAttribute(name, match, value);
 		} catch (AttributeTypeException e) {
 			throw new InputParseException("Input attribute cannot be parsed", e);
 		}
@@ -503,5 +480,64 @@ public class JsonToInputParser {
 	private static Integer getInt(JSONObject json, String key) {
 		return (json.get(key) != JSONObject.NULL) ?
 				json.getInt(key) : null;
+	}
+
+	private static InputAttribute getInputAttrWithLong(JSONObject json, String key, String keyInTable) throws AttributeTypeException {
+		JSONObject attr = json.getJSONObject(key);
+		boolean match = attr.optBoolean("matchLike", false);
+		Long value = getLong(attr, "value");
+
+		return new InputAttribute(keyInTable, match, value);
+	}
+
+	private static InputAttribute getInputAttrWithString(JSONObject json, String key, String keyInTable) throws AttributeTypeException {
+		JSONObject attr = json.getJSONObject(key);
+		boolean match = attr.optBoolean("matchLike", false);
+		String value = getString(attr, "value");
+
+		return new InputAttribute(keyInTable, match, value);
+	}
+
+	private static InputAttribute getInputAttrWithBoolean(JSONObject json, String key, String keyInTable) throws AttributeTypeException {
+		JSONObject attr = json.getJSONObject(key);
+		boolean match = attr.optBoolean("matchLike", false);
+		Boolean value = getBoolean(attr, "value");
+
+		return new InputAttribute(keyInTable, match, value);
+	}
+
+	private static InputAttribute getInputAttrWithInt(JSONObject json, String key, String keyInTable) throws AttributeTypeException {
+		JSONObject attr = json.getJSONObject(key);
+		boolean match = attr.optBoolean("matchLike", false);
+		Integer value = getInt(attr, "value");
+
+		return new InputAttribute(keyInTable, match, value);
+	}
+
+	private static InputAttribute getInputAttrWithTimestamp(JSONObject json, String key, String keyInTable) throws AttributeTypeException {
+		JSONObject attr = json.getJSONObject(key);
+		boolean match = attr.optBoolean("matchLike", false);
+		String stamp = getString(attr, "value");
+		Timestamp value = null;
+		if (stamp != null) {
+			value = Timestamp.valueOf(stamp);
+		}
+
+		return new InputAttribute(keyInTable, match, value);
+	}
+
+	private static InputAttribute transformBooleanToString(InputAttribute attr) {
+		if (attr.valueAsBoolean() == null) {
+			attr.setType(InputAttributeType.STRING);
+			attr.setValue(null);
+		} else if (attr.valueAsBoolean()) {
+			attr.setType(InputAttributeType.STRING);
+			attr.setValue('1');
+		} else {
+			attr.setType(InputAttributeType.STRING);
+			attr.setValue('0');
+		}
+
+		return attr;
 	}
 }

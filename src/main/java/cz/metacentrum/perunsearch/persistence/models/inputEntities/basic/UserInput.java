@@ -26,7 +26,7 @@ public class UserInput extends BasicInputEntity {
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(FACILITY, MEMBER, USER_EXT_SOURCE, USER_FACILITY);
 
-	public UserInput(boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
+	public UserInput(boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes,
 					 List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(TYPE, isTopLevel, core, attributes, attrNames, innerInputs);
 	}

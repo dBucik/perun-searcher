@@ -26,7 +26,7 @@ public class ExtSourceInput extends BasicInputEntity {
 
 	private static final List<PerunEntityType> ALLOWED_INNER_INPUTS = Arrays.asList(VO, GROUP, USER_EXT_SOURCE);
 
-	public ExtSourceInput(boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes,
+	public ExtSourceInput(boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes,
 						  List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(TYPE, isTopLevel, core, attributes, attrNames, innerInputs);
 	}

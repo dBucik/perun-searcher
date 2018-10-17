@@ -14,7 +14,7 @@ import java.util.StringJoiner;
 
 public abstract class BasicInputEntity extends InputEntity {
 
-	public BasicInputEntity(PerunEntityType entityType, boolean isTopLevel, Map<String, Object> core, List<InputAttribute> attributes, List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
+	public BasicInputEntity(PerunEntityType entityType, boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes, List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(entityType, isTopLevel, core, attributes, attrNames, innerInputs);
 	}
 
@@ -117,19 +117,28 @@ public abstract class BasicInputEntity extends InputEntity {
 		return "WHERE " + where.toString();
 	}
 
-	private String outerWhere(Query query, Map<String, Object> core) throws IncorrectCoreAttributeTypeException {
+	private String outerWhere(Query query, List<InputAttribute> core) throws IncorrectCoreAttributeTypeException {
 		if (core == null || core.isEmpty()) {
 			return NO_VALUE;
 		}
 
 		StringJoiner where = new StringJoiner(" AND ");
-		for (Map.Entry<String, Object> a: core.entrySet()) {
-			String operator = resolveMatchOperator(a.getValue());
-			String part = "ent." + a.getKey() + operator;
-			if (! operator.equals(NULL_MATCH)) {
-				//TODO: add also LIKE MATCH
-				part += query.nextParam( a.getValue());
+		for (InputAttribute attr: core) {
+			String operator = resolveMatchOperator(attr.isLikeMatch(), attr.getValue());
+			String part = "";
+
+			switch (operator) {
+				case NULL_MATCH:
+					part = "ent." + attr.getName() + operator;
+					break;
+				case LIKE_MATCH:
+					part = "ent." + attr.getName() + ":VARCHAR" + operator + query.nextParam('%' + attr.stringValue() + '%');
+					break;
+				case EXACT_MATCH:
+					part = "ent." + attr.getName() + operator + query.nextParam(attr.getValue());
+					break;
 			}
+
 			where.add(part);
 		}
 

@@ -235,12 +235,17 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 			case ARRAY: return attribute.getType() == PerunAttributeType.ARRAY
 					|| attribute.getType() == PerunAttributeType.LARGE_ARRAY_LIST;
 			case MAP: return attribute.getType() == PerunAttributeType.MAP;
+			case TIMESTAMP: return attribute.getType() == PerunAttributeType.STRING;
 		}
 
 		return false;
 	}
 
 	private boolean compareAttributeValues(InputAttribute a1, PerunAttribute a2) {
+		if (a1.isLikeMatch()) {
+			return compareValuesLike(a1, a2.stringValue());
+		}
+
 		switch (a1.getType()) {
 			case STRING: {
 				String value1 = a1.valueAsString();
@@ -266,6 +271,42 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 				Map<String, String> value1 = a1.valueAsMap();
 				Map<String, String> value2 = a2.valueAsMap();
 				return compareMapValues(value1, value2);
+			}
+		}
+
+		return false;
+	}
+
+	private boolean compareValuesLike(InputAttribute a1, String a2) {
+		switch (a1.getType()) {
+			case STRING: {
+				return a2.contains(a1.valueAsString());
+			}
+			case INTEGER: {
+				return a2.contains(a1.valueAsInt().toString());
+			}
+			case BOOLEAN: {
+				return a2.contains(a1.valueAsBoolean().toString());
+			}
+			case ARRAY: {
+				List<String> value1 = a1.valueAsList();
+				for (String subval: value1) {
+					if (!a2.contains(subval)) {
+						return false;
+					}
+				}
+				return true;
+			}
+			case MAP: {
+				Map<String, String> value1 = a1.valueAsMap();
+				for (Map.Entry<String, String> subval: value1.entrySet()) {
+					String key = subval.getKey();
+					String value = subval.getValue();
+					if (!a2.contains(key) || !a2.contains(value)) {
+						return false;
+					}
+				}
+				return true;
 			}
 		}
 

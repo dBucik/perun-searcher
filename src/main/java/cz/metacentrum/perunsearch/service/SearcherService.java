@@ -1,6 +1,7 @@
 package cz.metacentrum.perunsearch.service;
 
 import cz.metacentrum.perunsearch.persistence.data.PerunEntitiesDAO;
+import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationException;
 import cz.metacentrum.perunsearch.persistence.exceptions.IncorrectCoreAttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.models.Query;
@@ -20,7 +21,7 @@ public class SearcherService {
 		this.dao = perunEntitiesDAO;
 	}
 
-	public List<PerunEntity> performSearch(String input) throws IllegalRelationException, InputParseException, IncorrectCoreAttributeTypeException {
+	public List<PerunEntity> performSearch(String input) throws IllegalRelationException, InputParseException, IncorrectCoreAttributeTypeException, AttributeTypeException {
 		InputEntity parsedInput = JsonToInputParser.parseInput(input);
 		Query query = parsedInput.toQuery(null);
 		return dao.executeQuery(query);
