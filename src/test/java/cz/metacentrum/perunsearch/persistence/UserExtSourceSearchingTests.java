@@ -53,7 +53,7 @@ public class UserExtSourceSearchingTests {
 
 	private UserExtSource EXPECTED1;
 	private UserExtSource EXPECTED2;
-	private UserExtSource EXPECTED3;
+	private UserExtSource EXPECTED23;
 
 	@BeforeClass
 	public static void setUpDatabaseTables() throws Exception {
@@ -67,13 +67,13 @@ public class UserExtSourceSearchingTests {
 	}
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		setUpUes1();
 		setUpUes2();
-		setUpUes3();
+		setUpUes23();
 	}
 
-	private void setUpUes1() throws Exception {
+	private void setUpUes1() {
 		PerunAttribute userExtSource1attr1 = new PerunAttribute("user_ext_source_attr_str", PerunAttributeType.STRING, "value1");
 		PerunAttribute userExtSource1attr2 = new PerunAttribute("user_ext_source_attr_int", PerunAttributeType.INTEGER, "1");
 		PerunAttribute userExtSource1attr3 = new PerunAttribute("user_ext_source_attr_bool", PerunAttributeType.BOOLEAN, "true");
@@ -131,33 +131,33 @@ public class UserExtSourceSearchingTests {
 		EXPECTED2 = new UserExtSource(id, userId, loginExt, extSourcesId, loa, lastAccess, attributes, null);
 	}
 
-	private void setUpUes3() {
-		PerunAttribute userExtSource3attr1 = new PerunAttribute("user_ext_source_attr_str", PerunAttributeType.STRING, "value3");
-		PerunAttribute userExtSource3attr2 = new PerunAttribute("user_ext_source_attr_int", PerunAttributeType.INTEGER, "3");
-		PerunAttribute userExtSource3attr3 = new PerunAttribute("user_ext_source_attr_bool", PerunAttributeType.BOOLEAN, "true");
-		PerunAttribute userExtSource3attr4 = new PerunAttribute("user_ext_source_attr_array", PerunAttributeType.ARRAY, "5,6");
-		PerunAttribute userExtSource3attr5 = new PerunAttribute("user_ext_source_attr_map", PerunAttributeType.MAP, "key5:value5,key6:value6");
-		PerunAttribute userExtSource3attr6 = new PerunAttribute("user_ext_source_attr_lstring", PerunAttributeType.LARGE_STRING, "long_value3");
-		PerunAttribute userExtSource3attr7 = new PerunAttribute("user_ext_source_attr_larray", PerunAttributeType.LARGE_ARRAY_LIST, "5,6");
+	private void setUpUes23() {
+		PerunAttribute userExtSource23attr1 = new PerunAttribute("user_ext_source_attr_str", PerunAttributeType.STRING, "value2");
+		PerunAttribute userExtSource23attr2 = new PerunAttribute("user_ext_source_attr_int", PerunAttributeType.INTEGER, "2");
+		PerunAttribute userExtSource23attr3 = new PerunAttribute("user_ext_source_attr_bool", PerunAttributeType.BOOLEAN, "false");
+		PerunAttribute userExtSource23attr4 = new PerunAttribute("user_ext_source_attr_array", PerunAttributeType.ARRAY, "3,4");
+		PerunAttribute userExtSource23attr5 = new PerunAttribute("user_ext_source_attr_map", PerunAttributeType.MAP, "key3:value3,key4:value4");
+		PerunAttribute userExtSource23attr6 = new PerunAttribute("user_ext_source_attr_lstring", PerunAttributeType.LARGE_STRING, "long_value1");
+		PerunAttribute userExtSource23attr7 = new PerunAttribute("user_ext_source_attr_larray", PerunAttributeType.LARGE_ARRAY_LIST, "3,4");
 
 		Map<String, PerunAttribute> attributes = new HashMap<>();
-		attributes.put("user_ext_source_attr_str", userExtSource3attr1);
-		attributes.put("user_ext_source_attr_int", userExtSource3attr2);
-		attributes.put("user_ext_source_attr_bool", userExtSource3attr3);
-		attributes.put("user_ext_source_attr_array", userExtSource3attr4);
-		attributes.put("user_ext_source_attr_map", userExtSource3attr5);
-		attributes.put("user_ext_source_attr_lstring", userExtSource3attr6);
-		attributes.put("user_ext_source_attr_larray", userExtSource3attr7);
+		attributes.put("user_ext_source_attr_str", userExtSource23attr1);
+		attributes.put("user_ext_source_attr_int", userExtSource23attr2);
+		attributes.put("user_ext_source_attr_bool", userExtSource23attr3);
+		attributes.put("user_ext_source_attr_array", userExtSource23attr4);
+		attributes.put("user_ext_source_attr_map", userExtSource23attr5);
+		attributes.put("user_ext_source_attr_lstring", userExtSource23attr6);
+		attributes.put("user_ext_source_attr_larray", userExtSource23attr7);
 
-		Long id = 3L;
-		Long userId = 3L;
-		String loginExt = "login_ext3";
-		Long extSourcesId = 3L;
-		int loa = 2;
-		Timestamp stamp = Timestamp.valueOf("2018-01-03 08:00:00");
+		Long id = 23L;
+		Long userId = 23L;
+		String loginExt = "login_ext23";
+		Long extSourcesId = 23L;
+		int loa = 1;
+		Timestamp stamp = Timestamp.valueOf("2018-01-02 08:00:00");
 		long lastAccess = stamp.getTime();
 
-		EXPECTED3 = new UserExtSource(id, userId, loginExt, extSourcesId, loa, lastAccess, attributes, null);
+		EXPECTED23 = new UserExtSource(id, userId, loginExt, extSourcesId, loa, lastAccess, attributes, null);
 	}
 
 	@AfterClass
@@ -225,7 +225,6 @@ public class UserExtSourceSearchingTests {
 		assertEquals(EXPECTED1, result.get(0));
 	}
 
-
 	@Test
 	public void findAllUserExtSourcesTest() throws Exception {
 		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
@@ -233,11 +232,11 @@ public class UserExtSourceSearchingTests {
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
 		assertEquals(3, result.size());
-		assertThat(result, hasItems(EXPECTED3, EXPECTED2, EXPECTED1));
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2, EXPECTED1));
 	}
 
 	@Test
-	public void findUserExtSourceByStringAttribute() throws Exception {
+	public void findUserExtSourceByStringAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_str\", \"value\" : \"value1\"}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -247,7 +246,7 @@ public class UserExtSourceSearchingTests {
 	}
 
 	@Test
-	public void findUserExtSourceByIntegerAttribute() throws Exception {
+	public void findUserExtSourceByIntegerAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_int\", \"value\" : 1}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -257,17 +256,17 @@ public class UserExtSourceSearchingTests {
 	}
 
 	@Test
-	public void findUserExtSourceByBooleanAttribute() throws Exception {
-		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_bool\", \"value\" : false}], \"attributeNames\" : [\"ALL\"] }";
+	public void findUserExtSourceByBooleanAttributeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_bool\", \"value\" : true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
 		assertEquals(1, result.size());
-		assertEquals(EXPECTED2, result.get(0));
+		assertEquals(EXPECTED1, result.get(0));
 	}
 
 	@Test
-	public void findUserExtSourceByArrayAttribute() throws Exception {
+	public void findUserExtSourceByArrayAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_array\", \"value\" : [1,2]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -277,7 +276,7 @@ public class UserExtSourceSearchingTests {
 	}
 
 	@Test
-	public void findUserExtSourceByMapAttribute() throws Exception {
+	public void findUserExtSourceByMapAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_map\", \"value\" : { \"key1\" : \"value1\", \"key2\" : \"value2\"}}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -287,7 +286,7 @@ public class UserExtSourceSearchingTests {
 	}
 
 	@Test
-	public void findUserExtSourceByLongStringAttribute() throws Exception {
+	public void findUserExtSourceByLongStringAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_lstring\", \"value\" : \"long_value1\"}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -297,7 +296,7 @@ public class UserExtSourceSearchingTests {
 	}
 
 	@Test
-	public void findUserExtSourceByLongArrayAttribute() throws Exception {
+	public void findUserExtSourceByLongArrayAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_larray\", \"value\" : [1,2]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -307,7 +306,137 @@ public class UserExtSourceSearchingTests {
 	}
 
 	@Test
-	public void findUserExtSourceByUserEntity() throws Exception {
+	public void findUserExtSourceByIdLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"id\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(1, result.size());
+		assertEquals(EXPECTED1, result.get(0));
+	}
+
+	@Test
+	public void findUserExtSourceByUserIdLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"userId\" : {\"value\": 2, \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findUserExtSourceByLoginExtLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"loginExt\" : {\"value\":\"login_ext2\", \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findUserExtSourceByExtSourcesIdLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"extSourcesId\" : {\"value\": 2, \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findUserExtSourceByLoaLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"loa\" : {\"value\": 1, \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findUserExtSourceByLastAccessLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"lastAccess\" : {\"value\": \"2018-01-02 08:00:00\", \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findUserExtSourceByStringAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_str\", \"value\" : \"value2\", \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findUserExtSourceByIntegerAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_int\", \"value\" : 2, \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findUserExtSourceByBooleanAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_bool\", \"value\" : false, \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findUserExtSourceByArrayAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_array\", \"value\" : [3,4], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findUserExtSourceByMapAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_map\", \"value\" : { \"key3\" : \"value3\", \"key4\" : \"value4\"}, \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findUserExtSourceByLongStringAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_lstring\", \"value\" : \"long_value2\", \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findUserExtSourceByLongArrayAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [ { \"name\" : \"user_ext_source_attr_larray\", \"value\" : [3,4], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findUserExtSourceByUserEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
 				"{ \"entityName\" : \"user\", \"id\" : {\"value\": 1} }" +
 				"] }";
@@ -319,7 +448,7 @@ public class UserExtSourceSearchingTests {
 	}
 
 	@Test
-	public void findUserExtSourceByExtSourceEntity() throws Exception {
+	public void findUserExtSourceByExtSourceEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"user_ext_source\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
 				"{ \"entityName\" : \"ext_source\", \"id\" : {\"value\": 1} }" +
 				"] }";

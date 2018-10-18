@@ -102,7 +102,7 @@ public abstract class RelationInputEntity extends InputEntity {
 						part = "rel." + attr.getName() + operator;
 						break;
 					case LIKE_MATCH:
-						part = "rel." + attr.getName() + ":VARCHAR" + operator + query.nextParam('%' + attr.stringValue() + '%');
+						part = "rel." + attr.getName() + "::VARCHAR " + operator +  ' ' + query.nextParam('%' + attr.stringValue() + '%');
 						break;
 					case EXACT_MATCH:
 						part = "rel." + attr.getName() + operator + query.nextParam(attr.getValue());

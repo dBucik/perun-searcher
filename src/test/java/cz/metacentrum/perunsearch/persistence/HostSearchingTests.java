@@ -52,7 +52,7 @@ public class HostSearchingTests {
 
 	private Host EXPECTED1;
 	private Host EXPECTED2;
-	private Host EXPECTED3;
+	private Host EXPECTED23;
 
 	@BeforeClass
 	public static void setUpDatabaseTables() throws Exception {
@@ -66,13 +66,13 @@ public class HostSearchingTests {
 	}
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		setUpHost1();
 		setUpHost2();
-		setUpHost3();
+		setUpHost23();
 	}
 
-	private void setUpHost1() throws Exception {
+	private void setUpHost1() {
 		PerunAttribute host1attr1 = new PerunAttribute("host_attr_str", PerunAttributeType.STRING, "value1");
 		PerunAttribute host1attr2 = new PerunAttribute("host_attr_int", PerunAttributeType.INTEGER, "1");
 		PerunAttribute host1attr3 = new PerunAttribute("host_attr_bool", PerunAttributeType.BOOLEAN, "true");
@@ -124,30 +124,31 @@ public class HostSearchingTests {
 		EXPECTED2 = new Host(id, hostname, facilityId, dsc, attributes, null);
 	}
 
-	private void setUpHost3() {
-		PerunAttribute host3attr1 = new PerunAttribute("host_attr_str", PerunAttributeType.STRING, "value3");
-		PerunAttribute host3attr2 = new PerunAttribute("host_attr_int", PerunAttributeType.INTEGER, "3");
-		PerunAttribute host3attr3 = new PerunAttribute("host_attr_bool", PerunAttributeType.BOOLEAN, "true");
-		PerunAttribute host3attr4 = new PerunAttribute("host_attr_array", PerunAttributeType.ARRAY, "5,6");
-		PerunAttribute host3attr5 = new PerunAttribute("host_attr_map", PerunAttributeType.MAP, "key5:value5,key6:value6");
-		PerunAttribute host3attr6 = new PerunAttribute("host_attr_lstring", PerunAttributeType.LARGE_STRING, "long_value3");
-		PerunAttribute host3attr7 = new PerunAttribute("host_attr_larray", PerunAttributeType.LARGE_ARRAY_LIST, "5,6");
+	private void setUpHost23() {
+		PerunAttribute host23attr1 = new PerunAttribute("host_attr_str", PerunAttributeType.STRING, "value2");
+		PerunAttribute host23attr2 = new PerunAttribute("host_attr_int", PerunAttributeType.INTEGER, "2");
+		PerunAttribute host23attr3 = new PerunAttribute("host_attr_bool", PerunAttributeType.BOOLEAN, "false");
+		PerunAttribute host23attr4 = new PerunAttribute("host_attr_array", PerunAttributeType.ARRAY, "3,4");
+		PerunAttribute host23attr5 = new PerunAttribute("host_attr_map", PerunAttributeType.MAP, "key3:value3,key4:value4");
+		PerunAttribute host23attr6 = new PerunAttribute("host_attr_lstring", PerunAttributeType.LARGE_STRING, "long_value1");
+		PerunAttribute host23attr7 = new PerunAttribute("host_attr_larray", PerunAttributeType.LARGE_ARRAY_LIST, "3,4");
 
 		Map<String, PerunAttribute> attributes = new HashMap<>();
-		attributes.put("host_attr_str", host3attr1);
-		attributes.put("host_attr_int", host3attr2);
-		attributes.put("host_attr_bool", host3attr3);
-		attributes.put("host_attr_array", host3attr4);
-		attributes.put("host_attr_map", host3attr5);
-		attributes.put("host_attr_lstring", host3attr6);
-		attributes.put("host_attr_larray", host3attr7);
+		attributes.put("host_attr_str", host23attr1);
+		attributes.put("host_attr_int", host23attr2);
+		attributes.put("host_attr_bool", host23attr3);
+		attributes.put("host_attr_array", host23attr4);
+		attributes.put("host_attr_map", host23attr5);
+		attributes.put("host_attr_lstring", host23attr6);
+		attributes.put("host_attr_larray", host23attr7);
 
-		Long id = 3L;
-		String hostname = "hostname3";
-		Long facilityId = 3L;
-		String dsc = "dsc3";
+		Long id = 23L;
+		String hostname = "hostname23";
+		Long facilityId = 23L;
+		String dsc = "dsc23";
 
-		EXPECTED3 = new Host(id, hostname, facilityId, dsc, attributes, null);
+
+		EXPECTED23 = new Host(id, hostname, facilityId, dsc, attributes, null);
 	}
 
 	@AfterClass
@@ -202,11 +203,11 @@ public class HostSearchingTests {
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
 		assertEquals(3, result.size());
-		assertThat(result, hasItems(EXPECTED3, EXPECTED2, EXPECTED1));
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2, EXPECTED1));
 	}
 
 	@Test
-	public void findHostByStringAttribute() throws Exception {
+	public void findHostByStringAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_str\", \"value\" : \"value1\"}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -216,7 +217,7 @@ public class HostSearchingTests {
 	}
 
 	@Test
-	public void findHostByIntegerAttribute() throws Exception {
+	public void findHostByIntegerAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_int\", \"value\" : 1}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -226,17 +227,17 @@ public class HostSearchingTests {
 	}
 
 	@Test
-	public void findHostByBooleanAttribute() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_bool\", \"value\" : false}], \"attributeNames\" : [\"ALL\"] }";
+	public void findHostByBooleanAttributeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_bool\", \"value\" : true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
 		assertEquals(1, result.size());
-		assertEquals(EXPECTED2, result.get(0));
+		assertEquals(EXPECTED1, result.get(0));
 	}
 
 	@Test
-	public void findHostByArrayAttribute() throws Exception {
+	public void findHostByArrayAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_array\", \"value\" : [1,2]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -246,7 +247,7 @@ public class HostSearchingTests {
 	}
 
 	@Test
-	public void findHostByMapAttribute() throws Exception {
+	public void findHostByMapAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_map\", \"value\" : { \"key1\" : \"value1\", \"key2\" : \"value2\"}}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -256,7 +257,7 @@ public class HostSearchingTests {
 	}
 
 	@Test
-	public void findHostByLongStringAttribute() throws Exception {
+	public void findHostByLongStringAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_lstring\", \"value\" : \"long_value1\"}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -266,7 +267,7 @@ public class HostSearchingTests {
 	}
 
 	@Test
-	public void findHostByLongArrayAttribute() throws Exception {
+	public void findHostByLongArrayAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_larray\", \"value\" : [1,2]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -276,7 +277,117 @@ public class HostSearchingTests {
 	}
 
 	@Test
-	public void findHostByFacilityEntity() throws Exception {
+	public void findHostByIdLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"id\" : {\"value\": 2, \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findHostByHostnameLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"hostname\" : {\"value\":\"hostname2\", \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findHostByFacilityIdLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"facilityId\" : {\"value\": 2, \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findHostByDescriptionLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"description\" : {\"value\":\"dsc2\", \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findHostByStringAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_str\", \"value\" : \"value2\", \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findHostByIntegerAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_int\", \"value\" : 2, \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findHostByBooleanAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_bool\", \"value\" : false, \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findHostByArrayAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_array\", \"value\" : [3,4], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findHostByMapAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_map\", \"value\" : { \"key3\" : \"value3\", \"key4\" : \"value4\"}, \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findHostByLongStringAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_lstring\", \"value\" : \"long_value2\", \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findHostByLongArrayAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_larray\", \"value\" : [3,4], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findHostByFacilityEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"host\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
 				"{ \"entityName\" : \"facility\", \"id\" : {\"value\": 1} }" +
 				"] }";

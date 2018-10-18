@@ -58,7 +58,7 @@ public class VoSearchingTests {
 
 	private Vo EXPECTED1;
 	private Vo EXPECTED2;
-	private Vo EXPECTED3;
+	private Vo EXPECTED23;
 
 	@BeforeClass
 	public static void setUpDatabaseTables() throws Exception {
@@ -75,7 +75,7 @@ public class VoSearchingTests {
 	public void setUp() {
 		setUpVo1();
 		setUpVo2();
-		setUpVo3();
+		setUpVo23();
 	}
 
 	private void setUpVo1() {
@@ -128,29 +128,29 @@ public class VoSearchingTests {
 		EXPECTED2 = new Vo(id, name, shortName, attributes, null);
 	}
 
-	private void setUpVo3() {
-		PerunAttribute vo3attr1 = new PerunAttribute("vo_attr_str", PerunAttributeType.STRING, "value3");
-		PerunAttribute vo3attr2 = new PerunAttribute("vo_attr_int", PerunAttributeType.INTEGER, "3");
-		PerunAttribute vo3attr3 = new PerunAttribute("vo_attr_bool", PerunAttributeType.BOOLEAN, "true");
-		PerunAttribute vo3attr4 = new PerunAttribute("vo_attr_array", PerunAttributeType.ARRAY, "5,6");
-		PerunAttribute vo3attr5 = new PerunAttribute("vo_attr_map", PerunAttributeType.MAP, "key5:value5,key6:value6");
-		PerunAttribute vo3attr6 = new PerunAttribute("vo_attr_lstring", PerunAttributeType.LARGE_STRING, "long_value3");
-		PerunAttribute vo3attr7 = new PerunAttribute("vo_attr_larray", PerunAttributeType.LARGE_ARRAY_LIST, "5,6");
+	private void setUpVo23() {
+		PerunAttribute vo23attr1 = new PerunAttribute("vo_attr_str", PerunAttributeType.STRING, "value2");
+		PerunAttribute vo23attr2 = new PerunAttribute("vo_attr_int", PerunAttributeType.INTEGER, "2");
+		PerunAttribute vo23attr3 = new PerunAttribute("vo_attr_bool", PerunAttributeType.BOOLEAN, "false");
+		PerunAttribute vo23attr4 = new PerunAttribute("vo_attr_array", PerunAttributeType.ARRAY, "3,4");
+		PerunAttribute vo23attr5 = new PerunAttribute("vo_attr_map", PerunAttributeType.MAP, "key3:value3,key4:value4");
+		PerunAttribute vo23attr6 = new PerunAttribute("vo_attr_lstring", PerunAttributeType.LARGE_STRING, "long_value1");
+		PerunAttribute vo23attr7 = new PerunAttribute("vo_attr_larray", PerunAttributeType.LARGE_ARRAY_LIST, "3,4");
 
 		Map<String, PerunAttribute> attributes = new HashMap<>();
-		attributes.put("vo_attr_str", vo3attr1);
-		attributes.put("vo_attr_int", vo3attr2);
-		attributes.put("vo_attr_bool", vo3attr3);
-		attributes.put("vo_attr_array", vo3attr4);
-		attributes.put("vo_attr_map", vo3attr5);
-		attributes.put("vo_attr_lstring", vo3attr6);
-		attributes.put("vo_attr_larray", vo3attr7);
+		attributes.put("vo_attr_str", vo23attr1);
+		attributes.put("vo_attr_int", vo23attr2);
+		attributes.put("vo_attr_bool", vo23attr3);
+		attributes.put("vo_attr_array", vo23attr4);
+		attributes.put("vo_attr_map", vo23attr5);
+		attributes.put("vo_attr_lstring", vo23attr6);
+		attributes.put("vo_attr_larray", vo23attr7);
 
-		Long id = 3L;
-		String shortName = "vo3";
-		String name = "virtual_organization3";
+		Long id = 23L;
+		String shortName = "vo23";
+		String name = "virtual_organization23";
 
-		EXPECTED3 = new Vo(id, name, shortName, attributes, null);
+		EXPECTED23 = new Vo(id, name, shortName, attributes, null);
 	}
 
 	@AfterClass
@@ -195,11 +195,11 @@ public class VoSearchingTests {
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
 		assertEquals(3, result.size());
-		assertThat(result, hasItems(EXPECTED3, EXPECTED2, EXPECTED1));
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2, EXPECTED1));
 	}
 
 	@Test
-	public void findVoByStringAttribute() throws Exception {
+	public void findVoByStringAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_str\", \"value\" : \"value1\"}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -209,7 +209,7 @@ public class VoSearchingTests {
 	}
 
 	@Test
-	public void findVoByIntegerAttribute() throws Exception {
+	public void findVoByIntegerAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_int\", \"value\" : 1}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -219,17 +219,17 @@ public class VoSearchingTests {
 	}
 
 	@Test
-	public void findVoByBooleanAttribute() throws Exception {
-		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_bool\", \"value\" : false}], \"attributeNames\" : [\"ALL\"] }";
+	public void findVoByBooleanAttributeTest() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_bool\", \"value\" : true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
 		assertEquals(1, result.size());
-		assertEquals(EXPECTED2, result.get(0));
+		assertEquals(EXPECTED1, result.get(0));
 	}
 
 	@Test
-	public void findVoByArrayAttribute() throws Exception {
+	public void findVoByArrayAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_array\", \"value\" : [1,2]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -239,7 +239,7 @@ public class VoSearchingTests {
 	}
 
 	@Test
-	public void findVoByMapAttribute() throws Exception {
+	public void findVoByMapAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_map\", \"value\" : { \"key1\" : \"value1\", \"key2\" : \"value2\"}}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -249,7 +249,7 @@ public class VoSearchingTests {
 	}
 
 	@Test
-	public void findVoByLongStringAttribute() throws Exception {
+	public void findVoByLongStringAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_lstring\", \"value\" : \"long_value1\"}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -259,7 +259,7 @@ public class VoSearchingTests {
 	}
 
 	@Test
-	public void findVoByLongArrayAttribute() throws Exception {
+	public void findVoByLongArrayAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_larray\", \"value\" : [1,2]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -269,7 +269,107 @@ public class VoSearchingTests {
 	}
 
 	@Test
-	public void findVoByResourceEntity() throws Exception {
+	public void findVoByIdLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"id\" : {\"value\": 2, \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findVoByNameLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"name\" : {\"value\":\"virtual_organization2\", \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findVoByShortNameLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"shortName\" : {\"value\":\"vo2\", \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findVoByStringAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_str\", \"value\" : \"value2\", \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findVoByIntegerAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_int\", \"value\" : 2, \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findVoByBooleanAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_bool\", \"value\" : false, \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findVoByArrayAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_array\", \"value\" : [3,4], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findVoByMapAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_map\", \"value\" : { \"key3\" : \"value3\", \"key4\" : \"value4\"}, \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findVoByLongStringAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_lstring\", \"value\" : \"long_value2\", \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findVoByLongArrayAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"vo\", \"attributes\" : [ { \"name\" : \"vo_attr_larray\", \"value\" : [3,4], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findVoByResourceEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
 				"{ \"entityName\" : \"resource\", \"id\" : {\"value\": 1} }" +
 				"] }";
@@ -281,7 +381,7 @@ public class VoSearchingTests {
 	}
 
 	@Test
-	public void findVoByExtSourceEntity() throws Exception {
+	public void findVoByExtSourceEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
 				"{ \"entityName\" : \"ext_source\", \"id\" : {\"value\": 1} }" +
 				"] }";
@@ -293,7 +393,7 @@ public class VoSearchingTests {
 	}
 
 	@Test
-	public void findVoByGroupEntity() throws Exception {
+	public void findVoByGroupEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
 				"{ \"entityName\" : \"group\", \"id\" : {\"value\": 1} }" +
 				"] }";
@@ -305,7 +405,7 @@ public class VoSearchingTests {
 	}
 
 	@Test
-	public void findVoByMemberEntity() throws Exception {
+	public void findVoByMemberEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"vo\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
 				"{ \"entityName\" : \"member\", \"id\" : {\"value\": 1} }" +
 				"] }";

@@ -132,7 +132,7 @@ public abstract class BasicInputEntity extends InputEntity {
 					part = "ent." + attr.getName() + operator;
 					break;
 				case LIKE_MATCH:
-					part = "ent." + attr.getName() + ":VARCHAR" + operator + query.nextParam('%' + attr.stringValue() + '%');
+					part = "ent." + attr.getName() + "::VARCHAR " + operator +  ' ' + query.nextParam('%' + attr.stringValue() + '%');
 					break;
 				case EXACT_MATCH:
 					part = "ent." + attr.getName() + operator + query.nextParam(attr.getValue());

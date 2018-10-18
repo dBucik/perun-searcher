@@ -6,7 +6,6 @@ import cz.metacentrum.perunsearch.DBUtils;
 import cz.metacentrum.perunsearch.persistence.data.PerunEntitiesDAO;
 import cz.metacentrum.perunsearch.persistence.data.PerunEntitiesDAOImpl;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
-import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
 import cz.metacentrum.perunsearch.persistence.models.entities.basic.Service;
 import cz.metacentrum.perunsearch.service.SearcherService;
 import org.junit.AfterClass;
@@ -49,7 +48,7 @@ public class ServiceSearchingTests {
 
 	private Service EXPECTED1;
 	private Service EXPECTED2;
-	private Service EXPECTED3;
+	private Service EXPECTED23;
 
 	@BeforeClass
 	public static void setUpDatabaseTables() throws Exception {
@@ -63,13 +62,13 @@ public class ServiceSearchingTests {
 	}
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		setUpService1();
 		setUpService2();
-		setUpService3();
+		setUpService23();
 	}
 
-	private void setUpService1() throws Exception {
+	private void setUpService1() {
 		Long id = 1L;
 		String name = "service1";
 		String description = "dsc1";
@@ -93,16 +92,16 @@ public class ServiceSearchingTests {
 		EXPECTED2 = new Service(id, name, description, delay, recurrence, enabled, script, null);
 	}
 
-	private void setUpService3() {
-		Long id = 3L;
-		String name = "service3";
-		String description = "dsc3";
-		int delay = 3;
-		int recurrence = 3;
+	private void setUpService23() {
+		Long id = 23L;
+		String name = "service23";
+		String description = "dsc23";
+		int delay = 23;
+		int recurrence = 23;
 		boolean enabled = false;
-		String script = "script3";
+		String script = "script23";
 
-		EXPECTED3 = new Service(id, name, description, delay, recurrence, enabled, script, null);
+		EXPECTED23 = new Service(id, name, description, delay, recurrence, enabled, script, null);
 	}
 
 	@AfterClass
@@ -187,11 +186,81 @@ public class ServiceSearchingTests {
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
 		assertEquals(3, result.size());
-		assertThat(result, hasItems(EXPECTED3, EXPECTED2, EXPECTED1));
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2, EXPECTED1));
 	}
 
 	@Test
-	public void findServiceByResourceEntity() throws Exception {
+	public void findServiceByIdLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"service\", \"id\" : {\"value\": 2, \"matchLike\": true} }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findServiceByNameLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"service\", \"name\" : {\"value\":\"service2\", \"matchLike\": true} }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findServiceByDescriptionLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"service\", \"description\" : {\"value\":\"dsc2\", \"matchLike\": true} }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findServiceByDelayLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"service\", \"delay\" : {\"value\": 2, \"matchLike\": true} }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findServiceByRecurrenceLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"service\", \"recurrence\" : {\"value\": 2, \"matchLike\": true} }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findServiceByEnabledLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"service\", \"enabled\" : {\"value\": false, \"matchLike\": true} }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findServiceByScriptLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"service\", \"script\" : {\"value\": \"script2\", \"matchLike\": true}}";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findServiceByResourceEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"service\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
 				"{ \"entityName\" : \"resource\", \"id\" : {\"value\": 1} }" +
 				"] }";

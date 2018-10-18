@@ -452,7 +452,7 @@ public class JsonToInputParser {
 
 	private static InputAttribute parseAttribute(JSONObject attributeJson) throws InputParseException {
 		String name = attributeJson.getString("name");
-		boolean match = attributeJson.optBoolean("likeMatchEnabled", false);
+		boolean match = attributeJson.optBoolean("matchLike", false);
 		Object value = attributeJson.get("value");
 
 		try {
@@ -517,10 +517,11 @@ public class JsonToInputParser {
 	private static InputAttribute getInputAttrWithTimestamp(JSONObject json, String key, String keyInTable) throws AttributeTypeException {
 		JSONObject attr = json.getJSONObject(key);
 		boolean match = attr.optBoolean("matchLike", false);
-		String stamp = getString(attr, "value");
-		Timestamp value = null;
-		if (stamp != null) {
-			value = Timestamp.valueOf(stamp);
+		String value = getString(attr, "value");
+		if (!match && value != null) {
+			Timestamp stamp = Timestamp.valueOf(value);
+			return new InputAttribute(keyInTable, match, stamp);
+
 		}
 
 		return new InputAttribute(keyInTable, match, value);

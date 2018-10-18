@@ -1,51 +1,51 @@
 INSERT INTO ext_sources(id, name, type) VALUES (1, 'ext_source1', 'type1');
 INSERT INTO ext_sources(id, name, type) VALUES (2, 'ext_source2', 'type2');
-INSERT INTO ext_sources(id, name, type) VALUES (3, 'ext_source3', 'type3');
+INSERT INTO ext_sources(id, name, type) VALUES (23, 'ext_source23', 'type23');
 
 INSERT INTO facilities(id, name, dsc) VALUES (1, 'facility1', 'dsc1');
 INSERT INTO facilities(id, name, dsc) VALUES (2, 'facility2', 'dsc2');
-INSERT INTO facilities(id, name, dsc) VALUES (3, 'facility3', 'dsc3');
+INSERT INTO facilities(id, name, dsc) VALUES (23, 'facility23', 'dsc23');
 
 INSERT INTO vos(id, name, short_name) VALUES (1, 'virtual_organization1', 'vo1');
 INSERT INTO vos(id, name, short_name) VALUES (2, 'virtual_organization2', 'vo2');
-INSERT INTO vos(id, name, short_name) VALUES (3, 'virtual_organization3', 'vo3');
-
+INSERT INTO vos(id, name, short_name) VALUES (23, 'virtual_organization23', 'vo23');
 INSERT INTO services(id, name, description, delay, recurrence, enabled, script)
 VALUES (1, 'service1', 'dsc1', 1, 1, '1', 'script1');
 INSERT INTO services(id, name, description, delay, recurrence, enabled, script)
 VALUES (2, 'service2', 'dsc2', 2, 2, '0', 'script2');
 INSERT INTO services(id, name, description, delay, recurrence, enabled, script)
-VALUES (3, 'service3', 'dsc3', 3, 3, '0', 'script3');
+VALUES (23, 'service23', 'dsc23', 23, 23, '0', 'script23');
 
 INSERT INTO users(id, first_name, last_name, middle_name, title_before, title_after, service_acc, sponsored_acc)
-VALUES (1, 'first_name1', 'last_name1', 'middle_name1', 'title_before1', 'title_after1', '1', '0' );
+VALUES (1, 'first_name1', 'last_name1', 'middle_name1', 'title_before1', 'title_after1', '1', '1' );
 INSERT INTO users(id, first_name, last_name, middle_name, title_before, title_after, service_acc, sponsored_acc)
 VALUES (2, 'first_name2', 'last_name2', 'middle_name2', 'title_before2', 'title_after2', '0', '0' );
 INSERT INTO users(id, first_name, last_name, middle_name, title_before, title_after, service_acc, sponsored_acc)
-VALUES (3, 'first_name3', 'last_name3', 'middle_name3', 'title_before3', 'title_after3', '0', '1' );
+VALUES (23, 'first_name23', 'last_name23', 'middle_name23', 'title_before23', 'title_after23', '0', '0' );
 
 INSERT INTO hosts(id, hostname, facility_id, dsc) VALUES (1, 'hostname1', 1, 'dsc1');
 INSERT INTO hosts(id, hostname, facility_id, dsc) VALUES (2, 'hostname2', 2, 'dsc2');
-INSERT INTO hosts(id, hostname, facility_id, dsc) VALUES (3, 'hostname3', 3, 'dsc3');
+INSERT INTO hosts(id, hostname, facility_id, dsc) VALUES (23, 'hostname23', 23, 'dsc23');
 
 INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (1, 'group1', 'dsc1', 1, null);
 INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (2, 'group2', 'dsc2', 2, null);
-INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (3, 'group3', 'dsc3', 1, 1);
+INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (23, 'group23', 'dsc23', 2, 2);
+INSERT INTO groups(id, name, dsc, vo_id, parent_group_id) VALUES (123, 'group123', 'dsc123', 23, 23);
 
 INSERT INTO user_ext_sources(id, user_id, login_ext, ext_sources_id, loa, last_access)
 VALUES (1, 1, 'login_ext1', 1, 0, (TIMESTAMP '2018-01-01 08:00:00'));
 INSERT INTO user_ext_sources(id, user_id, login_ext, ext_sources_id, loa, last_access)
 VALUES (2, 2, 'login_ext2', 2, 1, (TIMESTAMP '2018-01-02 08:00:00'));
 INSERT INTO user_ext_sources(id, user_id, login_ext, ext_sources_id, loa, last_access)
-VALUES (3, 3, 'login_ext3', 3, 2, (TIMESTAMP '2018-01-03 08:00:00'));
+VALUES (23, 23, 'login_ext23', 23, 1, (TIMESTAMP '2018-01-02 08:00:00'));
 
 INSERT INTO members(id, vo_id, user_id, sponsored) VALUES (1, 1, 1, true);
 INSERT INTO members(id, vo_id, user_id, sponsored) VALUES (2, 2, 2, false);
-INSERT INTO members(id, vo_id, user_id, sponsored) VALUES (3, 3, 3, true);
+INSERT INTO members(id, vo_id, user_id, sponsored) VALUES (23, 23, 23, false);
 
 INSERT INTO resources(id, facility_id, name, dsc, vo_id) VALUES (1, 1, 'resource1', 'dsc1', 1);
 INSERT INTO resources(id, facility_id, name, dsc, vo_id) VALUES (2, 2, 'resource2', 'dsc2', 2);
-INSERT INTO resources(id, facility_id, name, dsc, vo_id) VALUES (3, 3, 'resource3', 'dsc3', 3);
+INSERT INTO resources(id, facility_id, name, dsc, vo_id) VALUES (23, 23, 'resource23', 'dsc23', 23);
 
 INSERT INTO attr_names(id, attr_name, type) VALUES (1, 'facility_attr_str', 'java.lang.String');
 INSERT INTO attr_names(id, attr_name, type) VALUES (2, 'facility_attr_int', 'java.lang.Integer');
@@ -167,13 +167,13 @@ INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES
 INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (2, 'ext_source_attr_lstring', 'long_value2');
 INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (2, 'ext_source_attr_larray', '3,4');
 
-INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_str', 'value3');
-INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_int', '3');
-INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_bool', 'false');
-INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_array', '5,6');
-INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_map', 'key5:value5,key6:value6');
-INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_lstring', 'long_value3');
-INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (3, 'ext_source_attr_larray', '5,6');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (23, 'ext_source_attr_str', 'value2');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (23, 'ext_source_attr_int', '2');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (23, 'ext_source_attr_bool', 'false');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (23, 'ext_source_attr_array', '3,4');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (23, 'ext_source_attr_map', 'key3:value3,key4:value4');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (23, 'ext_source_attr_lstring', 'long_value2');
+INSERT INTO ext_sources_attributes(ext_sources_id, attr_name, attr_value) VALUES (23, 'ext_source_attr_larray', '3,4');
 
 INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (1, 1, 'value1', null);
 INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (1, 2, '1', null);
@@ -191,13 +191,13 @@ INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_te
 INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (2, 6, null, 'long_value2');
 INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (2, 7, null, '3,4');
 
-INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 1, 'value3', null);
-INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 2, '3', null);
-INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 'true', null);
-INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 4, null, '5,6');
-INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 5, null, 'key5:value5,key6:value6');
-INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 6, null, 'long_value3');
-INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 7, null, '5,6');
+INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 1, 'value2', null);
+INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 2, '2', null);
+INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 3, 'false', null);
+INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 4, null, '3,4');
+INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 5, null, 'key3:value3,key4:value4');
+INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 6, null, 'long_value2');
+INSERT INTO facility_attr_values(facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 7, null, '3,4');
 
 INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (1, 8, 'value1', null);
 INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (1, 9, '1', null);
@@ -215,13 +215,21 @@ INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VA
 INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (2, 13, null, 'long_value2');
 INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (2, 14, null, '3,4');
 
-INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (3, 8, 'value3', null);
-INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (3, 9, '3', null);
-INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (3, 10, 'true', null);
-INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (3, 11, null, '5,6');
-INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (3, 12, null, 'key5:value5,key6:value6');
-INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (3, 13, null, 'long_value3');
-INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (3, 14, null, '5,6');
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (23, 8, 'value2', null);
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (23, 9, '2', null);
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (23, 10, 'false', null);
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (23, 11, null, '3,4');
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (23, 12, null, 'key3:value3,key4:value4');
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (23, 13, null, 'long_value2');
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (23, 14, null, '3,4');
+
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (123, 8, 'value2', null);
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (123, 9, '2', null);
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (123, 10, 'false', null);
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (123, 11, null, '3,4');
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (123, 12, null, 'key3:value3,key4:value4');
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (123, 13, null, 'long_value2');
+INSERT INTO group_attr_values(group_id, attr_id, attr_value, attr_value_text) VALUES (123, 14, null, '3,4');
 
 INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (1, 15, 'value1', null);
 INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (1, 16, '1', null);
@@ -239,13 +247,13 @@ INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALU
 INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (2, 20, null, 'long_value2');
 INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (2, 21, null, '3,4');
 
-INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (3, 15, 'value3', null);
-INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (3, 16, '3', null);
-INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (3, 17, 'true', null);
-INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (3, 18, null, '5,6');
-INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (3, 19, null, 'key5:value5,key6:value6');
-INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (3, 20, null, 'long_value3');
-INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (3, 21, null, '5,6');
+INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (23, 15, 'value2', null);
+INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (23, 16, '2', null);
+INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (23, 17, 'false', null);
+INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (23, 18, null, '3,4');
+INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (23, 19, null, 'key3:value3,key4:value4');
+INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (23, 20, null, 'long_value2');
+INSERT INTO host_attr_values(host_id, attr_id, attr_value, attr_value_text) VALUES (23, 21, null, '3,4');
 
 INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (1, 22, 'value1', null);
 INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (1, 23, '1', null);
@@ -263,13 +271,13 @@ INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) 
 INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (2, 27, null, 'long_value2');
 INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (2, 28, null, '3,4');
 
-INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (3, 22, 'value3', null);
-INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (3, 23, '3', null);
-INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (3, 24, 'true', null);
-INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (3, 25, null, '5,6');
-INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (3, 26, null, 'key5:value5,key6:value6');
-INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (3, 27, null, 'long_value3');
-INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (3, 28, null, '5,6');
+INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (23, 22, 'value2', null);
+INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, '2', null);
+INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (23, 24, 'false', null);
+INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (23, 25, null, '3,4');
+INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (23, 26, null, 'key3:value3,key4:value4');
+INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (23, 27, null, 'long_value2');
+INSERT INTO member_attr_values(member_id, attr_id, attr_value, attr_value_text) VALUES (23, 28, null, '3,4');
 
 INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (1, 29, 'value1', null);
 INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (1, 30, '1', null);
@@ -287,13 +295,13 @@ INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_te
 INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (2, 34, null, 'long_value2');
 INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (2, 35, null, '3,4');
 
-INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 29, 'value3', null);
-INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 30, '3', null);
-INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 31, 'true', null);
-INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 32, null, '5,6');
-INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 33, null, 'key5:value5,key6:value6');
-INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 34, null, 'long_value3');
-INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 35, null, '5,6');
+INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 29, 'value2', null);
+INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 30, '2', null);
+INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 31, 'false', null);
+INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 32, null, '3,4');
+INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 33, null, 'key3:value3,key4:value4');
+INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 34, null, 'long_value2');
+INSERT INTO resource_attr_values(resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 35, null, '3,4');
 
 INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (1, 36, 'value1', null);
 INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (1, 37, '1', null);
@@ -311,13 +319,13 @@ INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value,
 INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (2, 41, null, 'long_value2');
 INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (2, 42, null, '3,4');
 
-INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (3, 36, 'value3', null);
-INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (3, 37, '3', null);
-INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (3, 38, 'true', null);
-INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (3, 39, null, '5,6');
-INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (3, 40, null, 'key5:value5,key6:value6');
-INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (3, 41, null, 'long_value3');
-INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (3, 42, null, '5,6');
+INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (23, 36, 'value2', null);
+INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (23, 37, '2', null);
+INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (23, 38, 'false', null);
+INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (23, 39, null, '3,4');
+INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (23, 40, null, 'key3:value3,key4:value4');
+INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (23, 41, null, 'long_value2');
+INSERT INTO user_ext_source_attr_values(user_ext_source_id, attr_id, attr_value, attr_value_text) VALUES (23, 42, null, '3,4');
 
 INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (1, 43, 'value1', null);
 INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (1, 44, '1', null);
@@ -335,13 +343,13 @@ INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALU
 INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (2, 48, null, 'long_value2');
 INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (2, 49, null, '3,4');
 
-INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (3, 43, 'value3', null);
-INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (3, 44, '3', null);
-INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (3, 45, 'true', null);
-INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (3, 46, null, '5,6');
-INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (3, 47, null, 'key5:value5,key6:value6');
-INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (3, 48, null, 'long_value3');
-INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (3, 49, null, '5,6');
+INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (23, 43, 'value2', null);
+INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (23, 44, '2', null);
+INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (23, 45, 'false', null);
+INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (23, 46, null, '3,4');
+INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (23, 47, null, 'key3:value3,key4:value4');
+INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (23, 48, null, 'long_value2');
+INSERT INTO user_attr_values(user_id, attr_id, attr_value, attr_value_text) VALUES (23, 49, null, '3,4');
 
 INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (1, 50, 'value1', null);
 INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (1, 51, '1', null);
@@ -359,13 +367,13 @@ INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (
 INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (2, 55, null, 'long_value2');
 INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (2, 56, null, '3,4');
 
-INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (3, 50, 'value3', null);
-INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (3, 51, '3', null);
-INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (3, 52, 'true', null);
-INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (3, 53, null, '5,6');
-INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (3, 54, null, 'key5:value5,key6:value6');
-INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (3, 55, null, 'long_value3');
-INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (3, 56, null, '5,6');
+INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (23, 50, 'value2', null);
+INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (23, 51, '2', null);
+INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (23, 52, 'false', null);
+INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (23, 53, null, '3,4');
+INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (23, 54, null, 'key3:value3,key4:value4');
+INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (23, 55, null, 'long_value2');
+INSERT INTO vo_attr_values(vo_id, attr_id, attr_value, attr_value_text) VALUES (23, 56, null, '3,4');
 
 INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (1, 1, 57, 'value1', null);
 INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (1, 1, 58, '1', null);
@@ -383,13 +391,13 @@ INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_valu
 INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (2, 2, 62, null, 'long_value2');
 INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (2, 2, 63, null, '3,4');
 
-INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 57, 'value3', null);
-INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 58, '3', null);
-INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 59, 'false', null);
-INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 60, null, '5,6');
-INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 61, null, 'key5:value5,key6:value6');
-INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 62, null, 'long_value3');
-INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 63, null, '5,6');
+INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 57, 'value2', null);
+INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 58, '2', null);
+INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 59, 'false', null);
+INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 60, null, '3,4');
+INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 61, null, 'key3:value3,key4:value4');
+INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 62, null, 'long_value2');
+INSERT INTO group_resource_attr_values(group_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 63, null, '3,4');
 
 INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (1, 1, 64, 'value1', null);
 INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (1, 1, 65, '1', null);
@@ -407,13 +415,13 @@ INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, a
 INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (2, 2, 69, null, 'long_value2');
 INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (2, 2, 70, null, '3,4');
 
-INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 64, 'value3', null);
-INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 65, '3', null);
-INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 66, 'false', null);
-INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 67, null, '5,6');
-INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 68, null, 'key5:value5,key6:value6');
-INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 69, null, 'long_value3');
-INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 70, null, '5,6');
+INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 64, 'value2', null);
+INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 65, '2', null);
+INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 66, 'false', null);
+INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 67, null, '3,4');
+INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 68, null, 'key3:value3,key4:value4');
+INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 69, null, 'long_value2');
+INSERT INTO member_group_attr_values(member_id, group_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 70, null, '3,4');
 
 INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (1, 1, 71, 'value1', null);
 INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (1, 1, 72, '1', null);
@@ -431,13 +439,13 @@ INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_va
 INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (2, 2, 76, null, 'long_value2');
 INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (2, 2, 77, null, '3,4');
 
-INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 71, 'value3', null);
-INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 72, '3', null);
-INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 73, 'false', null);
-INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 74, null, '5,6');
-INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 75, null, 'key5:value5,key6:value6');
-INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 76, null, 'long_value3');
-INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 77, null, '5,6');
+INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 71, 'value2', null);
+INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 72, '2', null);
+INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 73, 'false', null);
+INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 74, null, '3,4');
+INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 75, null, 'key3:value3,key4:value4');
+INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 76, null, 'long_value2');
+INSERT INTO member_resource_attr_values(member_id, resource_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 77, null, '3,4');
 
 INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (1, 1, 78, 'value1', null);
 INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (1, 1, 79, '1', null);
@@ -455,30 +463,30 @@ INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value,
 INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (2, 2, 83, null, 'long_value2');
 INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (2, 2, 84, null, '3,4');
 
-INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 78, 'value3', null);
-INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 79, '3', null);
-INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 80, 'false', null);
-INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 81, null, '5,6');
-INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 82, null, 'key5:value5,key6:value6');
-INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 83, null, 'long_value3');
-INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (3, 3, 84, null, '5,6');
+INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 78, 'value2', null);
+INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 79, '2', null);
+INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 80, 'false', null);
+INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 81, null, '3,4');
+INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 82, null, 'key3:value3,key4:value4');
+INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 83, null, 'long_value2');
+INSERT INTO user_facility_attr_values(user_id, facility_id, attr_id, attr_value, attr_value_text) VALUES (23, 23, 84, null, '3,4');
 
 INSERT INTO vo_ext_sources(vo_id, ext_sources_id) VALUES (1, 1);
 INSERT INTO vo_ext_sources(vo_id, ext_sources_id) VALUES (2, 2);
-INSERT INTO vo_ext_sources(vo_id, ext_sources_id) VALUES (3, 3);
+INSERT INTO vo_ext_sources(vo_id, ext_sources_id) VALUES (23, 23);
 
 INSERT INTO groups_resources(group_id, resource_id) VALUES(1, 1);
 INSERT INTO groups_resources(group_id, resource_id) VALUES(2, 2);
-INSERT INTO groups_resources(group_id, resource_id) VALUES(3, 3);
+INSERT INTO groups_resources(group_id, resource_id) VALUES(23, 23);
 
 INSERT INTO resource_services(resource_id, service_id) VALUES (1, 1);
 INSERT INTO resource_services(resource_id, service_id) VALUES (2, 2);
-INSERT INTO resource_services(resource_id, service_id) VALUES (3, 3);
+INSERT INTO resource_services(resource_id, service_id) VALUES (23, 23);
 
 INSERT INTO groups_members(group_id, member_id) VALUES (1, 1);
 INSERT INTO groups_members(group_id, member_id) VALUES (2, 2);
-INSERT INTO groups_members(group_id, member_id) VALUES (3, 3);
+INSERT INTO groups_members(group_id, member_id) VALUES (23, 23);
 
 INSERT INTO group_ext_sources(group_id, ext_source_id) VALUES (1, 1);
 INSERT INTO group_ext_sources(group_id, ext_source_id) VALUES (2, 2);
-INSERT INTO group_ext_sources(group_id, ext_source_id) VALUES (3, 3);
+INSERT INTO group_ext_sources(group_id, ext_source_id) VALUES (23, 23);

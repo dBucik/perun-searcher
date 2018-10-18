@@ -52,7 +52,7 @@ public class FacilitySearchingTests {
 
 	private Facility EXPECTED1;
 	private Facility EXPECTED2;
-	private Facility EXPECTED3;
+	private Facility EXPECTED23;
 
 	@BeforeClass
 	public static void setUpDatabaseTables() throws Exception {
@@ -66,13 +66,13 @@ public class FacilitySearchingTests {
 	}
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		setUpFacility1();
 		setUpFacility2();
-		setUpFacility3();
+		setUpFacility23();
 	}
 
-	private void setUpFacility1() throws Exception {
+	private void setUpFacility1() {
 		PerunAttribute facility1attr1 = new PerunAttribute("facility_attr_str", PerunAttributeType.STRING, "value1");
 		PerunAttribute facility1attr2 = new PerunAttribute("facility_attr_int", PerunAttributeType.INTEGER, "1");
 		PerunAttribute facility1attr3 = new PerunAttribute("facility_attr_bool", PerunAttributeType.BOOLEAN, "true");
@@ -122,29 +122,29 @@ public class FacilitySearchingTests {
 		EXPECTED2 = new Facility(id, name, description, attributes, null);
 	}
 
-	private void setUpFacility3() {
-		PerunAttribute facility3attr1 = new PerunAttribute("facility_attr_str", PerunAttributeType.STRING, "value3");
-		PerunAttribute facility3attr2 = new PerunAttribute("facility_attr_int", PerunAttributeType.INTEGER, "3");
-		PerunAttribute facility3attr3 = new PerunAttribute("facility_attr_bool", PerunAttributeType.BOOLEAN, "true");
-		PerunAttribute facility3attr4 = new PerunAttribute("facility_attr_array", PerunAttributeType.ARRAY, "5,6");
-		PerunAttribute facility3attr5 = new PerunAttribute("facility_attr_map", PerunAttributeType.MAP, "key5:value5,key6:value6");
-		PerunAttribute facility3attr6 = new PerunAttribute("facility_attr_lstring", PerunAttributeType.LARGE_STRING, "long_value3");
-		PerunAttribute facility3attr7 = new PerunAttribute("facility_attr_larray", PerunAttributeType.LARGE_ARRAY_LIST, "5,6");
+	private void setUpFacility23() {
+		PerunAttribute facility23attr1 = new PerunAttribute("facility_attr_str", PerunAttributeType.STRING, "value2");
+		PerunAttribute facility23attr2 = new PerunAttribute("facility_attr_int", PerunAttributeType.INTEGER, "2");
+		PerunAttribute facility23attr3 = new PerunAttribute("facility_attr_bool", PerunAttributeType.BOOLEAN, "false");
+		PerunAttribute facility23attr4 = new PerunAttribute("facility_attr_array", PerunAttributeType.ARRAY, "3,4");
+		PerunAttribute facility23attr5 = new PerunAttribute("facility_attr_map", PerunAttributeType.MAP, "key3:value3,key4:value4");
+		PerunAttribute facility23attr6 = new PerunAttribute("facility_attr_lstring", PerunAttributeType.LARGE_STRING, "long_value1");
+		PerunAttribute facility23attr7 = new PerunAttribute("facility_attr_larray", PerunAttributeType.LARGE_ARRAY_LIST, "3,4");
 
 		Map<String, PerunAttribute> attributes = new HashMap<>();
-		attributes.put("facility_attr_str", facility3attr1);
-		attributes.put("facility_attr_int", facility3attr2);
-		attributes.put("facility_attr_bool", facility3attr3);
-		attributes.put("facility_attr_array", facility3attr4);
-		attributes.put("facility_attr_map", facility3attr5);
-		attributes.put("facility_attr_lstring", facility3attr6);
-		attributes.put("facility_attr_larray", facility3attr7);
+		attributes.put("facility_attr_str", facility23attr1);
+		attributes.put("facility_attr_int", facility23attr2);
+		attributes.put("facility_attr_bool", facility23attr3);
+		attributes.put("facility_attr_array", facility23attr4);
+		attributes.put("facility_attr_map", facility23attr5);
+		attributes.put("facility_attr_lstring", facility23attr6);
+		attributes.put("facility_attr_larray", facility23attr7);
 
-		Long id = 3L;
-		String name = "facility3";
-		String description = "dsc3";
+		Long id = 23L;
+		String name = "facility23";
+		String description = "dsc23";
 
-		EXPECTED3 = new Facility(id, name, description, attributes, null);
+		EXPECTED23 = new Facility(id, name, description, attributes, null);
 	}
 
 	@AfterClass
@@ -189,11 +189,11 @@ public class FacilitySearchingTests {
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
 		assertEquals(3, result.size());
-		assertThat(result, hasItems(EXPECTED3, EXPECTED2, EXPECTED1));
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2, EXPECTED1));
 	}
 
 	@Test
-	public void findFacilityByStringAttribute() throws Exception {
+	public void findFacilityByStringAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_str\", \"value\" : \"value1\"}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -203,7 +203,7 @@ public class FacilitySearchingTests {
 	}
 
 	@Test
-	public void findFacilityByIntegerAttribute() throws Exception {
+	public void findFacilityByIntegerAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_int\", \"value\" : 1}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -213,17 +213,17 @@ public class FacilitySearchingTests {
 	}
 
 	@Test
-	public void findFacilityByBooleanAttribute() throws Exception {
-		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_bool\", \"value\" : false}], \"attributeNames\" : [\"ALL\"] }";
+	public void findFacilityByBooleanAttributeTest() throws Exception {
+		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_bool\", \"value\" : true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
 		assertEquals(1, result.size());
-		assertEquals(EXPECTED2, result.get(0));
+		assertEquals(EXPECTED1, result.get(0));
 	}
 
 	@Test
-	public void findFacilityByArrayAttribute() throws Exception {
+	public void findFacilityByArrayAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_array\", \"value\" : [1,2]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -233,7 +233,7 @@ public class FacilitySearchingTests {
 	}
 
 	@Test
-	public void findFacilityByMapAttribute() throws Exception {
+	public void findFacilityByMapAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_map\", \"value\" : { \"key1\" : \"value1\", \"key2\" : \"value2\"}}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -243,7 +243,7 @@ public class FacilitySearchingTests {
 	}
 
 	@Test
-	public void findFacilityByLongStringAttribute() throws Exception {
+	public void findFacilityByLongStringAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_lstring\", \"value\" : \"long_value1\"}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -253,7 +253,7 @@ public class FacilitySearchingTests {
 	}
 
 	@Test
-	public void findFacilityByLongArrayAttribute() throws Exception {
+	public void findFacilityByLongArrayAttributeTest() throws Exception {
 		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_larray\", \"value\" : [1,2]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -263,7 +263,107 @@ public class FacilitySearchingTests {
 	}
 
 	@Test
-	public void findFacilityByUserEntity() throws Exception {
+	public void findFacilityByIdLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"facility\", \"id\" : {\"value\": 2, \"matchLike\" : true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findFacilityByNameLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"facility\", \"name\" : {\"value\":\"facility2\", \"matchLike\" : true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findFacilityByDescriptionLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"facility\", \"description\" : {\"value\":\"dsc2\", \"matchLike\" : true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findFacilityByStringAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_str\", \"value\" : \"value2\", \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findFacilityByIntegerAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_int\", \"value\" : 2, \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findFacilityByBooleanAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_bool\", \"value\" : false, \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findFacilityByArrayAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_array\", \"value\" : [3,4], \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findFacilityByMapAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_map\", \"value\" : { \"key3\" : \"value3\", \"key4\" : \"value4\"}, \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findFacilityByLongStringAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_lstring\", \"value\" : \"long_value2\", \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findFacilityByLongArrayAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"facility\", \"attributes\" : [ { \"name\" : \"facility_attr_larray\", \"value\" : [3,4], \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+
+		List<PerunEntity> result = service.performSearch(input);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertThat(result, hasItems(EXPECTED23, EXPECTED2));
+	}
+
+	@Test
+	public void findFacilityByUserEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"facility\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
 				"{ \"entityName\" : \"user\", \"id\" : {\"value\": 1} }" +
 				"] }";
@@ -275,7 +375,7 @@ public class FacilitySearchingTests {
 	}
 
 	@Test
-	public void findFacilityByResourceEntity() throws Exception {
+	public void findFacilityByResourceEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"facility\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
 				"{ \"entityName\" : \"resource\", \"id\" : {\"value\": 2} }" +
 				"] }";
@@ -287,7 +387,7 @@ public class FacilitySearchingTests {
 	}
 
 	@Test
-	public void findFacilityByHostEntity() throws Exception {
+	public void findFacilityByHostEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"facility\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
 				"{ \"entityName\" : \"host\", \"id\" : {\"value\": 1} }" +
 				"] }";
@@ -299,7 +399,7 @@ public class FacilitySearchingTests {
 	}
 
 	@Test
-	public void findFacilityByUserFacilityRelation() throws Exception {
+	public void findFacilityByUserFacilityRelationTest() throws Exception {
 		String input = "{\"entityName\" : \"facility\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
 				"{ \"entityName\" : \"user_facility\", \"userId\" : {\"value\": 1} }" +
 				"] }";
