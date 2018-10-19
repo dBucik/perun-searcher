@@ -15,13 +15,13 @@ public class HostMapper implements RowMapper<Host> {
 	public Host mapRow(ResultSet resultSet, int i) throws SQLException {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
-		Long id = entityJson.getLong("id");
+		Integer id = entityJson.getInt("id");
 		String hostName = MappersUtils.getString(entityJson,"hostname");
-		Long facilityId = MappersUtils.getLong(entityJson, "facility_id");
+		Integer facilityId = MappersUtils.getInteger(entityJson, "facility_id");
 		String dsc = MappersUtils.getString(entityJson,"dsc");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new Host(id, hostName, facilityId, dsc, attributes, foreignId);
 	}

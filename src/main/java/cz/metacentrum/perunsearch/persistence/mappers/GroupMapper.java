@@ -15,14 +15,14 @@ public class GroupMapper implements RowMapper<Group> {
 	public Group mapRow(ResultSet resultSet, int i) throws SQLException {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
-		Long id = entityJson.getLong("id");
+		Integer id = entityJson.getInt("id");
 		String name = MappersUtils.getString(entityJson,"name");
 		String dsc = MappersUtils.getString(entityJson,"dsc");
-		Long voId = MappersUtils.getLong(entityJson, "vo_id");
-		Long parentGroupId = MappersUtils.getLong(entityJson, "parent_group_id");
+		Integer voId = MappersUtils.getInteger(entityJson, "vo_id");
+		Integer parentGroupId = MappersUtils.getInteger(entityJson, "parent_group_id");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new Group(id, name, dsc, voId, parentGroupId, attributes, foreignId);
 	}

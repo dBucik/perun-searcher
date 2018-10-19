@@ -8,28 +8,28 @@ import java.util.Objects;
 @JsonIgnoreProperties(value = {"foreignId"})
 public abstract class PerunEntity {
 
-	private Long id;
+	private Integer id;
 	@JsonIgnore
-	private Long foreignId;
+	private Integer foreignId;
 
-	public PerunEntity(Long id, Long foreignId) {
+	public PerunEntity(Integer id, Integer foreignId) {
 		this.id = id;
 		this.foreignId = foreignId;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public Long getForeignId() {
+	public Integer getForeignId() {
 		return foreignId;
 	}
 
-	public void setForeignId(Long foreignId) {
+	public void setForeignId(Integer foreignId) {
 		this.foreignId = foreignId;
 	}
 

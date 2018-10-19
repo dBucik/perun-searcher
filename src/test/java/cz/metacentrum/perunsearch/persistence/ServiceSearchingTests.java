@@ -69,7 +69,7 @@ public class ServiceSearchingTests {
 	}
 
 	private void setUpService1() {
-		Long id = 1L;
+		Integer id = 1;
 		String name = "service1";
 		String description = "dsc1";
 		int delay = 1;
@@ -81,7 +81,7 @@ public class ServiceSearchingTests {
 	}
 
 	private void setUpService2() {
-		Long id = 2L;
+		Integer id = 2;
 		String name = "service2";
 		String description = "dsc2";
 		int delay = 2;
@@ -93,7 +93,7 @@ public class ServiceSearchingTests {
 	}
 
 	private void setUpService23() {
-		Long id = 23L;
+		Integer id = 23;
 		String name = "service23";
 		String description = "dsc23";
 		int delay = 23;
@@ -111,7 +111,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByIdTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"id\" : {\"value\": 1} }";
+		String input = "{\"entityName\" : \"service\", \"id\" : {\"value\": [1]} }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -121,7 +121,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByNameTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"name\" : {\"value\":\"service1\"} }";
+		String input = "{\"entityName\" : \"service\", \"name\" : {\"value\": [\"service1\"]} }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -131,7 +131,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByDescriptionTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"description\" : {\"value\":\"dsc1\"} }";
+		String input = "{\"entityName\" : \"service\", \"description\" : {\"value\": [\"dsc1\"]} }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -141,7 +141,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByDelayTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"delay\" : {\"value\": 1} }";
+		String input = "{\"entityName\" : \"service\", \"delay\" : {\"value\": [1]} }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -151,7 +151,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByRecurrenceTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"recurrence\" : {\"value\": 1} }";
+		String input = "{\"entityName\" : \"service\", \"recurrence\" : {\"value\": [1]} }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -161,7 +161,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByEnabledTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"enabled\" : {\"value\": true} }";
+		String input = "{\"entityName\" : \"service\", \"enabled\" : {\"value\": [true]} }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -171,7 +171,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByScriptTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"script\" : {\"value\": \"script1\"}}";
+		String input = "{\"entityName\" : \"service\", \"script\" : {\"value\": [\"script1\"]}}";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -191,7 +191,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByIdLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"id\" : {\"value\": 2, \"matchLike\": true} }";
+		String input = "{\"entityName\" : \"service\", \"id\" : {\"value\": [2], \"matchLike\": true} }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -201,7 +201,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByNameLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"name\" : {\"value\":\"service2\", \"matchLike\": true} }";
+		String input = "{\"entityName\" : \"service\", \"name\" : {\"value\": [\"service2\"], \"matchLike\": true} }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -211,7 +211,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByDescriptionLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"description\" : {\"value\":\"dsc2\", \"matchLike\": true} }";
+		String input = "{\"entityName\" : \"service\", \"description\" : {\"value\": [\"dsc2\"], \"matchLike\": true} }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -221,7 +221,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByDelayLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"delay\" : {\"value\": 2, \"matchLike\": true} }";
+		String input = "{\"entityName\" : \"service\", \"delay\" : {\"value\": [2], \"matchLike\": true} }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -231,7 +231,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByRecurrenceLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"recurrence\" : {\"value\": 2, \"matchLike\": true} }";
+		String input = "{\"entityName\" : \"service\", \"recurrence\" : {\"value\": [2], \"matchLike\": true} }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -241,7 +241,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByEnabledLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"enabled\" : {\"value\": false, \"matchLike\": true} }";
+		String input = "{\"entityName\" : \"service\", \"enabled\" : {\"value\": [false], \"matchLike\": true} }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -251,7 +251,7 @@ public class ServiceSearchingTests {
 
 	@Test
 	public void findServiceByScriptLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"service\", \"script\" : {\"value\": \"script2\", \"matchLike\": true}}";
+		String input = "{\"entityName\" : \"service\", \"script\" : {\"value\": [\"script2\"], \"matchLike\": true}}";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -262,7 +262,7 @@ public class ServiceSearchingTests {
 	@Test
 	public void findServiceByResourceEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"service\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"resource\", \"id\" : {\"value\": 1} }" +
+				"{ \"entityName\" : \"resource\", \"id\" : {\"value\": [1]} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);

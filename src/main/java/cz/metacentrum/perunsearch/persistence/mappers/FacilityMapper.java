@@ -15,12 +15,12 @@ public class FacilityMapper implements RowMapper<Facility> {
 	public Facility mapRow(ResultSet resultSet, int i) throws SQLException {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
-		Long id = entityJson.getLong("id");
+		Integer id = entityJson.getInt("id");
 		String name = MappersUtils.getString(entityJson,"name");
 		String dsc = MappersUtils.getString(entityJson,"dsc");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new Facility(id, name, dsc, attributes, foreignId);
 	}

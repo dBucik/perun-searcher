@@ -12,11 +12,11 @@ public class MemberGroupMapper implements RowMapper<MemberGroup> {
 
 	@Override
 	public MemberGroup mapRow(ResultSet resultSet, int i) throws SQLException {
-		Long memberId = resultSet.getLong("member_id");
-		Long groupId = resultSet.getLong("group_id");
+		Integer memberId = resultSet.getInt("member_id");
+		Integer groupId = resultSet.getInt("group_id");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new MemberGroup(memberId, groupId, attributes, foreignId);
 	}

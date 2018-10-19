@@ -13,7 +13,7 @@ public class ServiceMapper implements RowMapper<Service> {
 	public Service mapRow(ResultSet resultSet, int i) throws SQLException {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
-		Long id = entityJson.getLong("id");
+		Integer id = entityJson.getInt("id");
 		String name = MappersUtils.getString(entityJson,"name");
 		String description = MappersUtils.getString(entityJson,"description");
 		Integer delay = MappersUtils.getInt(entityJson, "delay");
@@ -21,7 +21,7 @@ public class ServiceMapper implements RowMapper<Service> {
 		Boolean enabled = "1".equals(MappersUtils.getString(entityJson, "enabled"));
 		String script = MappersUtils.getString(entityJson,"script");
 
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new Service(id, name, description, delay, recurrence, enabled, script, foreignId);
 	}

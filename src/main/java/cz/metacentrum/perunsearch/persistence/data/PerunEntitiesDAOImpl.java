@@ -21,6 +21,7 @@ import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import cz.metacentrum.perunsearch.persistence.models.Query;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunRichEntity;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -62,7 +63,6 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 	private static final MemberResourceMapper MEMBER_RESOURCE_MAPPER = new MemberResourceMapper();
 	private static final UserFacilityMapper USER_FACILITY_MAPPER = new UserFacilityMapper();
 
-
 	public void setTemplate(JdbcTemplate template) {
 		if (template == null) {
 			throw new IllegalArgumentException("Attempting to set null JDBC template");
@@ -76,8 +76,8 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 	@Override
 	public List<PerunEntity> executeQuery(Query query) {
 		if (PerunEntityType.isRelation(query.getEntityType())) {
-			Set<Long> ids1 = getIdsForPrimaryKey(query.getPrimaryKey(), query.getInnerQueries());
-			Set<Long> ids2 = getIdsForSecondaryKey(query.getSecondaryKey(), query.getInnerQueries());
+			Set<Integer> ids1 = getIdsForPrimaryKey(query.getPrimaryKey(), query.getInnerQueries());
+			Set<Integer> ids2 = getIdsForSecondaryKey(query.getSecondaryKey(), query.getInnerQueries());
 
 			if (query.getInnerQueries() != null && !query.getInnerQueries().isEmpty()
 					&& (ids1.isEmpty() && ids2.isEmpty())) {
@@ -86,7 +86,7 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 
 			query.setIds(query.getPrimaryKey(), ids1, query.getSecondaryKey(), ids2);
 		} else {
-			Set<Long> ids = new HashSet<>();
+			Set<Integer> ids = new HashSet<>();
 			for (Query inner: query.getInnerQueries()) {
 				ids.addAll(this.executeQueryForIds(inner));
 			}
@@ -137,8 +137,18 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 				.collect(Collectors.toList());
 	}
 
-	private Set<Long> getIdsForPrimaryKey(String primaryKey, List<Query> innerQueries) {
-		Set<Long> result = new HashSet<>();
+	@Override
+	public List<Integer> executeQueryForIds(Query query) {
+		List<PerunEntity> entities = executeQuery(query);
+
+		return entities.stream()
+				.filter(entity -> !(entity instanceof PerunRichEntity) || hasAllAttributes(((PerunRichEntity) entity).getAttributes(), query.getInputAttributes()))
+				.map(PerunEntity::getForeignId)
+				.collect(Collectors.toList());
+	}
+
+	private Set<Integer> getIdsForPrimaryKey(String primaryKey, List<Query> innerQueries) {
+		Set<Integer> result = new HashSet<>();
 		List<Query> queries = filterQueriesPrimaryKey(primaryKey, innerQueries);
 
 		for (Query inner: queries) {
@@ -169,8 +179,8 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 		return queriesToExecute;
 	}
 
-	private Set<Long> getIdsForSecondaryKey(String secondaryKey, List<Query> innerQueries) {
-		Set<Long> result = new HashSet<>();
+	private Set<Integer> getIdsForSecondaryKey(String secondaryKey, List<Query> innerQueries) {
+		Set<Integer> result = new HashSet<>();
 		List<Query> queries = filterQueriesSecondaryKey(secondaryKey, innerQueries);
 
 		for (Query inner: queries) {
@@ -199,16 +209,6 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 		}
 
 		return queriesToExecute;
-	}
-
-	@Override
-	public List<Long> executeQueryForIds(Query query) {
-		List<PerunEntity> entities = executeQuery(query);
-
-		return entities.stream()
-				.filter(entity -> !(entity instanceof PerunRichEntity) || hasAllAttributes(((PerunRichEntity) entity).getAttributes(), query.getInputAttributes()))
-				.map(PerunEntity::getForeignId)
-				.collect(Collectors.toList());
 	}
 
 	private boolean hasAllAttributes(Map<String, PerunAttribute> attributes, List<InputAttribute> inputAttributes) {
@@ -243,113 +243,180 @@ public class PerunEntitiesDAOImpl implements PerunEntitiesDAO {
 
 	private boolean compareAttributeValues(InputAttribute a1, PerunAttribute a2) {
 		if (a1.isLikeMatch()) {
-			return compareValuesLike(a1, a2.stringValue());
+			return compareAttributeValuesLike(a1, a2.stringValue());
 		}
 
 		switch (a1.getType()) {
 			case STRING: {
-				String value1 = a1.valueAsString();
+				List<String> values1 = a1.valueAsStrings();
 				String value2 = a2.valueAsString();
-				return compareStringValues(value1, value2);
+				return compareStringValues(values1, value2);
 			}
 			case INTEGER: {
-				Integer value1 = a1.valueAsInt();
+				List<Integer> values1 = a1.valueAsInts();
 				Integer value2 = a2.valueAsInt();
-				return compareIntValues(value1, value2);
+				return compareIntValues(values1, value2);
 			}
 			case BOOLEAN: {
-				Boolean value1 = a1.valueAsBoolean();
+				List<Boolean> values1 = a1.valueAsBooleans();
 				Boolean value2 = a2.valueAsBoolean();
-				return compareBooleanValues(value1, value2);
+				return compareBooleanValues(values1, value2);
 			}
 			case ARRAY: {
-				List<String> value1 = a1.valueAsList();
+				List<List<String>> values1 = a1.valueAsLists();
 				List<String> value2 = a2.valueAsList();
-				return compareListValues(value1, value2);
+				return compareListValues(values1, value2);
 			}
 			case MAP: {
-				Map<String, String> value1 = a1.valueAsMap();
+				List<Map<String, String>> values1 = a1.valueAsMaps();
 				Map<String, String> value2 = a2.valueAsMap();
-				return compareMapValues(value1, value2);
+				return compareMapValues(values1, value2);
 			}
 		}
 
 		return false;
 	}
 
-	private boolean compareValuesLike(InputAttribute a1, String a2) {
+	private boolean compareStringValues(List<String> values1, String value2) {
+		if (values1 != null) {
+			return values1.contains(value2);
+		}
+
+		return false;
+	}
+
+	private boolean compareIntValues(List<Integer> values1, Integer value2) {
+		if (values1 != null) {
+			return values1.contains(value2);
+		}
+
+		return false;
+	}
+
+	private boolean compareBooleanValues(List<Boolean> values1, Boolean value2) {
+		if (values1 != null) {
+			return values1.contains(value2);
+		}
+
+		return false;
+	}
+
+	private boolean compareListValues(List<List<String>> values1, List<String> value2) {
+		if (values1 != null) {
+			if (value2 == null) {
+				return values1.contains(null);
+			}
+
+			for (List<String> val: values1) {
+				if (value2.containsAll(val)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	private boolean compareMapValues(List<Map<String, String>> values1, Map<String, String> value2) {
+		if (values1 != null) {
+			if (value2 == null) {
+				return values1.contains(null);
+			}
+
+			for (Map<String, String> val: values1) {
+				if (value2.entrySet().containsAll(val.entrySet())) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	private boolean compareAttributeValuesLike(InputAttribute a1, String a2) {
 		switch (a1.getType()) {
 			case STRING: {
-				return a2.contains(a1.valueAsString());
+				return compareStringValuesLike(a1.valueAsStrings(), a2);
 			}
 			case INTEGER: {
-				return a2.contains(a1.valueAsInt().toString());
+				return compareIntValuesLike(a1.valueAsInts(), a2);
 			}
 			case BOOLEAN: {
-				return a2.contains(a1.valueAsBoolean().toString());
+				return compareBooleanValuesLike(a1.valueAsBooleans(), a2);
 			}
 			case ARRAY: {
-				List<String> value1 = a1.valueAsList();
-				for (String subval: value1) {
-					if (!a2.contains(subval)) {
-						return false;
-					}
-				}
-				return true;
+				return compareListValuesLike(a1.valueAsLists(), a2);
 			}
 			case MAP: {
-				Map<String, String> value1 = a1.valueAsMap();
-				for (Map.Entry<String, String> subval: value1.entrySet()) {
-					String key = subval.getKey();
-					String value = subval.getValue();
-					if (!a2.contains(key) || !a2.contains(value)) {
-						return false;
-					}
-				}
-				return true;
+				return compareMapValuesLike(a1.valueAsMaps(), a2);
 			}
 		}
 
 		return false;
 	}
 
-	private boolean compareMapValues(Map<String, String> value1, Map<String, String> value2) {
-		if (value1 != null && value2 != null) {
-			return value1.entrySet().containsAll(value2.entrySet());
+	private boolean compareStringValuesLike(List<String> values1, String a2) {
+		for (String s: values1) {
+			if (a2.contains(s)) {
+				return true;
+			}
 		}
-
-		return value1 == value2;
+		return false;
 	}
 
-	private boolean compareListValues(List<String> value1, List<String> value2) {
-		if (value1 != null) {
-			return value1.containsAll(value2);
+	private boolean compareIntValuesLike(List<Integer> values1, String a2) {
+		for (Integer i: values1) {
+			if (a2.contains(i.toString())) {
+				return true;
+			}
 		}
-
-		return value2 == null;
+		return false;
 	}
 
-	private boolean compareBooleanValues(Boolean value1, Boolean value2) {
-		if (value1 != null) {
-			return value1.equals(value2);
+	private boolean compareBooleanValuesLike(List<Boolean> values1, String a2) {
+		for (Boolean b: values1) {
+			if (a2.contains(b.toString())) {
+				return true;
+			}
 		}
-
-		return value2 == null;
+		return false;
 	}
 
-	private boolean compareIntValues(Integer value1, Integer value2) {
-		if (value1 != null) {
-			return value1.equals(value2);
-		}
+	private boolean compareListValuesLike(List<List<String>> values1, String a2) {
+		for (List<String> ls: values1) {
+			boolean res = true;
+			for (String subval : ls) {
+				res = a2.contains(subval);
+				if (!res) {
+					break;
+				}
+			}
 
-		return value2 == null;
+			if (res)  {
+				return true;
+			}
+		}
+		return false;
 	}
 
-	private boolean compareStringValues(String value1, String value2) {
-		if (value1 != null) {
-			return value1.equals(value2);
-		}
+	private boolean compareMapValuesLike(List<Map<String, String>> values1, String a2) {
+		for (Map<String, String> mss: values1) {
+			boolean res = true;
+			for (Map.Entry<String, String> subval : mss.entrySet()) {
+				String key = subval.getKey();
+				String value = subval.getValue();
+				res = a2.contains(key) && a2.contains(value);
 
-		return value2 == null;
+				if (! res) {
+					break;
+				}
+			}
+
+			if (res) {
+				return true;
+			}
+
+		}
+		return false;
 	}
 }

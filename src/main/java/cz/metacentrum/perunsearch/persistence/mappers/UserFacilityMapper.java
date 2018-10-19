@@ -12,11 +12,11 @@ public class UserFacilityMapper implements RowMapper<UserFacility> {
 
 	@Override
 	public UserFacility mapRow(ResultSet resultSet, int i) throws SQLException {
-		Long userId = resultSet.getLong("user_id");
-		Long facilityId = resultSet.getLong("facility_id");
+		Integer userId = resultSet.getInt("user_id");
+		Integer facilityId = resultSet.getInt("facility_id");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new UserFacility(userId, facilityId, attributes, foreignId);
 	}

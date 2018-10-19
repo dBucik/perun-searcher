@@ -15,10 +15,10 @@ import java.util.Map;
 
 public class MappersUtils {
 
-	public static Long getForeignId(ResultSet resultSet) throws SQLException {
-		Long foreignId = null;
+	public static Integer getForeignId(ResultSet resultSet) throws SQLException {
+		Integer foreignId = null;
 		try {
-			foreignId = resultSet.getLong("foreign_id");
+			foreignId = resultSet.getInt("foreign_id");
 		} catch (PSQLException e) {
 			//this is fine, no foreign id fetched
 			//TODO
@@ -67,9 +67,9 @@ public class MappersUtils {
 				json.getBoolean(key) : null;
 	}
 
-	public static Long getLong(JSONObject json, String key) {
+	public static Integer getInteger(JSONObject json, String key) {
 		return (json.has(key) && json.get(key) != JSONObject.NULL) ?
-				json.getLong(key) : null;
+				json.getInt(key) : null;
 	}
 
 	public static Integer getInt(JSONObject json, String key) {

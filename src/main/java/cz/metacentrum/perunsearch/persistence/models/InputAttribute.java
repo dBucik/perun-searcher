@@ -2,6 +2,7 @@ package cz.metacentrum.perunsearch.persistence.models;
 
 import cz.metacentrum.perunsearch.persistence.enums.InputAttributeType;
 import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
+import org.apache.commons.collections4.CollectionUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -23,9 +24,9 @@ public class InputAttribute {
 	private String name;
 	private InputAttributeType type;
 	private boolean likeMatch;
-	private Object value;
+	private JSONArray value;
 
-	public InputAttribute(String name, boolean likeMatch, Object value) throws AttributeTypeException {
+	public InputAttribute(String name, boolean likeMatch, JSONArray value) throws AttributeTypeException {
 		this.name = name;
 		this.type = getType(value);
 		this.likeMatch = likeMatch;
@@ -48,12 +49,17 @@ public class InputAttribute {
 		this.type = type;
 	}
 
-	public void setValue(Object value) {
+	public void setValue(JSONArray value) {
 		this.value = value;
 	}
 
-	public Object getValue() {
-		return value;
+	public List<Object> getValue() {
+		List<Object> values = new ArrayList<>();
+		for (int i = 0; i < value.length(); i++) {
+			values.add(value.get(i));
+		}
+
+		return values;
 	}
 
 	public boolean isLikeMatch() {
@@ -64,62 +70,93 @@ public class InputAttribute {
 		this.likeMatch = likeMatch;
 	}
 
-	public String stringValue() {
-		return value.toString();
-	}
-
-	public String valueAsString() {
-		return (String) value;
-	}
-
-	public Integer valueAsInt() {
-		return (Integer) value;
-	}
-
-	public Boolean valueAsBoolean() {
-		return (Boolean) value;
-	}
-
-	public List<String> valueAsList() {
-		JSONArray arr = (JSONArray) this.value;
-		List<String> value = new ArrayList<>();
-		for (int i = 0; i < arr.length(); i++) {
-			value.add(arr.get(i).toString());
-		}
-		return value;
-	}
-
-	public Map<String, String> valueAsMap() {
-		JSONObject obj = (JSONObject) this.value;
-		Map<String, String> value = new LinkedHashMap<>();
-		Iterator<String> keys = obj.keys();
-		while (keys.hasNext()) {
-			String key = keys.next();
-			String val = obj.getString(key);
-			value.put(key, val);
+	public List<String> stringsValue() {
+		List<String> values = new ArrayList<>();
+		for (int i = 0; i < value.length(); i++) {
+			values.add(value.get(i).toString());
 		}
 
-		return value;
+		return values;
 	}
 
-	private InputAttributeType getType(Object value) throws AttributeTypeException {
-		if (value instanceof String) {
-			return InputAttributeType.STRING;
-		} else if (value instanceof Number) {
-			return InputAttributeType.INTEGER;
-		} else if (value instanceof Boolean) {
-			return InputAttributeType.BOOLEAN;
-		} else if (value instanceof JSONArray) {
-			return InputAttributeType.ARRAY;
-		} else if (value instanceof JSONObject) {
-			return InputAttributeType.MAP;
-		} else if (value == JSONObject.NULL) {
-			return InputAttributeType.NULL;
-		} else if (value instanceof Timestamp) {
-			return InputAttributeType.TIMESTAMP;
+	public List<String> valueAsStrings() {
+		List<String> values = new ArrayList<>();
+		for (int i = 0; i < value.length(); i++) {
+			values.add(value.getString(i));
 		}
 
-		else throw new AttributeTypeException("Attribute cannot have type: " + type);
+		return values;
+	}
+
+	public List<Integer> valueAsInts() {
+		List<Integer> values = new ArrayList<>();
+		for (int i = 0; i < value.length(); i++) {
+			values.add(value.getInt(i));
+		}
+
+		return values;
+	}
+
+	public List<Boolean> valueAsBooleans() {
+		List<Boolean> values = new ArrayList<>();
+		for (int i = 0; i < value.length(); i++) {
+			values.add(value.getBoolean(i));
+		}
+
+		return values;
+	}
+
+	public List<List<String>> valueAsLists() {
+		List<List<String>> values = new ArrayList<>();
+		for (int i = 0; i < value.length(); i++) {
+			JSONArray sub = value.getJSONArray(i);
+			List<String> subValues = new ArrayList<>();
+			for (int j = 0; j < sub.length(); j++) {
+				subValues.add(sub.get(i).toString());
+			}
+			values.add(subValues);
+		}
+		return values;
+	}
+
+	public List<Map<String, String>> valueAsMaps() {
+		List<Map<String, String>> values = new ArrayList<>();
+		for (int i = 0; i < value.length(); i++) {
+			JSONObject obj =  value.getJSONObject(i);
+			Iterator<String> keys = obj.keys();
+			Map<String, String> subValues = new LinkedHashMap<>();
+			while (keys.hasNext()) {
+				String key = keys.next();
+				String val = obj.getString(key);
+				subValues.put(key, val);
+			}
+			values.add(subValues);
+		}
+
+		return values;
+	}
+
+	private InputAttributeType getType(JSONArray value) throws AttributeTypeException {
+		if (value != null && value.length() > 0) {
+			Object part = value.get(0);
+			if (part instanceof String) {
+				return InputAttributeType.STRING;
+			} else if (part instanceof Number) {
+				return InputAttributeType.INTEGER;
+			} else if (part instanceof Boolean) {
+				return InputAttributeType.BOOLEAN;
+			} else if (part instanceof JSONArray) {
+				return InputAttributeType.ARRAY;
+			} else if (part instanceof JSONObject) {
+				return InputAttributeType.MAP;
+			} else if (part == JSONObject.NULL) {
+				return InputAttributeType.NULL;
+			} else if (part instanceof Timestamp) {
+				return InputAttributeType.TIMESTAMP;
+			}
+		}
+
+		throw new AttributeTypeException("Attribute cannot have type: " + type);
 	}
 
 	@Override
@@ -144,13 +181,30 @@ public class InputAttribute {
 	public boolean equals(Object o) {
 		if (o == null) {
 			return false;
-		} else if (! this.getClass().equals(o.getClass())) {
+		} else if (! (o instanceof InputAttribute)) {
 			return false;
 		} else {
 			InputAttribute them = (InputAttribute) o;
 			return Objects.equals(this.name, them.name)
 					&& Objects.equals(this.type, them.type)
-					&& Objects.equals(this.value, them.value);
+					&& compareJsonArrays(this.value, them.value);
 		}
+	}
+
+	private boolean compareJsonArrays(JSONArray a1, JSONArray a2) {
+		if (a1 == null || a2 == null) {
+			return a1 == a2;
+		}
+
+		List<Object> arr1 = new ArrayList<>();
+		List<Object> arr2 = new ArrayList<>();
+		for (int i = 0; i < a1.length(); i++) {
+			arr1.add(a1.get(i));
+		}
+		for (int i = 0; i < a2.length(); i++) {
+			arr2.add(a2.get(i));
+		}
+
+		return CollectionUtils.isEqualCollection(arr1, arr2);
 	}
 }

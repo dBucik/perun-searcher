@@ -15,15 +15,15 @@ public class UserExtSourceMapper implements RowMapper<UserExtSource> {
 	public UserExtSource mapRow(ResultSet resultSet, int i) throws SQLException {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
-		Long id = entityJson.getLong("id");
-		Long userId = MappersUtils.getLong(entityJson, "user_id");
+		Integer id = entityJson.getInt("id");
+		Integer userId = MappersUtils.getInteger(entityJson, "user_id");
 		String loginExt = MappersUtils.getString(entityJson,"login_ext");
-		Long extSourceId = MappersUtils.getLong(entityJson, "ext_source_id");
+		Integer extSourceId = MappersUtils.getInteger(entityJson, "ext_source_id");
 		Integer loa = MappersUtils.getInt(entityJson, "loa");
 		Long lastAccess = MappersUtils.getTimestampMillis(entityJson, "last_access");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new UserExtSource(id, userId, loginExt, extSourceId, loa, lastAccess, attributes, foreignId);
 	}

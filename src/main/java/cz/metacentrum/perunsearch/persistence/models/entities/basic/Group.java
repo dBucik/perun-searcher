@@ -9,10 +9,10 @@ public class Group extends PerunRichEntity {
 
 	private String name;
 	private String description;
-	private Long voId;
-	private Long parentGroupId;
+	private Integer voId;
+	private Integer parentGroupId;
 
-	public Group(Long id, String name, String description, Long voId, Long parentGroupId, Map<String, PerunAttribute> attributes, Long foreignId) {
+	public Group(Integer id, String name, String description, Integer voId, Integer parentGroupId, Map<String, PerunAttribute> attributes, Integer foreignId) {
 		super(id, attributes, foreignId);
 		this.name = name;
 		this.description = description;
@@ -36,19 +36,19 @@ public class Group extends PerunRichEntity {
 		this.description = description;
 	}
 
-	public Long getVoId() {
+	public Integer getVoId() {
 		return voId;
 	}
 
-	public void setVoId(Long voId) {
+	public void setVoId(Integer voId) {
 		this.voId = voId;
 	}
 
-	public Long getParentGroupId() {
+	public Integer getParentGroupId() {
 		return parentGroupId;
 	}
 
-	public void setParentGroupId(Long parentGroupId) {
+	public void setParentGroupId(Integer parentGroupId) {
 		this.parentGroupId = parentGroupId;
 	}
 }

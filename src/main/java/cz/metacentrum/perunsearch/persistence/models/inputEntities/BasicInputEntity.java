@@ -8,7 +8,6 @@ import cz.metacentrum.perunsearch.persistence.models.Query;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -117,29 +116,34 @@ public abstract class BasicInputEntity extends InputEntity {
 		return "WHERE " + where.toString();
 	}
 
-	private String outerWhere(Query query, List<InputAttribute> core) throws IncorrectCoreAttributeTypeException {
+	private String outerWhere(Query query, List<InputAttribute> core) {
 		if (core == null || core.isEmpty()) {
 			return NO_VALUE;
 		}
 
 		StringJoiner where = new StringJoiner(" AND ");
-		for (InputAttribute attr: core) {
-			String operator = resolveMatchOperator(attr.isLikeMatch(), attr.getValue());
-			String part = "";
 
-			switch (operator) {
-				case NULL_MATCH:
-					part = "ent." + attr.getName() + operator;
-					break;
-				case LIKE_MATCH:
-					part = "ent." + attr.getName() + "::VARCHAR " + operator +  ' ' + query.nextParam('%' + attr.stringValue() + '%');
-					break;
-				case EXACT_MATCH:
-					part = "ent." + attr.getName() + operator + query.nextParam(attr.getValue());
-					break;
+		for (InputAttribute attr: core) {
+			List<Object> values = attr.getValue();
+			StringJoiner subJoiner = new StringJoiner(" OR ");
+
+			for (Object  o: values) {
+				String operator = resolveMatchOperator(attr.isLikeMatch(), o);
+
+				switch (operator) {
+					case NULL_MATCH:
+						subJoiner.add("ent." + attr.getName() + operator);
+						break;
+					case LIKE_MATCH:
+						subJoiner.add("ent." + attr.getName() + "::VARCHAR " + operator + ' ' + query.nextParam('%' + o.toString() + '%'));
+						break;
+					case EXACT_MATCH:
+						subJoiner.add("ent." + attr.getName() + operator + query.nextParam(o));
+						break;
+				}
 			}
 
-			where.add(part);
+			where.add(subJoiner.toString());
 		}
 
 		return "WHERE " + where.toString();

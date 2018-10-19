@@ -15,14 +15,14 @@ public class ResourceMapper implements RowMapper<Resource> {
 	public Resource mapRow(ResultSet resultSet, int i) throws SQLException {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
-		Long id = entityJson.getLong("id");
-		Long facilityId = MappersUtils.getLong(entityJson, "facility_id");
+		Integer id = entityJson.getInt("id");
+		Integer facilityId = MappersUtils.getInteger(entityJson, "facility_id");
 		String name = MappersUtils.getString(entityJson,"name");
 		String dsc = MappersUtils.getString(entityJson,"dsc");
-		Long voId = MappersUtils.getLong(entityJson, "vo_id");
+		Integer voId = MappersUtils.getInteger(entityJson, "vo_id");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new Resource(id, facilityId, name, dsc, voId, attributes, foreignId);
 	}

@@ -10,28 +10,28 @@ import java.util.Objects;
 @JsonIgnoreProperties(value = "id")
 public class MemberGroup extends PerunRichEntity {
 
-	private Long memberId;
-	private Long groupId;
+	private Integer memberId;
+	private Integer groupId;
 
-	public MemberGroup(Long memberId, Long groupId, Map<String, PerunAttribute> attributes, Long foreignId) {
+	public MemberGroup(Integer memberId, Integer groupId, Map<String, PerunAttribute> attributes, Integer foreignId) {
 		super(null, attributes, foreignId);
 		this.memberId = memberId;
 		this.groupId = groupId;
 	}
 
-	public Long getMemberId() {
+	public Integer getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(Long memberId) {
+	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
 
-	public Long getGroupId() {
+	public Integer getGroupId() {
 		return groupId;
 	}
 
-	public void setGroupId(Long groupId) {
+	public void setGroupId(Integer groupId) {
 		this.groupId = groupId;
 	}
 

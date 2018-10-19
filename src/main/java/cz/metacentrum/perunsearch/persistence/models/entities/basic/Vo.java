@@ -10,7 +10,7 @@ public class Vo extends PerunRichEntity {
 	private String name;
 	private String shortName;
 
-	public Vo(Long id, String name, String shortName, Map<String, PerunAttribute> attributes, Long foreignId) {
+	public Vo(Integer id, String name, String shortName, Map<String, PerunAttribute> attributes, Integer foreignId) {
 		super(id, attributes, foreignId);
 		this.name = name;
 		this.shortName = shortName;

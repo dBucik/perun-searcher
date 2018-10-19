@@ -90,9 +90,9 @@ public class MemberSearchingTests {
 		attributes.put("member_attr_lstring", member1attr6);
 		attributes.put("member_attr_larray", member1attr7);
 
-		Long id = 1L;
-		Long userId = 1L;
-		Long voId = 1L;
+		Integer id = 1;
+		Integer userId = 1;
+		Integer voId = 1;
 		boolean sponsored = true;
 
 		EXPECTED1 = new Member(id, userId, voId, sponsored, attributes, null);
@@ -116,9 +116,9 @@ public class MemberSearchingTests {
 		attributes.put("member_attr_lstring", member2attr6);
 		attributes.put("member_attr_larray", member2attr7);
 
-		Long id = 2L;
-		Long userId = 2L;
-		Long voId = 2L;
+		Integer id = 2;
+		Integer userId = 2;
+		Integer voId = 2;
 		boolean sponsored = false;
 
 		EXPECTED2 = new Member(id, userId, voId, sponsored, attributes, null);
@@ -142,9 +142,9 @@ public class MemberSearchingTests {
 		attributes.put("member_attr_lstring", member23attr6);
 		attributes.put("member_attr_larray", member23attr7);
 
-		Long id = 23L;
-		Long userId = 23L;
-		Long voId = 23L;
+		Integer id = 23;
+		Integer userId = 23;
+		Integer voId = 23;
 		boolean sponsored = false;
 
 		EXPECTED23 = new Member(id, userId, voId, sponsored, attributes, null);
@@ -157,7 +157,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByIdTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"id\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"id\" : {\"value\": [1]}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -167,7 +167,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByUserIdTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"userId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"userId\" : {\"value\": [1]}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -177,7 +177,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByVoIdTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"voId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"voId\" : {\"value\": [1]}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -187,7 +187,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberBySponsoredTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"sponsored\" : {\"value\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"sponsored\" : {\"value\": [true]}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -207,7 +207,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByStringAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_str\", \"value\" : \"value1\"}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_str\", \"value\" : [\"value1\"]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -217,7 +217,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByIntegerAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_int\", \"value\" : 1}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_int\", \"value\" : [1]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -227,7 +227,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByBooleanAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_bool\", \"value\" : true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_bool\", \"value\" : [true]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -237,7 +237,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByArrayAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_array\", \"value\" : [1,2]}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_array\", \"value\" : [[1,2]]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -247,7 +247,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByMapAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_map\", \"value\" : { \"key1\" : \"value1\", \"key2\" : \"value2\"}}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_map\", \"value\" : [{ \"key1\" : \"value1\", \"key2\" : \"value2\"}]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -256,8 +256,8 @@ public class MemberSearchingTests {
 	}
 
 	@Test
-	public void findMemberByLongStringAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_lstring\", \"value\" : \"long_value1\"}], \"attributeNames\" : [\"ALL\"] }";
+	public void findMemberByIntegerStringAttributeTest() throws Exception {
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_lstring\", \"value\" : [\"long_value1\"]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -266,8 +266,8 @@ public class MemberSearchingTests {
 	}
 
 	@Test
-	public void findMemberByLongArrayAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_larray\", \"value\" : [1,2]}], \"attributeNames\" : [\"ALL\"] }";
+	public void findMemberByIntegerArrayAttributeTest() throws Exception {
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_larray\", \"value\" : [[1,2]]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -277,7 +277,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByIdLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"id\" : {\"value\": 2, \"matchLike\":true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"id\" : {\"value\": [2], \"matchLike\":true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -287,7 +287,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByUserIdLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"userId\" : {\"value\": 2, \"matchLike\":true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"userId\" : {\"value\": [2], \"matchLike\":true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -297,7 +297,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByVoIdLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"voId\" : {\"value\": 2, \"matchLike\":true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"voId\" : {\"value\": [2], \"matchLike\":true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -307,7 +307,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberBySponsoredLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"sponsored\" : {\"value\": false, \"matchLike\":true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"sponsored\" : {\"value\": [false], \"matchLike\":true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -317,7 +317,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByStringAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_str\", \"value\" : \"value2\", \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_str\", \"value\" : [\"value2\"], \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -327,7 +327,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByIntegerAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_int\", \"value\" : 2, \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_int\", \"value\" : [2], \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -337,7 +337,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByBooleanAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_bool\", \"value\" : false, \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_bool\", \"value\" : [false], \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -347,7 +347,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByArrayAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_array\", \"value\" : [3,4], \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_array\", \"value\" : [[3,4]], \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -357,7 +357,7 @@ public class MemberSearchingTests {
 
 	@Test
 	public void findMemberByMapAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_map\", \"value\" : { \"key3\" : \"value3\", \"key4\" : \"value4\"}, \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_map\", \"value\" : [{ \"key3\" : \"value3\", \"key4\" : \"value4\"}], \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -366,8 +366,8 @@ public class MemberSearchingTests {
 	}
 
 	@Test
-	public void findMemberByLongStringAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_lstring\", \"value\" : \"long_value2\", \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
+	public void findMemberByIntegerStringAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_lstring\", \"value\" : [\"long_value2\"], \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -376,8 +376,8 @@ public class MemberSearchingTests {
 	}
 
 	@Test
-	public void findMemberByLongArrayAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_larray\", \"value\" : [3,4], \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
+	public void findMemberByIntegerArrayAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"member\", \"attributes\" : [ { \"name\" : \"member_attr_larray\", \"value\" : [[3,4]], \"matchLike\":true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -388,7 +388,7 @@ public class MemberSearchingTests {
 	@Test
 	public void findMemberByVoEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"member\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"vo\", \"id\" : {\"value\": 1} }" +
+				"{ \"entityName\" : \"vo\", \"id\" : {\"value\": [1]} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -400,7 +400,7 @@ public class MemberSearchingTests {
 	@Test
 	public void findMemberByUserEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"member\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"user\", \"id\" : {\"value\": 1} }" +
+				"{ \"entityName\" : \"user\", \"id\" : {\"value\": [1]} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -412,7 +412,7 @@ public class MemberSearchingTests {
 	@Test
 	public void findMemberByResourceEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"member\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"resource\", \"id\" : {\"value\": 1} }" +
+				"{ \"entityName\" : \"resource\", \"id\" : {\"value\": [1]} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -424,7 +424,7 @@ public class MemberSearchingTests {
 	@Test
 	public void findMemberByGroupEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"member\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"group\", \"id\" : {\"value\": 1} }" +
+				"{ \"entityName\" : \"group\", \"id\" : {\"value\": [1]} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -436,7 +436,7 @@ public class MemberSearchingTests {
 	@Test
 	public void findMemberByMemberResourceRelationTest() throws Exception {
 		String input = "{\"entityName\" : \"member\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"member_resource\", \"resourceId\" : {\"value\": 1} }" +
+				"{ \"entityName\" : \"member_resource\", \"resourceId\" : {\"value\": [1]} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -448,7 +448,7 @@ public class MemberSearchingTests {
 	@Test
 	public void findMemberByMemberGroupRelationTest() throws Exception {
 		String input = "{\"entityName\" : \"member\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"member_group\", \"groupId\" : {\"value\": 1} }" +
+				"{ \"entityName\" : \"member_group\", \"groupId\" : {\"value\": [1]} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);

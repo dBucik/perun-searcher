@@ -14,7 +14,7 @@ public abstract class PerunRichEntity extends PerunEntity {
 	private Map<String, PerunAttribute> attributes = new HashMap<>();
 	@JsonIgnore
 
-	public PerunRichEntity(Long id, Map<String, PerunAttribute> attributes, Long foreignId) {
+	public PerunRichEntity(Integer id, Map<String, PerunAttribute> attributes, Integer foreignId) {
 		super(id, foreignId);
 		if (attributes != null) {
 			this.attributes.putAll(attributes);

@@ -15,12 +15,12 @@ public class VoMapper implements RowMapper<Vo> {
 	public Vo mapRow(ResultSet resultSet, int i) throws SQLException {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
-		Long id = entityJson.getLong("id");
+		Integer id = entityJson.getInt("id");
 		String name = MappersUtils.getString(entityJson, "name");
 		String shortName = MappersUtils.getString(entityJson, "short_name");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new Vo(id, name, shortName, attributes, foreignId);
 	}

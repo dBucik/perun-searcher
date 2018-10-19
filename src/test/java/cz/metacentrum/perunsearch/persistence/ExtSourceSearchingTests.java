@@ -90,7 +90,7 @@ public class ExtSourceSearchingTests {
 		attributes.put("ext_source_attr_lstring", extSource1attr6);
 		attributes.put("ext_source_attr_larray", extSource1attr7);
 
-		Long id = 1L;
+		Integer id = 1;
 		String name = "ext_source1";
 		String type = "type1";
 
@@ -115,7 +115,7 @@ public class ExtSourceSearchingTests {
 		attributes.put("ext_source_attr_lstring", extSource2attr6);
 		attributes.put("ext_source_attr_larray", extSource2attr7);
 
-		Long id = 2L;
+		Integer id = 2;
 		String name = "ext_source2";
 		String type = "type2";
 
@@ -140,7 +140,7 @@ public class ExtSourceSearchingTests {
 		attributes.put("ext_source_attr_lstring", extSource23attr6);
 		attributes.put("ext_source_attr_larray", extSource23attr7);
 
-		Long id = 23L;
+		Integer id = 23;
 		String name = "ext_source23";
 		String type = "type23";
 
@@ -154,7 +154,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByIdTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"id\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"id\" : {\"value\": [1]}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -164,7 +164,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByNameTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"name\" : {\"value\": \"ext_source1\"}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"name\" : {\"value\": [\"ext_source1\"]}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -174,7 +174,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByTypeTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"type\" : {\"value\":\"type1\"}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"type\" : {\"value\": [\"type1\"]}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -194,7 +194,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByStringAttribute() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_str\", \"value\" : \"value1\"}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_str\", \"value\" : [\"value1\"]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -204,7 +204,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByIntegerAttribute() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_int\", \"value\" : \"1\"}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_int\", \"value\" : [\"1\"]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -214,7 +214,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByBooleanAttribute() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_bool\", \"value\" : \"true\"}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_bool\", \"value\" : [\"true\"]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -224,7 +224,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByArrayAttribute() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_array\", \"value\" : \"1,2\"}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_array\", \"value\" : [\"1,2\"]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -234,7 +234,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByMapAttribute() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_map\", \"value\" : \"key1:value1,key2:value2\"}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_map\", \"value\" : [\"key1:value1,key2:value2\"]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -243,8 +243,8 @@ public class ExtSourceSearchingTests {
 	}
 
 	@Test
-	public void findExtSourceByLongStringAttribute() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_lstring\", \"value\" : \"long_value1\"}], \"attributeNames\" : [\"ALL\"] }";
+	public void findExtSourceByIntegerStringAttribute() throws Exception {
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_lstring\", \"value\" : [\"long_value1\"]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -253,8 +253,8 @@ public class ExtSourceSearchingTests {
 	}
 
 	@Test
-	public void findExtSourceByLongArrayAttribute() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_larray\", \"value\" : \"1,2\"}], \"attributeNames\" : [\"ALL\"] }";
+	public void findExtSourceByIntegerArrayAttribute() throws Exception {
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_larray\", \"value\" : [\"1,2\"]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -264,7 +264,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByIdLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"id\" : {\"value\": 2, \"matchLike\" : true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"id\" : {\"value\": [2], \"matchLike\" : true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -274,7 +274,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByNameLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"name\" : {\"value\": \"ext_source2\", \"matchLike\" : true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"name\" : {\"value\": [\"ext_source2\"], \"matchLike\" : true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -284,7 +284,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByTypeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"type\" : {\"value\":\"type2\", \"matchLike\" : true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"type\" : {\"value\": [\"type2\"], \"matchLike\" : true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -294,7 +294,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByStringAttributeTestTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_str\", \"value\" : \"value2\", \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_str\", \"value\" : [\"value2\"], \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -304,7 +304,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByIntegerAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_int\", \"value\" : \"2\", \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_int\", \"value\" : [\"2\"], \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -314,7 +314,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByBooleanAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_bool\", \"value\" : \"false\" , \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_bool\", \"value\" : [\"false\"] , \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -324,7 +324,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByArrayAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_array\", \"value\" : \"3,4\", \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_array\", \"value\" : [\"3,4\"], \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -334,7 +334,7 @@ public class ExtSourceSearchingTests {
 
 	@Test
 	public void findExtSourceByMapAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_map\", \"value\" : \"key3:value3,key4:value4\", \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_map\", \"value\" : [\"key3:value3,key4:value4\"], \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -343,8 +343,8 @@ public class ExtSourceSearchingTests {
 	}
 
 	@Test
-	public void findExtSourceByLongStringAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_lstring\", \"value\" : \"long_value2\", \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+	public void findExtSourceByIntegerStringAttributeTest() throws Exception {
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_lstring\", \"value\" : [\"long_value2\"], \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -353,8 +353,8 @@ public class ExtSourceSearchingTests {
 	}
 
 	@Test
-	public void findExtSourceByLongArrayAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_larray\", \"value\" : \"3,4\", \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
+	public void findExtSourceByIntegerArrayAttributeTest() throws Exception {
+		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [ { \"name\" : \"ext_source_attr_larray\", \"value\" : [\"3,4\"], \"matchLike\" : true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -365,7 +365,7 @@ public class ExtSourceSearchingTests {
 	@Test
 	public void findExtSourceByVoEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"vo\", \"id\" : {\"value\": 1} }" +
+				"{ \"entityName\" : \"vo\", \"id\" : {\"value\": [1]} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -377,7 +377,7 @@ public class ExtSourceSearchingTests {
 	@Test
 	public void findExtSourceByGroupEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"group\", \"id\" : {\"value\": 1} }" +
+				"{ \"entityName\" : \"group\", \"id\" : {\"value\": [1]} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
@@ -389,7 +389,7 @@ public class ExtSourceSearchingTests {
 	@Test
 	public void findExtSourceByUserExtSourceEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"ext_source\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"user_ext_source\", \"id\" : {\"value\": 1} }" +
+				"{ \"entityName\" : \"user_ext_source\", \"id\" : {\"value\": [1]} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);

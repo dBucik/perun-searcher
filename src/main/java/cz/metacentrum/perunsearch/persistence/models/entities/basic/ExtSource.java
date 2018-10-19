@@ -10,7 +10,7 @@ public class ExtSource extends PerunRichEntity {
 	private String name;
 	private String type;
 
-	public ExtSource(Long id, String name, String type, Map<String, PerunAttribute> attributes, Long foreignId) {
+	public ExtSource(Integer id, String name, String type, Map<String, PerunAttribute> attributes, Integer foreignId) {
 		super(id, attributes, foreignId);
 		this.name = name;
 		this.type = type;

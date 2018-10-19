@@ -12,11 +12,11 @@ public class GroupResourceMapper implements RowMapper<GroupResource> {
 
 	@Override
 	public GroupResource mapRow(ResultSet resultSet, int i) throws SQLException {
-		Long groupId = resultSet.getLong("group_id");
-		Long resourceId = resultSet.getLong("resource_id");
+		Integer groupId = resultSet.getInt("group_id");
+		Integer resourceId = resultSet.getInt("resource_id");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new GroupResource(groupId, resourceId, attributes, foreignId);
 	}

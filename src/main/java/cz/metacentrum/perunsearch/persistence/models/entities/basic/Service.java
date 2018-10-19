@@ -11,8 +11,8 @@ public class Service extends PerunEntity {
 	private boolean enabled;
 	private String script;
 
-	public Service(Long id, String name, String description, Integer delay, Integer recurrence, Boolean enabled,
-				   String script, Long foreignId) {
+	public Service(Integer id, String name, String description, Integer delay, Integer recurrence, Boolean enabled,
+				   String script, Integer foreignId) {
 		super(id, foreignId);
 		this.name = name;
 		this.description = description;

@@ -7,12 +7,12 @@ import java.util.Map;
 
 public class Resource extends PerunRichEntity {
 
-	private Long facilityId;
+	private Integer facilityId;
 	private String name;
 	private String description;
-	private Long voId;
+	private Integer voId;
 
-	public Resource(Long id, Long facilityId, String name, String description, Long voId, Map<String, PerunAttribute> attributes, Long foreignId) {
+	public Resource(Integer id, Integer facilityId, String name, String description, Integer voId, Map<String, PerunAttribute> attributes, Integer foreignId) {
 		super(id, attributes, foreignId);
 		this.facilityId = facilityId;
 		this.name = name;
@@ -20,11 +20,11 @@ public class Resource extends PerunRichEntity {
 		this.voId = voId;
 	}
 
-	public Long getFacilityId() {
+	public Integer getFacilityId() {
 		return facilityId;
 	}
 
-	public void setFacilityId(Long facilityId) {
+	public void setFacilityId(Integer facilityId) {
 		this.facilityId = facilityId;
 	}
 
@@ -44,11 +44,11 @@ public class Resource extends PerunRichEntity {
 		this.description = description;
 	}
 
-	public Long getVoId() {
+	public Integer getVoId() {
 		return voId;
 	}
 
-	public void setVoId(Long voId) {
+	public void setVoId(Integer voId) {
 		this.voId = voId;
 	}
 }

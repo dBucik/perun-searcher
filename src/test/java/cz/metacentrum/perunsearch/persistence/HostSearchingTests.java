@@ -90,9 +90,9 @@ public class HostSearchingTests {
 		attributes.put("host_attr_lstring", host1attr6);
 		attributes.put("host_attr_larray", host1attr7);
 
-		Long id = 1L;
+		Integer id = 1;
 		String hostname = "hostname1";
-		Long facilityId = 1L;
+		Integer facilityId = 1;
 		String dsc = "dsc1";
 
 		EXPECTED1 = new Host(id, hostname, facilityId, dsc, attributes, null);
@@ -116,9 +116,9 @@ public class HostSearchingTests {
 		attributes.put("host_attr_lstring", host2attr6);
 		attributes.put("host_attr_larray", host2attr7);
 
-		Long id = 2L;
+		Integer id = 2;
 		String hostname = "hostname2";
-		Long facilityId = 2L;
+		Integer facilityId = 2;
 		String dsc = "dsc2";
 
 		EXPECTED2 = new Host(id, hostname, facilityId, dsc, attributes, null);
@@ -142,9 +142,9 @@ public class HostSearchingTests {
 		attributes.put("host_attr_lstring", host23attr6);
 		attributes.put("host_attr_larray", host23attr7);
 
-		Long id = 23L;
+		Integer id = 23;
 		String hostname = "hostname23";
-		Long facilityId = 23L;
+		Integer facilityId = 23;
 		String dsc = "dsc23";
 
 
@@ -158,7 +158,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByIdTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"id\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"id\" : {\"value\": [1]}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -168,7 +168,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByHostnameTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"hostname\" : {\"value\":\"hostname1\"}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"hostname\" : {\"value\": [\"hostname1\"]}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -178,7 +178,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByFacilityIdTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"facilityId\" : {\"value\": 1}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"facilityId\" : {\"value\": [1]}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -188,7 +188,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByDescriptionTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"description\" : {\"value\":\"dsc1\"}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"description\" : {\"value\": [\"dsc1\"]}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -208,7 +208,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByStringAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_str\", \"value\" : \"value1\"}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_str\", \"value\" : [\"value1\"]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -218,7 +218,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByIntegerAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_int\", \"value\" : 1}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_int\", \"value\" : [1]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -228,7 +228,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByBooleanAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_bool\", \"value\" : true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_bool\", \"value\" : [true]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -238,7 +238,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByArrayAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_array\", \"value\" : [1,2]}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_array\", \"value\" : [[1,2]]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -248,7 +248,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByMapAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_map\", \"value\" : { \"key1\" : \"value1\", \"key2\" : \"value2\"}}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_map\", \"value\" : [{ \"key1\" : \"value1\", \"key2\" : \"value2\"}]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -257,8 +257,8 @@ public class HostSearchingTests {
 	}
 
 	@Test
-	public void findHostByLongStringAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_lstring\", \"value\" : \"long_value1\"}], \"attributeNames\" : [\"ALL\"] }";
+	public void findHostByIntegerStringAttributeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_lstring\", \"value\" : [\"long_value1\"]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -267,8 +267,8 @@ public class HostSearchingTests {
 	}
 
 	@Test
-	public void findHostByLongArrayAttributeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_larray\", \"value\" : [1,2]}], \"attributeNames\" : [\"ALL\"] }";
+	public void findHostByIntegerArrayAttributeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_larray\", \"value\" : [[1,2]]}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -278,7 +278,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByIdLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"id\" : {\"value\": 2, \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"id\" : {\"value\": [2], \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -288,7 +288,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByHostnameLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"hostname\" : {\"value\":\"hostname2\", \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"hostname\" : {\"value\": [\"hostname2\"], \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -298,7 +298,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByFacilityIdLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"facilityId\" : {\"value\": 2, \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"facilityId\" : {\"value\": [2], \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -308,7 +308,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByDescriptionLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"description\" : {\"value\":\"dsc2\", \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"description\" : {\"value\": [\"dsc2\"], \"matchLike\": true}, \"attributes\" : [], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -318,7 +318,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByStringAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_str\", \"value\" : \"value2\", \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_str\", \"value\" : [\"value2\"], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -328,7 +328,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByIntegerAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_int\", \"value\" : 2, \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_int\", \"value\" : [2], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -338,7 +338,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByBooleanAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_bool\", \"value\" : false, \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_bool\", \"value\" : [false], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -348,7 +348,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByArrayAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_array\", \"value\" : [3,4], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_array\", \"value\" : [[3,4]], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -358,7 +358,7 @@ public class HostSearchingTests {
 
 	@Test
 	public void findHostByMapAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_map\", \"value\" : { \"key3\" : \"value3\", \"key4\" : \"value4\"}, \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_map\", \"value\" : [{ \"key3\" : \"value3\", \"key4\" : \"value4\"}], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -367,8 +367,8 @@ public class HostSearchingTests {
 	}
 
 	@Test
-	public void findHostByLongStringAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_lstring\", \"value\" : \"long_value2\", \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+	public void findHostByIntegerStringAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_lstring\", \"value\" : [\"long_value2\"], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -377,8 +377,8 @@ public class HostSearchingTests {
 	}
 
 	@Test
-	public void findHostByLongArrayAttributeLikeTest() throws Exception {
-		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_larray\", \"value\" : [3,4], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
+	public void findHostByIntegerArrayAttributeLikeTest() throws Exception {
+		String input = "{\"entityName\" : \"host\", \"attributes\" : [ { \"name\" : \"host_attr_larray\", \"value\" : [[3,4]], \"matchLike\": true}], \"attributeNames\" : [\"ALL\"] }";
 
 		List<PerunEntity> result = service.performSearch(input);
 		assertNotNull(result);
@@ -389,7 +389,7 @@ public class HostSearchingTests {
 	@Test
 	public void findHostByFacilityEntityTest() throws Exception {
 		String input = "{\"entityName\" : \"host\", \"attributes\" : [], \"attributesNames\" : [\"ALL\"], \"relations\" : [" +
-				"{ \"entityName\" : \"facility\", \"id\" : {\"value\": 1} }" +
+				"{ \"entityName\" : \"facility\", \"id\" : {\"value\": [1]} }" +
 				"] }";
 
 		List<PerunEntity> result = service.performSearch(input);

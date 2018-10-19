@@ -10,7 +10,7 @@ public class Facility extends PerunRichEntity {
 	private String name;
 	private String description;
 
-	public Facility(Long id, String name, String description, Map<String, PerunAttribute> attributes, Long foreignId) {
+	public Facility(Integer id, String name, String description, Map<String, PerunAttribute> attributes, Integer foreignId) {
 		super(id, attributes, foreignId);
 		this.name = name;
 		this.description = description;

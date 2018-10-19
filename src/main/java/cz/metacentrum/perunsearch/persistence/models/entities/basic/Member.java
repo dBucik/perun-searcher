@@ -7,30 +7,30 @@ import java.util.Map;
 
 public class Member extends PerunRichEntity {
 
-	private Long userId;
-	private Long voId;
+	private Integer userId;
+	private Integer voId;
 	private Boolean sponsored;
 
-	public Member(Long id, Long userId, Long voId, Boolean sponsored, Map<String, PerunAttribute> attributes, Long foreignId) {
+	public Member(Integer id, Integer userId, Integer voId, Boolean sponsored, Map<String, PerunAttribute> attributes, Integer foreignId) {
 		super(id, attributes, foreignId);
 		this.userId = userId;
 		this.voId = voId;
 		this.sponsored = sponsored;
 	}
 
-	public Long getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
-	public Long getVoId() {
+	public Integer getVoId() {
 		return voId;
 	}
 
-	public void setVoId(Long voId) {
+	public void setVoId(Integer voId) {
 		this.voId = voId;
 	}
 

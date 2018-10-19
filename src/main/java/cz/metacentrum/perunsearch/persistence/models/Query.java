@@ -61,7 +61,7 @@ public class Query {
 		return ':' + String.valueOf(paramCounter);
 	}
 
-	public void setIds(Set<Long> ids) {
+	public void setIds(Set<Integer> ids) {
 		if (ids == null || ids.isEmpty()) {
 			return;
 		}
@@ -74,7 +74,7 @@ public class Query {
 		this.queryString += query;
 	}
 
-	public void setIds(String key1, Set<Long> ids1, String key2, Set<Long> ids2) {
+	public void setIds(String key1, Set<Integer> ids1, String key2, Set<Integer> ids2) {
 		StringJoiner query = new StringJoiner(" AND ");
 		if ((ids1 != null && !ids1.isEmpty()) || (ids2 != null && !ids2.isEmpty())) {
 			if (key1 != null && ids1 != null && !ids1.isEmpty()) {

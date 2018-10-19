@@ -7,14 +7,14 @@ import java.util.Map;
 
 public class UserExtSource extends PerunRichEntity {
 
-	private Long userId;
+	private Integer userId;
 	private String loginExt;
-	private Long extSourceId;
+	private Integer extSourceId;
 	private Integer loa;
 	private Long lastAccess;
 
-	public UserExtSource(Long id, Long userId, String loginExt, Long extSourceId,
-						 Integer loa, Long lastAccess, Map<String, PerunAttribute> attributes, Long foreignId) {
+	public UserExtSource(Integer id, Integer userId, String loginExt, Integer extSourceId,
+						 Integer loa, Long lastAccess, Map<String, PerunAttribute> attributes, Integer foreignId) {
 		super(id, attributes, foreignId);
 		this.userId = userId;
 		this.loginExt = loginExt;
@@ -23,11 +23,11 @@ public class UserExtSource extends PerunRichEntity {
 		this.lastAccess = lastAccess;
 	}
 
-	public Long getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
@@ -39,11 +39,11 @@ public class UserExtSource extends PerunRichEntity {
 		this.loginExt = loginExt;
 	}
 
-	public Long getExtSourceId() {
+	public Integer getExtSourceId() {
 		return extSourceId;
 	}
 
-	public void setExtSourceId(Long extSourceId) {
+	public void setExtSourceId(Integer extSourceId) {
 		this.extSourceId = extSourceId;
 	}
 

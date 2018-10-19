@@ -16,12 +16,12 @@ public class ExtSourceMapper implements RowMapper<ExtSource> {
 	public ExtSource mapRow(ResultSet resultSet, int i) throws SQLException {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
-		Long id = entityJson.getLong("id");
+		Integer id = entityJson.getInt("id");
 		String name = MappersUtils.getString(entityJson,"name");
 		String type = MappersUtils.getString(entityJson,"type");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet, PerunAttributeType.STRING_TYPE);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new ExtSource(id, name, type, attributes, foreignId);
 	}

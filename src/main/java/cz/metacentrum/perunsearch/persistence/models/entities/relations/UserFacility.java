@@ -10,28 +10,28 @@ import java.util.Objects;
 @JsonIgnoreProperties(value = "id")
 public class UserFacility extends PerunRichEntity {
 
-	private Long userId;
-	private Long facilityId;
+	private Integer userId;
+	private Integer facilityId;
 
-	public UserFacility(Long userId, Long facilityId, Map<String, PerunAttribute> attributes, Long foreignId) {
+	public UserFacility(Integer userId, Integer facilityId, Map<String, PerunAttribute> attributes, Integer foreignId) {
 		super(null, attributes, foreignId);
 		this.userId = userId;
 		this.facilityId = facilityId;
 	}
 
-	public Long getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
-	public Long getFacilityId() {
+	public Integer getFacilityId() {
 		return facilityId;
 	}
 
-	public void setFacilityId(Long resourceId) {
+	public void setFacilityId(Integer resourceId) {
 		this.facilityId = resourceId;
 	}
 

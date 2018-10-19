@@ -8,7 +8,6 @@ import cz.metacentrum.perunsearch.persistence.models.Query;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -85,7 +84,7 @@ public abstract class RelationInputEntity extends InputEntity {
 		return query;
 	}
 
-	private String buildWhere(Query query, List<InputAttribute> core, List<String> attrNames) throws IncorrectCoreAttributeTypeException {
+	private String buildWhere(Query query, List<InputAttribute> core, List<String> attrNames) {
 		if ((core == null || core.isEmpty()) && (attrNames == null || attrNames.isEmpty())) {
 			return NO_VALUE;
 		}
@@ -94,22 +93,26 @@ public abstract class RelationInputEntity extends InputEntity {
 
 		if (core != null) {
 			for (InputAttribute attr: core) {
-				String operator = resolveMatchOperator(attr.isLikeMatch(), attr.getValue());
-				String part = "";
+				List<Object> values = attr.getValue();
+				StringJoiner subJoiner = new StringJoiner(" OR ");
 
-				switch (operator) {
-					case NULL_MATCH:
-						part = "rel." + attr.getName() + operator;
-						break;
-					case LIKE_MATCH:
-						part = "rel." + attr.getName() + "::VARCHAR " + operator +  ' ' + query.nextParam('%' + attr.stringValue() + '%');
-						break;
-					case EXACT_MATCH:
-						part = "rel." + attr.getName() + operator + query.nextParam(attr.getValue());
-						break;
+				for (Object  o: values) {
+					String operator = resolveMatchOperator(attr.isLikeMatch(), o);
+
+					switch (operator) {
+						case NULL_MATCH:
+							subJoiner.add("rel." + attr.getName() + operator);
+							break;
+						case LIKE_MATCH:
+							subJoiner.add("rel." + attr.getName() + "::VARCHAR " + operator + ' ' + query.nextParam('%' + o.toString() + '%'));
+							break;
+						case EXACT_MATCH:
+							subJoiner.add("rel." + attr.getName() + operator + query.nextParam(o));
+							break;
+					}
 				}
 
-				where.add(part);
+				where.add(subJoiner.toString());
 			}
 		}
 

@@ -15,8 +15,7 @@ public class UserMapper implements RowMapper<User> {
 	public User mapRow(ResultSet resultSet, int i) throws SQLException {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
-		//TODO: change to mappersUtils
-		Long id = entityJson.getLong("id");
+		Integer id = entityJson.getInt("id");
 		String firstName = MappersUtils.getString(entityJson, "first_name");
 		String middleName = MappersUtils.getString(entityJson, "middle_name");
 		String lastName = MappersUtils.getString(entityJson, "last_name");
@@ -26,7 +25,7 @@ public class UserMapper implements RowMapper<User> {
 		Boolean sponsored = "1".equals(MappersUtils.getString(entityJson, "sponsored_acc"));
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new User(id, firstName, middleName, lastName, titleBefore, titleAfter,
 				service, sponsored, attributes, foreignId);

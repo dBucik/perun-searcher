@@ -8,10 +8,10 @@ import java.util.Map;
 public class Host extends PerunRichEntity {
 
 	private String hostname;
-	private Long facilityId;
+	private Integer facilityId;
 	private String description;
 
-	public Host(Long id, String hostname, Long facilityId, String description, Map<String, PerunAttribute> attributes, Long foreignId) {
+	public Host(Integer id, String hostname, Integer facilityId, String description, Map<String, PerunAttribute> attributes, Integer foreignId) {
 		super(id, attributes, foreignId);
 		this.hostname = hostname;
 		this.facilityId = facilityId;
@@ -26,11 +26,11 @@ public class Host extends PerunRichEntity {
 		this.hostname = hostname;
 	}
 
-	public Long getFacilityId() {
+	public Integer getFacilityId() {
 		return facilityId;
 	}
 
-	public void setFacilityId(Long facilityId) {
+	public void setFacilityId(Integer facilityId) {
 		this.facilityId = facilityId;
 	}
 

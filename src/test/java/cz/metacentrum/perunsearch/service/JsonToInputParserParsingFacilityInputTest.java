@@ -6,6 +6,7 @@ import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.FacilityInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.UserInput;
 import org.apache.commons.collections4.CollectionUtils;
+import org.json.JSONArray;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,13 +43,13 @@ public class JsonToInputParserParsingFacilityInputTest {
 	private void setUpInputString() {
 		this.input = "{\n" +
 				"  \"entityName\": \"FACILITY\",\n" +
-				"  \"id\": {\"value\": 1},\n" +
-				"  \"name\": {\"value\":\"test_facility\"},\n" +
-				"  \"description\": {\"value\":\"test_description\"},\n" +
+				"  \"id\": {\"value\": [1]},\n" +
+				"  \"name\": {\"value\": [\"test_facility\"]},\n" +
+				"  \"description\": {\"value\": [\"test_description\"]},\n" +
 				"  \"attributes\": [\n" +
 				"    {\n" +
 				"      \"name\": \"urn:perun:facility:attribute-def:def:attribute1\",\n" +
-				"      \"value\": 1\n" +
+				"      \"value\": [1]\n" +
 				"    }\n" +
 				"  ],\n" +
 				"  \"attributeNames\": [\n" +
@@ -64,16 +65,24 @@ public class JsonToInputParserParsingFacilityInputTest {
 
 	private void setUpCoreAttributes() throws AttributeTypeException {
 		List<InputAttribute> core = new ArrayList<>();
-		core.add(new InputAttribute("id", false, 1L));
-		core.add(new InputAttribute("name", false, "test_facility"));
-		core.add(new InputAttribute("dsc", false, "test_description"));
+		JSONArray val1 = new JSONArray();
+		val1.put(1);
+		JSONArray val2 = new JSONArray();
+		val2.put("test_facility");
+		JSONArray val3 = new JSONArray();
+		val3.put("test_description");
+		core.add(new InputAttribute("id", false, val1));
+		core.add(new InputAttribute("name", false, val2));
+		core.add(new InputAttribute("dsc", false, val3));
 
 		this.core = core;
 	}
 
 	private void setUpAttributes() throws Exception {
 		List<InputAttribute> attributes = new ArrayList<>();
-		InputAttribute attr = new InputAttribute("urn:perun:facility:attribute-def:def:attribute1", false, 1);
+		JSONArray value = new JSONArray();
+		value.put(1);
+		InputAttribute attr = new InputAttribute("urn:perun:facility:attribute-def:def:attribute1", false, value);
 		attributes.add(attr);
 
 		this.attributes = attributes;

@@ -15,13 +15,13 @@ public class MemberMapper implements RowMapper<Member> {
 	public Member mapRow(ResultSet resultSet, int i) throws SQLException {
 		JSONObject entityJson = new JSONObject(resultSet.getString("entity"));
 
-		Long id = entityJson.getLong("id");
-		Long userId = MappersUtils.getLong(entityJson, "user_id");
-		Long voId = MappersUtils.getLong(entityJson, "vo_id");
+		Integer id = entityJson.getInt("id");
+		Integer userId = MappersUtils.getInteger(entityJson, "user_id");
+		Integer voId = MappersUtils.getInteger(entityJson, "vo_id");
 		Boolean sponsored = MappersUtils.getBoolean(entityJson, "sponsored");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new Member(id, userId, voId, sponsored, attributes, foreignId);
 	}

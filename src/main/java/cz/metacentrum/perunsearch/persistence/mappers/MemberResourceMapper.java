@@ -13,11 +13,11 @@ public class MemberResourceMapper implements RowMapper<MemberResource> {
 
 	@Override
 	public MemberResource mapRow(ResultSet resultSet, int i) throws SQLException {
-		Long memberId = resultSet.getLong("member_id");
-		Long resourceId = resultSet.getLong("resource_id");
+		Integer memberId = resultSet.getInt("member_id");
+		Integer resourceId = resultSet.getInt("resource_id");
 
 		Map<String, PerunAttribute> attributes = MappersUtils.getAttributes(resultSet);
-		Long foreignId = MappersUtils.getForeignId(resultSet);
+		Integer foreignId = MappersUtils.getForeignId(resultSet);
 
 		return new MemberResource(memberId, resourceId, attributes, foreignId);
 	}

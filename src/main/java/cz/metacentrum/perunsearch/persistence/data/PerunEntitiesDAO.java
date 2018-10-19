@@ -10,6 +10,6 @@ public interface PerunEntitiesDAO {
 
 	List<PerunEntity> executeQuery(Query query);
 
-	List<Long> executeQueryForIds(Query query);
+	List<Integer> executeQueryForIds(Query query);
 
 }

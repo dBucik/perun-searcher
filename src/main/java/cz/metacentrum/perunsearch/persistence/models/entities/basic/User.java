@@ -15,8 +15,8 @@ public class User extends PerunRichEntity {
 	private Boolean serviceAcc;
 	private Boolean sponsoredAcc;
 
-	public User(Long id, String firstName, String middleName, String lastName, String titleBefore, String titleAfter,
-				Boolean serviceAcc, Boolean sponsoredAcc, Map<String, PerunAttribute> attributes, Long foreignId) {
+	public User(Integer id, String firstName, String middleName, String lastName, String titleBefore, String titleAfter,
+				Boolean serviceAcc, Boolean sponsoredAcc, Map<String, PerunAttribute> attributes, Integer foreignId) {
 		super(id, attributes, foreignId);
 		this.firstName = firstName;
 		this.lastName = lastName;

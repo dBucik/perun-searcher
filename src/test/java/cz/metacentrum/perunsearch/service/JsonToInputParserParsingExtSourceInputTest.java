@@ -6,6 +6,7 @@ import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.ExtSourceInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.VoInput;
 import org.apache.commons.collections4.CollectionUtils;
+import org.json.JSONArray;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,13 +38,13 @@ public class JsonToInputParserParsingExtSourceInputTest {
 	private void setUpInputString() {
 		input = "{\n" +
 				"  \"entityName\": \"EXT_SOURCE\",\n" +
-				"  \"id\": {\"value\": 1},\n" +
-				"  \"name\": {\"value\":\"test_ext_source\"},\n" +
-				"  \"type\": {\"value\":\"test_type\"},\n" +
+				"  \"id\": {\"value\": [1]},\n" +
+				"  \"name\": {\"value\": [\"test_ext_source\"]},\n" +
+				"  \"type\": {\"value\": [\"test_type\"]},\n" +
 				"  \"attributes\": [\n" +
 				"    {\n" +
 				"      \"name\": \"urn:perun:ext_source:attribute-def:def:attribute1\",\n" +
-				"      \"value\": 1\n" +
+				"      \"value\": [1]\n" +
 				"    }\n" +
 				"  ],\n" +
 				"  \"attributeNames\": [\n" +
@@ -59,16 +60,24 @@ public class JsonToInputParserParsingExtSourceInputTest {
 
 	private void setUpCoreAttributes() throws AttributeTypeException {
 		List<InputAttribute> core = new ArrayList<>();
-		core.add(new InputAttribute("id", false, 1L));
-		core.add(new InputAttribute("name", false, "test_ext_source"));
-		core.add(new InputAttribute("type", false, "test_type"));
+		JSONArray val1 = new JSONArray();
+		val1.put(1);
+		JSONArray val2 = new JSONArray();
+		val2.put("test_ext_source");
+		JSONArray val3 = new JSONArray();
+		val3.put("test_type");
+		core.add(new InputAttribute("id", false, val1));
+		core.add(new InputAttribute("name", false, val2));
+		core.add(new InputAttribute("type", false, val3));
 
 		this.core = core;
 	}
 
 	private void setUpAttributes() throws Exception {
 		List<InputAttribute> attributes = new ArrayList<>();
-		InputAttribute attr = new InputAttribute("urn:perun:ext_source:attribute-def:def:attribute1", false,1);
+		JSONArray val = new JSONArray();
+		val.put(1);
+		InputAttribute attr = new InputAttribute("urn:perun:ext_source:attribute-def:def:attribute1", false, val);
 		attributes.add(attr);
 
 		this.attributes = attributes;
