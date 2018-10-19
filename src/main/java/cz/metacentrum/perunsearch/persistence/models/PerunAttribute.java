@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.metacentrum.perunsearch.persistence.enums.PerunAttributeType;
 import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -106,9 +107,13 @@ public class PerunAttribute {
 			return null;
 		}
 
-		//TODO: split only at unescaped chars
-		String[] parts = value.split(",");
-		return Arrays.asList(parts);
+		String[] parts = value.split("(?<!\\\\)(?:\\\\\\\\)*,");
+		List<String> arr = new ArrayList<>();
+		for (String s: parts) {
+			arr.add(s.replace("\\,", ","));
+		}
+
+		return arr;
 	}
 
 	/**
@@ -120,12 +125,14 @@ public class PerunAttribute {
 			return null;
 		}
 
-		//TODO: split only at unescaped chars
-		String[] parts = value.split(",");
+		String[] parts = value.split("(?<!\\\\)(?:\\\\\\\\)*,");
 		Map<String, String> valuesMap = new LinkedHashMap<>();
 		for (String part: parts) {
-			String[] subParts = part.split(":");
-			valuesMap.put(subParts[0], subParts[1]);
+			part = part.replace("\\,", ",");
+			String[] subParts = part.split("(?<!\\\\)(?:\\\\\\\\)*:");
+			String key = subParts[0].replace("\\:", ":");
+			String value = subParts[1].replace("\\:", ":");
+			valuesMap.put(key, value);
 		}
 
 		return valuesMap;
