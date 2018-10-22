@@ -102,7 +102,7 @@
     </pluginRepositories>
 
     <build>
-        <finalName>perun-graphql</finalName>
+        <finalName>perun-search</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -6,7 +6,6 @@ import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationExceptio
 import cz.metacentrum.perunsearch.persistence.exceptions.IncorrectCoreAttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.models.Query;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
-import cz.metacentrum.perunsearch.persistence.models.entities.PerunRichEntity;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 import org.springframework.stereotype.Service;
 

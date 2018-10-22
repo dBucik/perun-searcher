@@ -4,7 +4,6 @@ import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.MemberInput;
-import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.UserExtSourceInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.UserInput;
 import org.apache.commons.collections4.CollectionUtils;
 import org.json.JSONArray;
@@ -14,12 +13,12 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings("Duplicates")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class JsonToInputParserParsingUserInputTest {

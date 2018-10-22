@@ -12,7 +12,7 @@ public abstract class PerunEntity {
 	@JsonIgnore
 	private Integer foreignId;
 
-	public PerunEntity(Integer id, Integer foreignId) {
+	protected PerunEntity(Integer id, Integer foreignId) {
 		this.id = id;
 		this.foreignId = foreignId;
 	}

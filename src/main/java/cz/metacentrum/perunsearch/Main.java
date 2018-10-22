@@ -13,9 +13,4 @@ public class Main extends SpringBootServletInitializer {
 		SpringApplication.run(Main.class, args);
 	}
 
-	//TODO: entity ExtSource
-	//TODO: entity Service
-	//TODO: new entities?
-	//TODO: LIKE matching
-
 }

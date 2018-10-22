@@ -4,7 +4,6 @@ import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.MemberInput;
-import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.UserInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.VoInput;
 import org.apache.commons.collections4.CollectionUtils;
 import org.json.JSONArray;
@@ -19,6 +18,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings("Duplicates")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class JsonToInputParserParsingVoInputTest {

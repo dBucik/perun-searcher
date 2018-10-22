@@ -9,15 +9,13 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public abstract class InputEntity {
 
-	public static final String NO_VALUE = null;
+	protected static final String NO_VALUE = null;
 	public static final String EXACT_MATCH = " = ";
 	public static final String LIKE_MATCH = " LIKE ";
 	public static final String NULL_MATCH = " IS NULL ";
@@ -47,15 +45,15 @@ public abstract class InputEntity {
 		}
 	}
 
-	public abstract boolean isAllowedInnerInput(PerunEntityType entityType);
+	protected abstract boolean isAllowedInnerInput(PerunEntityType entityType);
 
-	public abstract String getAttrNamesTable();
+	protected abstract String getAttrNamesTable();
 
 	public abstract Query toQuery(PerunEntityType sourceType) throws IncorrectCoreAttributeTypeException;
 
 	public abstract Query initQuery();
 
-	public abstract String buildSelectFrom(PerunEntityType sourceType, boolean isSimple);
+	protected abstract String buildSelectFrom(PerunEntityType sourceType, boolean isSimple);
 
 	public PerunEntityType getEntityType() {
 		return entityType;

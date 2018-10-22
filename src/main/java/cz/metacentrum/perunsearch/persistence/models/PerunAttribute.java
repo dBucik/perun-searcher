@@ -5,7 +5,6 @@ import cz.metacentrum.perunsearch.persistence.enums.PerunAttributeType;
 import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;

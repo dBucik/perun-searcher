@@ -2,9 +2,7 @@ package cz.metacentrum.perunsearch.persistence;
 
 import com.opentable.db.postgres.junit.EmbeddedPostgresRules;
 import com.opentable.db.postgres.junit.SingleInstancePostgresRule;
-import cz.metacentrum.perunsearch.DBUtils;
-import cz.metacentrum.perunsearch.persistence.data.PerunEntitiesDAO;
-import cz.metacentrum.perunsearch.persistence.data.PerunEntitiesDAOImpl;
+import cz.metacentrum.perunsearch.TestUtils;
 import cz.metacentrum.perunsearch.persistence.enums.PerunAttributeType;
 import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
@@ -19,11 +17,9 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -40,15 +36,11 @@ import static org.junit.Assert.assertThat;
 public class MemberSearchingTests {
 
 	@ClassRule
-	public static SingleInstancePostgresRule pg = EmbeddedPostgresRules.singleInstance();
+	public static final SingleInstancePostgresRule pg = EmbeddedPostgresRules.singleInstance();
 
-	private static DataSource dataSource;
-	private static JdbcTemplate template;
-	private static PerunEntitiesDAO dao;
 	private static SearcherService service;
-
-	private static Resource tablesFile = new ClassPathResource("db_init.sql");
-	private static Resource dataFile = new ClassPathResource("db_init_data.sql");
+	private static final Resource tablesFile = new ClassPathResource("db_init.sql");
+	private static final Resource dataFile = new ClassPathResource("db_init_data.sql");
 
 	private Member EXPECTED1;
 	private Member EXPECTED2;
@@ -56,13 +48,7 @@ public class MemberSearchingTests {
 
 	@BeforeClass
 	public static void setUpDatabaseTables() throws Exception {
-		dataSource = pg.getEmbeddedPostgres().getPostgresDatabase();
-		DBUtils.executeSqlScript(dataSource, tablesFile.getFile());
-		DBUtils.executeSqlScript(dataSource, dataFile.getFile());
-		template = new JdbcTemplate(dataSource);
-		dao = new PerunEntitiesDAOImpl();
-		((PerunEntitiesDAOImpl) dao).setTemplate(template);
-		service = new SearcherService(dao);
+		service = TestUtils.setUpDatabaseTables(pg, tablesFile, dataFile);
 	}
 
 	@Before

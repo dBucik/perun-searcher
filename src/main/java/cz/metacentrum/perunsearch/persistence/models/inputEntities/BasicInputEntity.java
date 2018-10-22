@@ -13,15 +13,15 @@ import java.util.StringJoiner;
 
 public abstract class BasicInputEntity extends InputEntity {
 
-	public BasicInputEntity(PerunEntityType entityType, boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes, List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
+	protected BasicInputEntity(PerunEntityType entityType, boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes, List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(entityType, isTopLevel, core, attributes, attrNames, innerInputs);
 	}
 
 	public abstract String getEntityTable();
 
-	public abstract String getEntityIdInAttrValuesTable();
+	protected abstract String getEntityIdInAttrValuesTable();
 
-	public abstract String getAttrValuesTable();
+	protected abstract String getAttrValuesTable();
 
 	@Override
 	public Query initQuery() {

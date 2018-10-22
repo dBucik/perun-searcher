@@ -8,7 +8,6 @@ import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.GROUP;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.MEMBER;
@@ -20,7 +19,7 @@ import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.VO;
 
 public class MemberInput extends BasicInputEntity {
 
-	public static final PerunEntityType TYPE = MEMBER;
+	private static final PerunEntityType TYPE = MEMBER;
 	private static final String ENTITY_ID_FIELD = "member_id";
 	private static final String ENTITY_TABLE = "members";
 	private static final String ENTITY_ATTRS_TABLE = "member_attr_values";

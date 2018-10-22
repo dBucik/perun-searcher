@@ -70,15 +70,6 @@ public class InputAttribute {
 		this.likeMatch = likeMatch;
 	}
 
-	public List<String> stringsValue() {
-		List<String> values = new ArrayList<>();
-		for (int i = 0; i < value.length(); i++) {
-			values.add(value.get(i).toString());
-		}
-
-		return values;
-	}
-
 	public List<String> valueAsStrings() {
 		List<String> values = new ArrayList<>();
 		for (int i = 0; i < value.length(); i++) {

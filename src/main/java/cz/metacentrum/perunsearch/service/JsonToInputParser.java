@@ -555,9 +555,9 @@ public class JsonToInputParser {
 				}
 			}
 
-			return new InputAttribute(keyInTable, match, transformedValues);
+			return new InputAttribute(keyInTable, false, transformedValues);
 		}
 
-		return new InputAttribute(keyInTable, match, value);
+		return new InputAttribute(keyInTable, true, value);
 	}
 }

@@ -13,15 +13,15 @@ import java.util.StringJoiner;
 
 public abstract class RelationInputEntity extends InputEntity {
 
-	public RelationInputEntity(PerunEntityType entityType, boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes, List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
+	protected RelationInputEntity(PerunEntityType entityType, boolean isTopLevel, List<InputAttribute> core, List<InputAttribute> attributes, List<String> attrNames, List<InputEntity> innerInputs) throws IllegalRelationException {
 		super(entityType, isTopLevel, core, attributes, attrNames, innerInputs);
 	}
 
 	public abstract String buildSelectFrom(PerunEntityType sourceType, boolean isSimple);
 
-	public abstract String getPrimaryKey();
+	protected abstract String getPrimaryKey();
 
-	public abstract String getSecondaryKey();
+	protected abstract String getSecondaryKey();
 
 	protected abstract String getRelationTable();
 

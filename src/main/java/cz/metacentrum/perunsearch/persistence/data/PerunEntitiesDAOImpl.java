@@ -21,7 +21,6 @@ import cz.metacentrum.perunsearch.persistence.models.PerunAttribute;
 import cz.metacentrum.perunsearch.persistence.models.Query;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunEntity;
 import cz.metacentrum.perunsearch.persistence.models.entities.PerunRichEntity;
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

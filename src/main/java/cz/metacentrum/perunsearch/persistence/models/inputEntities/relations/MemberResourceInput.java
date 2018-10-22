@@ -8,7 +8,6 @@ import cz.metacentrum.perunsearch.persistence.models.inputEntities.RelationInput
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.MEMBER;
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.MEMBER_RESOURCE;

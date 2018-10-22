@@ -9,7 +9,6 @@ import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import static cz.metacentrum.perunsearch.persistence.enums.PerunEntityType.EXT_SOURCE;

@@ -3,7 +3,6 @@ package cz.metacentrum.perunsearch.service;
 import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
-import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.GroupInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.ResourceInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.ServiceInput;
 import org.apache.commons.collections4.CollectionUtils;
@@ -19,6 +18,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings("Duplicates")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class JsonToInputParserParsingServiceInputTest {

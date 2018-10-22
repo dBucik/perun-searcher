@@ -5,7 +5,6 @@ import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.GroupInput;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.ResourceInput;
-import cz.metacentrum.perunsearch.persistence.models.inputEntities.relations.GroupResourceInput;
 import org.apache.commons.collections4.CollectionUtils;
 import org.json.JSONArray;
 import org.junit.Before;
@@ -19,6 +18,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings("Duplicates")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class JsonToInputParserParsingGroupInputTest {
