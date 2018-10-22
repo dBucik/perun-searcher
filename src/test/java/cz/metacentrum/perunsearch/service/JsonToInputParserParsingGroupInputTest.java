@@ -3,8 +3,9 @@ package cz.metacentrum.perunsearch.service;
 import cz.metacentrum.perunsearch.persistence.exceptions.AttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
-import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.FacilityInput;
-import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.UserInput;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.GroupInput;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.basic.ResourceInput;
+import cz.metacentrum.perunsearch.persistence.models.inputEntities.relations.GroupResourceInput;
 import org.apache.commons.collections4.CollectionUtils;
 import org.json.JSONArray;
 import org.junit.Before;
@@ -14,16 +15,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class JsonToInputParserParsingFacilityInputTest {
+public class JsonToInputParserParsingGroupInputTest {
 
 	private String input;
 	private List<InputAttribute> core;
@@ -42,10 +40,12 @@ public class JsonToInputParserParsingFacilityInputTest {
 
 	private void setUpInputString() {
 		this.input = "{\n" +
-				"  \"entityName\": \"FACILITY\",\n" +
+				"  \"entityName\": \"GROUP\",\n" +
 				"  \"id\": {\"value\": [1]},\n" +
-				"  \"name\": {\"value\": [\"test_facility\"]},\n" +
-				"  \"description\": {\"value\": [\"test_description\"]},\n" +
+				"  \"name\": {\"value\": [\"group1\"]},\n" +
+				"  \"description\": {\"value\": [\"description1\"]},\n" +
+				"  \"voId\": {\"value\": [1]},\n" +
+				"  \"parentGroupId\": {\"value\": [2]},\n" +
 				"  \"attributes\": [\n" +
 				"    {\n" +
 				"      \"name\": \"attribute1\",\n" +
@@ -57,7 +57,7 @@ public class JsonToInputParserParsingFacilityInputTest {
 				"  ],\n" +
 				"  \"relations\": [\n" +
 				"    {\n" +
-				"      \"entityName\": \"USER\"" +
+				"      \"entityName\": \"RESOURCE\"" +
 				"    }\n" +
 				"  ]\n" +
 				"}";
@@ -68,13 +68,18 @@ public class JsonToInputParserParsingFacilityInputTest {
 		JSONArray val1 = new JSONArray();
 		val1.put(1);
 		JSONArray val2 = new JSONArray();
-		val2.put("test_facility");
+		val2.put("group1");
 		JSONArray val3 = new JSONArray();
-		val3.put("test_description");
+		val3.put("description1");
+		JSONArray val4 = new JSONArray();
+		val4.put(1);
+		JSONArray val5 = new JSONArray();
+		val5.put(2);
 		core.add(new InputAttribute("id", false, val1));
 		core.add(new InputAttribute("name", false, val2));
 		core.add(new InputAttribute("dsc", false, val3));
-
+		core.add(new InputAttribute("vo_id", false, val4));
+		core.add(new InputAttribute("parent_group_id", false, val5));
 		this.core = core;
 	}
 
@@ -101,40 +106,40 @@ public class JsonToInputParserParsingFacilityInputTest {
 		List<String> attributeNames = new ArrayList<>();
 		List<InputEntity> inputs = new ArrayList<>();
 
-		UserInput user = new UserInput(false, core, attributes, attributeNames, inputs);
+		ResourceInput group = new ResourceInput(false, core, attributes, attributeNames, inputs);
 
 		List<InputEntity> innerInputs = new ArrayList<>();
-		innerInputs.add(user);
+		innerInputs.add(group);
 
 		this.innerInputs = innerInputs;
 	}
 
 	@Test
-	public void testFacilityInputClass() throws Exception {
+	public void testGroupInputClass() throws Exception {
 		InputEntity entity = JsonToInputParser.parseInput(input);
-		assertTrue(entity instanceof FacilityInput);
+		assertTrue(entity instanceof GroupInput);
 	}
 
 	@Test
-	public void testFacilityInputCore() throws Exception {
+	public void testGroupInputCore() throws Exception {
 		InputEntity entity = JsonToInputParser.parseInput(input);
 		assertTrue(CollectionUtils.isEqualCollection(this.core, entity.getCore()));
 	}
 
 	@Test
-	public void testFacilityInputAttributes() throws Exception {
+	public void testGroupInputAttributes() throws Exception {
 		InputEntity entity = JsonToInputParser.parseInput(input);
 		assertTrue(CollectionUtils.isEqualCollection(this.attributes, entity.getAttributes()));
 	}
 
 	@Test
-	public void testFacilityInputAttributeNames() throws Exception {
+	public void testGroupInputAttributeNames() throws Exception {
 		InputEntity entity = JsonToInputParser.parseInput(input);
 		assertTrue(CollectionUtils.isEqualCollection(this.attributeNames, entity.getAttrNames()));
 	}
 
 	@Test
-	public void testFacilityInputInnerInputs() throws Exception {
+	public void testGroupInputInnerInputs() throws Exception {
 		InputEntity entity = JsonToInputParser.parseInput(input);
 		assertTrue(CollectionUtils.isEqualCollection(this.innerInputs, entity.getInnerInputs()));
 	}

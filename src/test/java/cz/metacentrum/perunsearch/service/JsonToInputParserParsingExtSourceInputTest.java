@@ -43,7 +43,7 @@ public class JsonToInputParserParsingExtSourceInputTest {
 				"  \"type\": {\"value\": [\"test_type\"]},\n" +
 				"  \"attributes\": [\n" +
 				"    {\n" +
-				"      \"name\": \"urn:perun:ext_source:attribute-def:def:attribute1\",\n" +
+				"      \"name\": \"attribute1\",\n" +
 				"      \"value\": [1]\n" +
 				"    }\n" +
 				"  ],\n" +
@@ -77,7 +77,7 @@ public class JsonToInputParserParsingExtSourceInputTest {
 		List<InputAttribute> attributes = new ArrayList<>();
 		JSONArray val = new JSONArray();
 		val.put(1);
-		InputAttribute attr = new InputAttribute("urn:perun:ext_source:attribute-def:def:attribute1", false, val);
+		InputAttribute attr = new InputAttribute("attribute1", false, val);
 		attributes.add(attr);
 
 		this.attributes = attributes;
