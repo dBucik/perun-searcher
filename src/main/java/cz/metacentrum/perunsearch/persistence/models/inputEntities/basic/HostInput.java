@@ -5,6 +5,7 @@ import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationExceptio
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.BasicInputEntity;
 import cz.metacentrum.perunsearch.persistence.models.inputEntities.InputEntity;
+import cz.metacentrum.perunsearch.service.IncorrectSourceEntityException;
 
 import java.util.Collections;
 import java.util.List;
@@ -57,7 +58,7 @@ public class HostInput extends BasicInputEntity {
 	}
 
 	@Override
-	public String buildSelectFrom(PerunEntityType sourceType, boolean isSimple) {
+	public String buildSelectFrom(PerunEntityType sourceType, boolean isSimple) throws IncorrectSourceEntityException {
 		if (sourceType == null) {
 			return getDefaultQuery(isSimple);
 		}
@@ -65,7 +66,8 @@ public class HostInput extends BasicInputEntity {
 		switch (sourceType) {
 			case FACILITY:
 				return getQueryForFacility(isSimple);
-			default: return null; //TODO: throw exception
+			default:
+				throw new IncorrectSourceEntityException("HOST cannot have " + sourceType + " as SourceType");
 		}
 	}
 

@@ -20,7 +20,7 @@ public class SearcherService {
 		this.dao = perunEntitiesDAO;
 	}
 
-	public List<PerunEntity> performSearch(String input) throws IllegalRelationException, InputParseException, IncorrectCoreAttributeTypeException, AttributeTypeException {
+	public List<PerunEntity> performSearch(String input) throws IllegalRelationException, InputParseException, IncorrectCoreAttributeTypeException, AttributeTypeException, IncorrectSourceEntityException {
 		InputEntity parsedInput = JsonToInputParser.parseInput(input);
 		Query query = parsedInput.toQuery(null);
 		return dao.executeQuery(query);

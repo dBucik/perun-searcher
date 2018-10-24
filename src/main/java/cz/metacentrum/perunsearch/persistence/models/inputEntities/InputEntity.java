@@ -5,6 +5,7 @@ import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationExceptio
 import cz.metacentrum.perunsearch.persistence.exceptions.IncorrectCoreAttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.Query;
+import cz.metacentrum.perunsearch.service.IncorrectSourceEntityException;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
@@ -49,11 +50,11 @@ public abstract class InputEntity {
 
 	protected abstract String getAttrNamesTable();
 
-	public abstract Query toQuery(PerunEntityType sourceType) throws IncorrectCoreAttributeTypeException;
+	public abstract Query toQuery(PerunEntityType sourceType) throws IncorrectCoreAttributeTypeException, IncorrectSourceEntityException;
 
 	public abstract Query initQuery();
 
-	protected abstract String buildSelectFrom(PerunEntityType sourceType, boolean isSimple);
+	protected abstract String buildSelectFrom(PerunEntityType sourceType, boolean isSimple) throws IncorrectSourceEntityException;
 
 	public PerunEntityType getEntityType() {
 		return entityType;

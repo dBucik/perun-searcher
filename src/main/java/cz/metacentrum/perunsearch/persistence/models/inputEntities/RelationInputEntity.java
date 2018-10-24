@@ -5,6 +5,7 @@ import cz.metacentrum.perunsearch.persistence.exceptions.IllegalRelationExceptio
 import cz.metacentrum.perunsearch.persistence.exceptions.IncorrectCoreAttributeTypeException;
 import cz.metacentrum.perunsearch.persistence.models.InputAttribute;
 import cz.metacentrum.perunsearch.persistence.models.Query;
+import cz.metacentrum.perunsearch.service.IncorrectSourceEntityException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public abstract class RelationInputEntity extends InputEntity {
 		super(entityType, isTopLevel, core, attributes, attrNames, innerInputs);
 	}
 
-	public abstract String buildSelectFrom(PerunEntityType sourceType, boolean isSimple);
+	public abstract String buildSelectFrom(PerunEntityType sourceType, boolean isSimple) throws IncorrectSourceEntityException;
 
 	protected abstract String getPrimaryKey();
 
@@ -57,7 +58,7 @@ public abstract class RelationInputEntity extends InputEntity {
 		return queryString.toString();
 	}
 
-	public Query toQuery(PerunEntityType sourceType) throws IncorrectCoreAttributeTypeException {
+	public Query toQuery(PerunEntityType sourceType) throws IncorrectCoreAttributeTypeException, IncorrectSourceEntityException {
 		boolean isSimple = PerunEntityType.isSimpleEntity(this.getEntityType()) && this.isSimpleQuery();
 		Query query = this.initQuery();
 

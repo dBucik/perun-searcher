@@ -21,7 +21,6 @@ public class MappersUtils {
 			foreignId = resultSet.getInt("foreign_id");
 		} catch (PSQLException e) {
 			//this is fine, no foreign id fetched
-			//TODO
 		}
 
 		return foreignId;
